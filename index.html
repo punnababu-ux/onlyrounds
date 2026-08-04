@@ -96,7 +96,7 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
 @keyframes drift{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(0,-16px,0) scale(1.05)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes shimmer{0%{background-position:0% 50%}100%{background-position:200% 50%}}
-@keyframes morph{0%,100%{border-radius:54% 46% 42% 58%/58% 52% 48% 42%;transform:rotate(0deg) scale(1)}25%{border-radius:44% 56% 58% 42%/50% 58% 42% 50%;transform:rotate(45deg) scale(1.03) translate(2px,-2px)}50%{border-radius:58% 42% 46% 54%/42% 50% 50% 58%;transform:rotate(90deg) scale(.97) translate(-2px,2px)}75%{border-radius:46% 54% 52% 48%/54% 44% 56% 46%;transform:rotate(135deg) scale(1.02) translate(1px,1px)}}
+@keyframes morph{0%,100%{border-radius:54% 46% 42% 58%/58% 52% 48% 42%;transform:rotate(0deg) scale(1);background-position:0% 30%}25%{border-radius:44% 56% 58% 42%/50% 58% 42% 50%;transform:rotate(45deg) scale(1.03) translate(2px,-2px);background-position:70% 10%}50%{border-radius:58% 42% 46% 54%/42% 50% 50% 58%;transform:rotate(90deg) scale(.97) translate(-2px,2px);background-position:100% 70%}75%{border-radius:46% 54% 52% 48%/54% 44% 56% 46%;transform:rotate(135deg) scale(1.02) translate(1px,1px);background-position:30% 100%}}
 @keyframes grow{from{width:0}to{width:100%}}
 @keyframes breathe{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.18);opacity:.15}}
 @media (max-width:768px){
@@ -176,8 +176,8 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
           <div style="opacity:{{ c.io }};transition:opacity .45s ease">
           <div style="position:relative;width:190px;height:190px;margin:0 auto;display:flex;align-items:center;justify-content:center">
             <div style="position:absolute;inset:0;border-radius:50%;background:{{ c.halo }};filter:blur(26px);animation:breathe 5s ease-in-out infinite"></div>
-            <div style="position:absolute;inset:6%;background:{{ c.orb }};animation:morph 11s ease-in-out infinite"></div>
-            <div style="position:absolute;inset:24%;background:{{ c.inner }};filter:blur(9px);animation:morph 8s ease-in-out infinite reverse"></div>
+            <div style="position:absolute;inset:6%;background:{{ c.orb }};background-size:180% 180%;animation:morph 11s ease-in-out infinite"></div>
+            <div style="position:absolute;inset:24%;background:{{ c.inner }};background-size:180% 180%;filter:blur(9px);animation:morph 8s ease-in-out infinite reverse"></div>
             <div style="position:relative;width:54px;height:54px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px -8px rgba(0,0,0,.5)">
               <span style="font-size:14px;color:#0E1210;margin-left:3px">▶</span>
             </div>
@@ -226,8 +226,8 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
         <!-- Central Voice Agent Orb Screen -->
         <div style="position:relative;width:200px;height:200px;margin:24px auto 0;display:flex;align-items:center;justify-content:center">
           <div style="position:absolute;inset:0;border-radius:50%;background:{{ callCard.halo }};filter:blur(28px);animation:breathe 4s ease-in-out infinite"></div>
-          <div style="position:absolute;inset:8%;background:{{ callCard.orb }};animation:morph 10s ease-in-out infinite"></div>
-          <div style="position:absolute;inset:26%;background:{{ callCard.inner }};filter:blur(9px);animation:morph 7s ease-in-out infinite reverse"></div>
+          <div style="position:absolute;inset:8%;background:{{ callCard.orb }};background-size:180% 180%;animation:morph 10s ease-in-out infinite"></div>
+          <div style="position:absolute;inset:26%;background:{{ callCard.inner }};background-size:180% 180%;filter:blur(9px);animation:morph 7s ease-in-out infinite reverse"></div>
           <sc-if value="{{ callIsLive }}">
             <div style="position:relative;width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.4)">
               <svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:#0E1210;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
@@ -816,19 +816,19 @@ class Component extends DCLogic {
     const CARDS = [
       { kind: "BFSI · default demo", name: "Credit Card Sales", tags: ["English", "Audio", "Inbound QR"], hero: "inbound QR screening.",
         persona: "Evaluates candidates on retail card sales experience, product pitching fluency, monthly quota metrics, and objection handling.",
-        orb: "radial-gradient(circle at 40% 35%,#CFF3E1,#3EBA8D)", inner: "radial-gradient(circle,#FFFFFF,#74D7AE)", halo: "rgba(62,186,141,.45)" },
+        orb: "radial-gradient(circle at 35% 30%, #E8FAF2 0%, #74D7AE 40%, #1D976C 75%, #0B4F37 100%)", inner: "radial-gradient(circle at 30% 30%, #FFFFFF 0%, #A3ECCF 50%, #3EBA8D 100%)", halo: "rgba(62,186,141,.45)" },
       { kind: "Vernacular", name: "Credit Card Sales · Hindi", tags: ["Hindi", "Language switch", "FAQ"], hero: "live language switching.",
         persona: "Screens candidates in Hindi & English, testing bilingual fluency, customer rapport, and mid-interview language switching.",
-        orb: "radial-gradient(circle at 40% 35%,#FFF0C2,#E9B23C)", inner: "radial-gradient(circle,#FFFFFF,#FFD975)", halo: "rgba(255,217,117,.42)" },
+        orb: "radial-gradient(circle at 35% 30%, #FFFDF0 0%, #FFE58F 40%, #E9B23C 75%, #94680A 100%)", inner: "radial-gradient(circle at 30% 30%, #FFFFFF 0%, #FFF0C2 50%, #FFD975 100%)", halo: "rgba(255,217,117,.42)" },
       { kind: "Hard gate", name: "Loan Sales · CEFR B1", tags: ["English", "CEFR gate", "Audio"], hero: "CEFR English gates.",
         persona: "Conducts automated CEFR English assessment to verify candidate spoken English meets the minimum B1 threshold for loan sales.",
-        orb: "radial-gradient(circle at 40% 35%,#CFE6F8,#4E93CB)", inner: "radial-gradient(circle,#FFFFFF,#7BB9E5)", halo: "rgba(123,185,229,.42)" },
+        orb: "radial-gradient(circle at 35% 30%, #F0F7FF 0%, #A5D3F5 40%, #4E93CB 75%, #185285 100%)", inner: "radial-gradient(circle at 30% 30%, #FFFFFF 0%, #CFE6F8 50%, #7BB9E5 100%)", halo: "rgba(123,185,229,.42)" },
       { kind: "Assessment round", name: "Deep Interview · Retail", tags: ["Video", "Behavioral", "Proctored"], hero: "behavioral video rounds.",
         persona: "Evaluates situation handling, customer service behavioral traits, and proctored video responses for retail store staff.",
-        orb: "radial-gradient(circle at 40% 35%,#D9F1E4,#2F9E96)", inner: "radial-gradient(circle,#FFFFFF,#5FCFC1)", halo: "rgba(95,207,193,.42)" },
+        orb: "radial-gradient(circle at 35% 30%, #EEFAF7 0%, #95E6DC 40%, #2F9E96 75%, #105752 100%)", inner: "radial-gradient(circle at 30% 30%, #FFFFFF 0%, #D9F1E4 50%, #5FCFC1 100%)", halo: "rgba(95,207,193,.42)" },
       { kind: "Different round type", name: "Interview Scheduler", tags: ["English", "In + out", "Booking"], hero: "interview scheduling calls.",
         persona: "Interacts with candidates to collect availability, verify location preferences, and automatically book interview slots.",
-        orb: "radial-gradient(circle at 40% 35%,#F6E3C9,#C88C46)", inner: "radial-gradient(circle,#FFFFFF,#F2C98A)", halo: "rgba(242,201,138,.42)" }
+        orb: "radial-gradient(circle at 35% 30%, #FFFBF5 0%, #F8D9A8 40%, #C88C46 75%, #764A15 100%)", inner: "radial-gradient(circle at 30% 30%, #FFFFFF 0%, #F6E3C9 50%, #F2C98A 100%)", halo: "rgba(242,201,138,.42)" }
     ];
     const n = CARDS.length;
     const STACK = [
