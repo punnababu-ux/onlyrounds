@@ -32,6 +32,8 @@
 <!-- Font Preconnect & Performance -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400..700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <!-- QRCode CDN Library -->
@@ -42,23 +44,34 @@
 
 <!-- Structured Data (JSON-LD) -->
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "OnlyRound",
-  "applicationCategory": "BusinessApplication",
-  "operatingSystem": "Web",
-  "description": "AI-powered voice screening and assessment platform for automated recruitment.",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD",
-    "availability": "https://schema.org/InStock"
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "OnlyRound",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "url": "https://onlyround.ai/",
+    "description": "AI-powered voice screening and assessment platform for automated recruitment.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "OnlyRound",
+    "url": "https://onlyround.ai/",
+    "logo": "https://onlyround.ai/assets/logo-mark.svg"
   }
-}
+]
 </script>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 <x-dc>
 <helmet>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -70,6 +83,8 @@
 <style>
 :root{--bg:#07100D;--ink:#F1F6F3;--mut:#8B9A94;--line:rgba(255,255,255,.11);--card:rgba(255,255,255,.04);--card2:rgba(255,255,255,.06);--head:rgba(7,16,13,.72);--panel:#0B1714;--glow1:rgba(62,186,141,.30);--glow2:rgba(123,185,229,.24);--shadow:0 34px 80px -40px rgba(0,0,0,.9);--accent:#3EBA8D;--accent2:#7BB9E5;--gold:#FFD975}
 *{box-sizing:border-box}
+.skip-link{position:absolute;top:-100px;left:16px;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;z-index:999;font-size:14px;font-weight:500;text-decoration:none;transition:top .2s ease}
+.skip-link:focus{top:16px}
 html{scroll-behavior:smooth;overflow-x:clip}
 body{margin:0;padding:0;overflow-x:clip;width:100%;background:var(--bg);color:var(--ink);font-family:"Familjen Grotesk",Helvetica,sans-serif;-webkit-font-smoothing:antialiased;text-wrap:pretty;transition:background .45s ease,color .45s ease}
 a{color:var(--ink);text-decoration:none}
@@ -134,7 +149,7 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
 
 <div class="page-container" style="position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 28px">
 
-  <main>
+  <main id="main-content">
   <section id="top" style="display:flex;flex-direction:column;min-height:calc(100vh - 78px);padding:40px 0 32px">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:40px;align-items:center;flex:1">
       <div>
