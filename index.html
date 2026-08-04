@@ -293,7 +293,7 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
             <sc-for list="{{ panel.rows }}" as="r" hint-placeholder-count="4">
               <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;border:1px solid var(--line);background:var(--card);border-radius:13px;padding:12px 14px;animation:rise .45s cubic-bezier(.22,.7,.2,1) both;animation-delay:{{ r.delay }}">
                 <span style="font-size:14.5px">{{ r.k }}</span>
-                <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ r.c }};border:1px solid var(--line);border-radius:999px;padding:4px 10px;flex:none">{{ r.v }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;color:{{ r.c }};background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:4px 10px;flex:none">{{ r.v }}</span>
               </div>
             </sc-for>
           </div>
@@ -320,8 +320,8 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
         <div style="display:flex;flex-direction:column;gap:12px;height:100%">
           <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
             <div onClick="{{ s.pick }}" tabindex="0" role="button" aria-label="Step {{ s.n }}: {{ s.title }}" style="position:relative;display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:center;border:1px solid {{ s.border }};background:{{ s.bg }};border-radius:18px;padding:0 20px;flex:1;cursor:pointer;overflow:hidden;transition:border-color .4s ease,background .4s ease" style-hover="border-color:var(--accent)">
-              <div style="width:44px;height:44px;border-radius:13px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center">
-                <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:{{ s.dot }};stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="{{ s.icon }}"></path></svg>
+              <div style="width:44px;height:44px;border-radius:13px;border:1px solid {{ s.active ? 'var(--accent)' : 'var(--line)' }};background:var(--card2);box-shadow:0 3px 10px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center">
+                <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:{{ s.dot }};stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="{{ s.icon }}"></path></svg>
               </div>
               <div>
                 <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
@@ -346,7 +346,7 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
               <sc-for list="{{ panel.rows }}" as="r" hint-placeholder-count="4">
                 <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;border:1px solid var(--line);background:var(--card);border-radius:13px;padding:14px 16px;animation:rise .45s cubic-bezier(.22,.7,.2,1) both;animation-delay:{{ r.delay }}">
                   <span style="font-size:15px">{{ r.k }}</span>
-                  <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ r.c }};border:1px solid var(--line);border-radius:999px;padding:5px 11px;flex:none">{{ r.v }}</span>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;color:{{ r.c }};background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:5px 11px;flex:none">{{ r.v }}</span>
                 </div>
               </sc-for>
             </div>
@@ -651,29 +651,29 @@ const SCRIPT = [
 ];
 
 const STEPS = [
-  { n: "01", dot: "#74D7AE", icon: "M6 3h8l4 4v14H6z M14 3v4h4 M9 12h6 M9 16h4",
+  { n: "01", dot: "var(--accent)", icon: "M6 3h8l4 4v14H6z M14 3v4h4 M9 12h6 M9 16h4",
     title: "Create the job", body: "Paste the job description and the platform builds the interview agent for that role." },
-  { n: "02", dot: "#7BB9E5", icon: "M4 7h16 M4 12h16 M4 17h16 M9 5v4 M16 10v4 M7 15v4",
+  { n: "02", dot: "var(--accent2)", icon: "M4 7h16 M4 12h16 M4 17h16 M9 5v4 M16 10v4 M7 15v4",
     title: "Add the assessments", body: "Switch on CEFR English, domain tests, behavioral scoring or proctoring per role." },
-  { n: "03", dot: "#FFD975", icon: "M8 3h8v18H8z M11 18h2",
+  { n: "03", dot: "var(--gold)", icon: "M8 3h8v18H8z M11 18h2",
     title: "Interview candidates", body: "Send a link or QR and they interview in the browser, or upload a list and the agent calls them." },
-  { n: "04", dot: "#5FCFC1", icon: "M9 4h6v3H9z M15 5h3v15H6V5h3 M9 13l2 2 4-4",
+  { n: "04", dot: "var(--accent)", icon: "M9 4h6v3H9z M15 5h3v15H6V5h3 M9 13l2 2 4-4",
     title: "Review and decide", body: "Read the report against your criteria, with the recording and transcript attached." }
 ];
 
 const PANELS = [
   { title: "Credit Card Sales Executive", meta: "Agent generated", desc: "The interview agent is built from your job description.", note: "Edit any question, or keep what the agent drafted.",
-    rows: [["Interview questions", "12 drafted", "#74D7AE"], ["Follow-up depth", "Adaptive", "#74D7AE"],
-      ["Must Have criteria", "4 set", "#74D7AE"], ["Tracks", "Fresher + experienced", "#8B9A94"]] },
+    rows: [["Interview questions", "12 drafted", "var(--accent)"], ["Follow-up depth", "Adaptive", "var(--accent)"],
+      ["Must Have criteria", "4 set", "var(--accent)"], ["Tracks", "Fresher + experienced", "var(--mut)"]] },
   { title: "Assessment modules", meta: "Per role", desc: "Add the checks this role needs.", note: "They run inside the same interview — no separate test to schedule.",
-    rows: [["CEFR English", "Gate · B1", "#7BB9E5"], ["Industry knowledge", "BFSI bank", "#7BB9E5"],
-      ["Behavioral scoring", "On", "#7BB9E5"], ["Proctoring", "Video only", "#8B9A94"]] },
+    rows: [["CEFR English", "Gate · B1", "var(--accent2)"], ["Industry knowledge", "BFSI bank", "var(--accent2)"],
+      ["Behavioral scoring", "On", "var(--accent2)"], ["Proctoring", "Video only", "var(--mut)"]] },
   { title: "240 candidates", meta: "Live", desc: "Candidates interview by web link, or the agent calls them.", note: "Both routes run the same interview and the same criteria.",
-    rows: [["Web link + QR", "Inbound", "#FFD975"], ["Agent calling", "148 dialed", "#FFD975"],
-      ["WhatsApp retry", "Scheduled", "#FFD975"], ["Language", "Hindi → English", "#8B9A94"]] },
+    rows: [["Web link + QR", "Inbound", "var(--gold)"], ["Agent calling", "148 dialed", "var(--gold)"],
+      ["WhatsApp retry", "Scheduled", "var(--gold)"], ["Language", "Hindi → English", "var(--mut)"]] },
   { title: "Shortlist", meta: "Ranked", desc: "See who passed, and why.", note: "Recording, transcript and evidence attached to each candidate.",
-    rows: [["Recommended", "18 candidates", "#5FCFC1"], ["Below the bar", "63 candidates", "#8B9A94"],
-      ["Red flags", "9 candidates", "#E8875A"], ["Synced to ATS", "Complete", "#5FCFC1"]] }
+    rows: [["Recommended", "18 candidates", "var(--accent)"], ["Below the bar", "63 candidates", "var(--mut)"],
+      ["Red flags", "9 candidates", "#E8544A"], ["Synced to ATS", "Complete", "var(--accent)"]] }
 ].map(p => ({ title: p.title, meta: p.meta, desc: p.desc, note: p.note,
   rows: p.rows.map(([k, v, c], i) => ({ k, v, c, delay: (i * 70) + "ms" })) }));
 
