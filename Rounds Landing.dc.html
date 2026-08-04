@@ -320,7 +320,7 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
         <div style="display:flex;flex-direction:column;gap:12px;height:100%">
           <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
             <div onClick="{{ s.pick }}" tabindex="0" role="button" aria-label="Step {{ s.n }}: {{ s.title }}" style="position:relative;display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:center;border:1px solid {{ s.border }};background:{{ s.bg }};border-radius:18px;padding:0 20px;flex:1;cursor:pointer;overflow:hidden;transition:border-color .4s ease,background .4s ease" style-hover="border-color:var(--accent)">
-              <div style="width:44px;height:44px;border-radius:13px;border:1px solid {{ s.active ? 'var(--accent)' : 'var(--line)' }};background:var(--card2);box-shadow:0 3px 10px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center">
+              <div style="width:44px;height:44px;border-radius:13px;border:1px solid {{ s.active ? 'var(--accent)' : 'var(--line)' }};background:var(--card);display:flex;align-items:center;justify-content:center">
                 <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:{{ s.dot }};stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="{{ s.icon }}"></path></svg>
               </div>
               <div>
