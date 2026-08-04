@@ -850,11 +850,11 @@ class Component extends DCLogic {
         border = "var(--accent)";
         shadow = "0 20px 40px -15px rgba(116, 215, 174, 0.25)";
       } else if (diff === 1) {
-        x = mobile ? 140 : 190; s = 0.85; o = 0.45; z = 20; io = 0.35; pe = "auto";
+        x = mobile ? 75 : 95; s = 0.92; o = 0.65; z = 20; io = 0.25; pe = "auto";
       } else if (diff === -1) {
-        x = mobile ? -140 : -190; s = 0.85; o = 0.45; z = 20; io = 0.35; pe = "auto";
+        x = mobile ? -75 : -95; s = 0.92; o = 0.65; z = 20; io = 0.25; pe = "auto";
       } else {
-        x = diff > 0 ? 360 : -360; s = 0.7; o = 0; z = 10; io = 0; pe = "none";
+        x = diff > 0 ? 240 : -240; s = 0.8; o = 0; z = 10; io = 0; pe = "none";
       }
 
       return Object.assign({}, c, {
