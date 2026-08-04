@@ -196,13 +196,8 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
       </div>
 
       <!-- Navigation controls at the bottom -->
-      <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;position:relative;z-index:40">
+      <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:16px;position:relative;z-index:40">
         <button onClick="{{ prev }}" aria-label="Previous card" style="width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--card);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);font-size:15px;box-shadow:var(--shadow);padding:0" style-hover="border-color:var(--accent);color:var(--accent)">←</button>
-        <div style="display:flex;gap:6px;align-items:center">
-          <sc-for list="{{ dots }}" as="d">
-            <span style="width:{{ d.w }};height:7px;border-radius:999px;background:{{ d.bg }};transition:all .3s ease;cursor:pointer" onClick="{{ d.go }}"></span>
-          </sc-for>
-        </div>
         <button onClick="{{ next }}" aria-label="Next card" style="width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--card);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);font-size:15px;box-shadow:var(--shadow);padding:0" style-hover="border-color:var(--accent);color:var(--accent)">→</button>
       </div>
     </div>
