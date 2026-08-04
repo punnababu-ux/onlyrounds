@@ -1,0 +1,16 @@
+{
+  "name": "OnlyRound — AI Voice Interview Platform",
+  "short_name": "OnlyRound",
+  "icons": [
+    {
+      "src": "/assets/logo-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#07100D",
+  "theme_color": "#07100D",
+  "description": "AI interview rounds with voice screening, CEFR evaluation, and explainable recruitment reports."
+}
