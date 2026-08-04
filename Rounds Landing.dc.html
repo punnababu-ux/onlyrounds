@@ -104,7 +104,7 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
   h1{font-size:38px!important;line-height:1.1!important;min-height:auto!important;margin-top:16px!important}
   h2{font-size:28px!important;line-height:1.15!important}
   #top{padding-top:20px!important;min-height:auto!important}
-  .hero-deck{height:460px!important;margin:0!important;padding:48px 0!important;overflow:visible!important}
+  .hero-deck{height:450px!important;margin:0!important;padding:0!important;overflow:visible!important}
   .hero-card{width:min(300px,76%)!important}
   #contact{padding:44px 22px!important;border-radius:20px!important}
   #contact h2{font-size:32px!important}
@@ -170,34 +170,41 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
       </div>
       </div>
 
-    <div class="hero-deck" style="position:relative;height:540px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin:0 -20px;padding:0 26px">
-      <sc-for list="{{ deck }}" as="c" hint-placeholder-count="3">
-        <div class="hero-card" onClick="{{ c.go }}" tabindex="0" role="button" aria-label="{{ c.name }} demo card" style="position:absolute;width:min(330px,84%);background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:30px 26px 26px;box-shadow:var(--shadow);transform:{{ c.t }};opacity:{{ c.o }};z-index:{{ c.z }};pointer-events:{{ c.pe }};transition:transform .75s cubic-bezier(.22,.7,.2,1),opacity .6s ease;cursor:pointer;text-align:center">
-          <div style="opacity:{{ c.io }};transition:opacity .45s ease">
-          <div style="position:relative;width:190px;height:190px;margin:0 auto;display:flex;align-items:center;justify-content:center">
-            <div style="position:absolute;inset:0;border-radius:50%;background:{{ c.halo }};filter:blur(26px);animation:breathe 5s ease-in-out infinite"></div>
-            <div style="position:absolute;inset:6%;background:{{ c.orb }};background-size:180% 180%;animation:morph 11s ease-in-out infinite"></div>
-            <div style="position:absolute;inset:24%;background:{{ c.inner }};background-size:180% 180%;filter:blur(9px);animation:morph 8s ease-in-out infinite reverse"></div>
-            <div style="position:relative;width:54px;height:54px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px -8px rgba(0,0,0,.5)">
-              <span style="font-size:14px;color:#0E1210;margin-left:3px">▶</span>
+    <div style="display:flex;flex-direction:column;align-items:center;position:relative;z-index:20;width:100%">
+      <div class="hero-deck" style="position:relative;height:450px;width:100%;display:flex;align-items:center;justify-content:center;margin:0;padding:0;overflow:visible">
+        <sc-for list="{{ deck }}" as="c" hint-placeholder-count="3">
+          <div class="hero-card" onClick="{{ c.go }}" tabindex="0" role="button" aria-label="{{ c.name }} demo card" style="position:absolute;width:min(310px,82%);background:var(--panel);border:1px solid {{ c.border }};border-radius:24px;padding:30px 24px 24px;box-shadow:{{ c.shadow }};transform:{{ c.t }};opacity:{{ c.o }};z-index:{{ c.z }};pointer-events:{{ c.pe }};transition:transform .75s cubic-bezier(.22,.7,.2,1),opacity .6s ease,border-color .4s ease,box-shadow .4s ease;cursor:pointer;text-align:center">
+            <div style="opacity:{{ c.io }};transition:opacity .45s ease">
+            <div style="position:relative;width:180px;height:180px;margin:0 auto;display:flex;align-items:center;justify-content:center">
+              <div style="position:absolute;inset:0;border-radius:50%;background:{{ c.halo }};filter:blur(26px);animation:breathe 5s ease-in-out infinite"></div>
+              <div style="position:absolute;inset:6%;background:{{ c.orb }};background-size:180% 180%;animation:morph 11s ease-in-out infinite"></div>
+              <div style="position:absolute;inset:24%;background:{{ c.inner }};background-size:180% 180%;filter:blur(9px);animation:morph 8s ease-in-out infinite reverse"></div>
+              <div style="position:relative;width:52px;height:52px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px -8px rgba(0,0,0,.5)">
+                <span style="font-size:14px;color:#0E1210;margin-left:3px">▶</span>
+              </div>
+            </div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-top:20px">{{ c.kind }}</div>
+            <div style="font-size:19px;font-weight:600;letter-spacing:-.02em;margin-top:8px">{{ c.name }}</div>
+            <div style="display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:12px">
+              <sc-for list="{{ c.tags }}" as="t" hint-placeholder-count="3">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:3px 9px">{{ t }}</span>
+              </sc-for>
+            </div>
             </div>
           </div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-top:22px">{{ c.kind }}</div>
-          <div style="font-size:20px;font-weight:600;letter-spacing:-.02em;margin-top:8px">{{ c.name }}</div>
-          <div style="display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:13px">
-            <sc-for list="{{ c.tags }}" as="t" hint-placeholder-count="3">
-              <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:3px 9px">{{ t }}</span>
-            </sc-for>
-          </div>
-          </div>
-        </div>
-      </sc-for>
-
-      <div style="position:absolute;right:4px;top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:10px">
-        <button onClick="{{ prev }}" aria-label="Previous card" style="width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card2);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--mut);font-size:13px;padding:0" style-hover="border-color:var(--accent);color:var(--ink)">▲</button>
-        <button onClick="{{ next }}" aria-label="Next card" style="width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card2);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--mut);font-size:13px;padding:0" style-hover="border-color:var(--accent);color:var(--ink)">▼</button>
+        </sc-for>
       </div>
 
+      <!-- Navigation controls at the bottom -->
+      <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;position:relative;z-index:40">
+        <button onClick="{{ prev }}" aria-label="Previous card" style="width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--card);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);font-size:15px;box-shadow:var(--shadow);padding:0" style-hover="border-color:var(--accent);color:var(--accent)">←</button>
+        <div style="display:flex;gap:6px;align-items:center">
+          <sc-for list="{{ dots }}" as="d">
+            <span style="width:{{ d.w }};height:7px;border-radius:999px;background:{{ d.bg }};transition:all .3s ease;cursor:pointer" onClick="{{ d.go }}"></span>
+          </sc-for>
+        </div>
+        <button onClick="{{ next }}" aria-label="Next card" style="width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--card);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);font-size:15px;box-shadow:var(--shadow);padding:0" style-hover="border-color:var(--accent);color:var(--accent)">→</button>
+      </div>
     </div>
     </div>
     
@@ -831,24 +838,39 @@ class Component extends DCLogic {
         orb: "linear-gradient(135deg, #F2C98A 0%, #FFD975 50%, #74D7AE 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #F2C98A 45%, #FFD975 100%)", halo: "rgba(242,201,138,.42)" }
     ];
     const n = CARDS.length;
-    const STACK = [
-      { y: 0, s: 1, o: 1, z: 30 },
-      { y: -22, s: 0.945, o: 0.62, z: 29 },
-      { y: -42, s: 0.89, o: 0.32, z: 28 }
-    ];
+    const cur = ((idx % n) + n) % n;
     const deck = CARDS.map((c, i) => {
-      const ord = (i - (idx % n) + n) % n;
-      const f = ord < 3 ? STACK[ord] : ord === n - 1
-        ? { y: 96, s: 0.97, o: 0, z: 31 }
-        : { y: -56, s: 0.85, o: 0, z: 20 };
+      let diff = i - cur;
+      if (diff > 2) diff -= n;
+      if (diff < -2) diff += n;
+
+      let x = 0, s = 1, o = 1, z = 30, io = 1, pe = "auto", border = "var(--line)", shadow = "var(--shadow)";
+      if (diff === 0) {
+        x = 0; s = 1; o = 1; z = 30; io = 1; pe = "auto";
+        border = "var(--accent)";
+        shadow = "0 20px 40px -15px rgba(116, 215, 174, 0.25)";
+      } else if (diff === 1) {
+        x = mobile ? 140 : 190; s = 0.85; o = 0.45; z = 20; io = 0.35; pe = "auto";
+      } else if (diff === -1) {
+        x = mobile ? -140 : -190; s = 0.85; o = 0.45; z = 20; io = 0.35; pe = "auto";
+      } else {
+        x = diff > 0 ? 360 : -360; s = 0.7; o = 0; z = 10; io = 0; pe = "none";
+      }
+
       return Object.assign({}, c, {
-        go: () => ord === 0 ? this.openCall(i) : this.setState({ idx: idx + ord }),
-        t: "translateY(" + f.y + "px) scale(" + f.s + ")",
-        o: f.o,
-        io: ord === 0 ? 1 : 0,
-        pe: ord === 0 ? "auto" : "none",
-        z: f.z
+        go: () => diff === 0 ? this.openCall(i) : this.setState({ idx: idx + diff }),
+        t: "translateX(" + x + "px) scale(" + s + ")",
+        o, io, pe, z, border, shadow
       });
+    });
+
+    const dots = CARDS.map((_, i) => {
+      const active = cur === i;
+      return {
+        w: active ? "22px" : "7px",
+        bg: active ? "var(--accent)" : "var(--line)",
+        go: () => this.setState({ idx: i })
+      };
     });
 
     const faqData = [
@@ -874,6 +896,7 @@ class Component extends DCLogic {
         this.setState({ theme: next });
       },
       deck,
+      dots,
       callOpen: this.state.call !== null,
       callCard: this.state.call !== null ? CARDS[this.state.call] : {},
       callPhase: this.state.phase,
