@@ -284,8 +284,7 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
                 <span style="font-size:14px;color:#0E1210;margin-left:3px">▶</span>
               </div>
             </div>
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-top:20px">{{ c.kind }}</div>
-            <div style="font-size:19px;font-weight:600;letter-spacing:-.02em;margin-top:8px">{{ c.name }}</div>
+            <div style="font-size:19px;font-weight:600;letter-spacing:-.02em;margin-top:24px">{{ c.name }}</div>
             <div style="display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:12px">
               <sc-for list="{{ c.tags }}" as="t" hint-placeholder-count="3">
                 <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:3px 9px">{{ t }}</span>
@@ -1014,21 +1013,12 @@ class Component extends DCLogic {
     const ss = String(secs % 60).padStart(2, "0");
 
     const CARDS = [
-      { kind: "BFSI · Interview Demo", name: "Credit Card Sales", tags: ["English", "Audio", "Inbound QR"], hero: "inbound QR screening.",
-        persona: "Evaluates candidates on retail card sales experience, product pitching fluency, monthly quota metrics, and objection handling.",
-        orb: "linear-gradient(100deg, #2E6BFF 0%, #7C4CFF 50%, #C24CFF 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #2E6BFF 45%, #C24CFF 100%)", halo: "rgba(124,76,255,.45)" },
-      { kind: "Vernacular · Interview Demo", name: "Credit Card Sales · Hindi", tags: ["Hindi", "Language switch", "FAQ"], hero: "live language switching.",
-        persona: "Screens candidates in Hindi & English, testing bilingual fluency, customer rapport, and mid-interview language switching.",
+      { name: "Customer Support for BPO", tags: ["English", "Audio", "Inbound"],
+        orb: "linear-gradient(135deg, #7C4CFF 0%, #FFB84C 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #7C4CFF 40%, #FFB84C 100%)", halo: "rgba(124,76,255,.45)" },
+      { name: "Field Sales for Retailer", tags: ["Hindi", "Language switch"],
         orb: "linear-gradient(135deg, #7C4CFF 0%, #2DD4A7 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #7C4CFF 40%, #2DD4A7 100%)", halo: "rgba(124,76,255,.45)" },
-      { kind: "Hard Gate · Interview Demo", name: "Loan Sales · CEFR B1", tags: ["English", "CEFR gate", "Audio"], hero: "CEFR English gates.",
-        persona: "Conducts automated CEFR English assessment to verify candidate spoken English meets the minimum B1 threshold for loan sales.",
-        orb: "linear-gradient(135deg, #7C4CFF 0%, #22D3EE 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #7C4CFF 40%, #22D3EE 100%)", halo: "rgba(124,76,255,.45)" },
-      { kind: "Assessment · Interview Demo", name: "Deep Interview · Retail", tags: ["Video", "Behavioral", "Proctored"], hero: "behavioral video rounds.",
-        persona: "Evaluates situation handling, customer service behavioral traits, and proctored video responses for retail store staff.",
-        orb: "linear-gradient(135deg, #FF4C93 0%, #7C4CFF 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #FF4C93 40%, #7C4CFF 100%)", halo: "rgba(124,76,255,.45)" },
-      { kind: "Scheduler · Interview Demo", name: "Interview Scheduler", tags: ["English", "In + out", "Booking"], hero: "interview scheduling calls.",
-        persona: "Interacts with candidates to collect availability, verify location preferences, and automatically book interview slots.",
-        orb: "linear-gradient(135deg, #4C7BFF 0%, #7C4CFF 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #4C7BFF 40%, #7C4CFF 100%)", halo: "rgba(124,76,255,.45)" }
+      { name: "Insurance Sales for BFSI", tags: ["English", "CEFR gate", "Audio"],
+        orb: "linear-gradient(135deg, #7C4CFF 0%, #22D3EE 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #7C4CFF 40%, #22D3EE 100%)", halo: "rgba(124,76,255,.45)" }
     ];
     const n = CARDS.length;
     const cur = ((idx % n) + n) % n;
