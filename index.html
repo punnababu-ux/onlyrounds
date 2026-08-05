@@ -307,51 +307,41 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
   </section>
 
   <sc-if value="{{ callOpen }}" hint-placeholder-val="{{ false }}">
-    <div onClick="{{ endCall }}" style="position:fixed;inset:0;z-index:90;background:rgba(4,10,8,.66);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:24px;animation:rise .3s ease">
-      <div class="call-modal" onClick="{{ stopProp }}" style="position:relative;width:min(460px,100%);background:var(--panel);border:1px solid var(--line);border-radius:26px;padding:34px 32px 30px;box-shadow:var(--shadow);text-align:center">
-        <button onClick="{{ endCall }}" aria-label="Close call modal" style="position:absolute;top:16px;right:18px;font-size:18px;color:var(--mut);cursor:pointer;background:none;border:none;padding:4px" style-hover="color:var(--ink)">×</button>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)">{{ callCard.kind }}</div>
-        <div style="font-size:23px;font-weight:600;letter-spacing:-.02em;margin-top:7px">{{ callCard.name }}</div>
+    <audio id="demo-audio" style="display:none"></audio>
+    <div onClick="{{ closeAudio }}" style="position:fixed;inset:0;z-index:90;background:rgba(4,10,8,.72);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;padding:24px;animation:rise .3s ease">
+      <div onClick="{{ stopProp }}" style="position:relative;width:min(420px,100%);background:var(--panel);border:1px solid var(--line);border-radius:26px;padding:36px 32px 32px;box-shadow:var(--shadow);text-align:center">
+        <button onClick="{{ closeAudio }}" aria-label="Close player" style="position:absolute;top:16px;right:18px;font-size:20px;color:var(--mut);cursor:pointer;background:none;border:none;padding:4px" style-hover="color:var(--ink)">×</button>
 
-        <!-- Central Voice Agent Orb Screen -->
-        <div style="position:relative;width:200px;height:200px;margin:24px auto 0;display:flex;align-items:center;justify-content:center">
-          <div style="position:absolute;inset:0;border-radius:50%;background:{{ callCard.halo }};filter:blur(28px);animation:breathe 4s ease-in-out infinite"></div>
-          <div style="position:absolute;inset:8%;background:{{ callCard.orb }};background-size:180% 180%;animation:morph 10s ease-in-out infinite"></div>
-          <div style="position:absolute;inset:26%;background:{{ callCard.inner }};background-size:180% 180%;filter:blur(9px);animation:morph 7s ease-in-out infinite reverse"></div>
-          <sc-if value="{{ callIsLive }}">
-            <div style="position:relative;width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.4)">
-              <svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:#0E1210;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
-            </div>
-          </sc-if>
+        <!-- Orb -->
+        <div style="position:relative;width:160px;height:160px;margin:0 auto;display:flex;align-items:center;justify-content:center">
+          <div style="position:absolute;inset:0;border-radius:50%;background:{{ audioCard.halo }};filter:blur(28px);animation:breathe 4s ease-in-out infinite"></div>
+          <div style="position:absolute;inset:8%;background:{{ audioCard.orb }};background-size:180% 180%;animation:morph 10s ease-in-out infinite"></div>
+          <div style="position:absolute;inset:26%;background:{{ audioCard.inner }};background-size:180% 180%;filter:blur(9px);animation:morph 7s ease-in-out infinite reverse"></div>
+          <!-- Play/Pause button inside orb -->
+          <button onClick="{{ toggleAudio }}" aria-label="Play or pause demo" style="position:relative;width:52px;height:52px;border-radius:50%;background:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.4)">
+            <sc-if value="{{ audioPlaying }}">
+              <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:#0E1210"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+            </sc-if>
+            <sc-if value="{{ !audioPlaying }}">
+              <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:#0E1210;margin-left:3px"><polygon points="5,3 19,12 5,21"/></svg>
+            </sc-if>
+          </button>
         </div>
 
-        <!-- STATE 1: Ready to start (Show Persona & Instructions) -->
-        <sc-if value="{{ callIsReady }}" hint-placeholder-val="{{ true }}">
-          <div style="margin-top:20px">
-            <div style="border:1px solid var(--line);background:var(--card);border-radius:16px;padding:16px 18px;text-align:left">
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:6px">Interview Persona & Instructions</div>
-              <div style="font-size:14px;line-height:1.55;color:var(--ink)">{{ callCard.persona }}</div>
-            </div>
-            <button onClick="{{ startCall }}" style="display:inline-flex;align-items:center;gap:9px;margin-top:22px;background:var(--ink);color:var(--bg);font-size:15.5px;font-weight:500;padding:14px 28px;border-radius:12px;cursor:pointer;border:none" style-hover="opacity:.85">Start interview</button>
+        <!-- Title -->
+        <div style="font-size:20px;font-weight:600;letter-spacing:-.02em;margin-top:20px">{{ audioCard.name }}</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-top:6px">Live demo recording</div>
+
+        <!-- Progress bar -->
+        <div style="margin-top:24px">
+          <div onClick="{{ seekClick }}" style="height:4px;background:var(--line);border-radius:4px;cursor:pointer;position:relative;overflow:hidden">
+            <div style="position:absolute;left:0;top:0;height:100%;width:{{ audioPct }};background:var(--accent);border-radius:4px;transition:width .25s linear"></div>
           </div>
-        </sc-if>
-
-        <!-- STATE 2: Live Interview Active (Timer, Voice Agent Screen, End Interview Button - NO transcript) -->
-        <sc-if value="{{ callIsLive }}" hint-placeholder-val="{{ false }}">
-          <div style="margin-top:22px">
-            <div style="display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 18px">
-              <span style="width:8px;height:8px;border-radius:50%;background:#E8544A;animation:pulse 1.8s ease-out infinite"></span>
-              <span style="font-size:14px;font-weight:500;color:var(--ink)">Interview in progress</span>
-              <span style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;color:var(--accent);margin-left:6px">{{ callClock }}</span>
-            </div>
-
-            <div style="margin-top:16px;font-size:13.5px;color:var(--mut)">Voice agent active — speak into your microphone</div>
-
-            <div style="margin-top:22px">
-              <button onClick="{{ endCall }}" style="display:inline-flex;align-items:center;gap:9px;background:rgba(232,84,74,.12);border:1px solid rgba(232,84,74,.35);color:#E8544A;font-size:15px;font-weight:500;padding:13px 28px;border-radius:12px;cursor:pointer" style-hover="background:rgba(232,84,74,.22);border-color:#E8544A">End interview</button>
-            </div>
+          <div style="display:flex;justify-content:space-between;margin-top:8px">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--mut)">{{ audioTime }}</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--mut)">{{ audioDurFmt }}</span>
           </div>
-        </sc-if>
+        </div>
       </div>
     </div>
   </sc-if>
@@ -808,21 +798,41 @@ class Component extends DCLogic {
     }, initialDelay);
   }
 
-  openCall(i) {
-    this.setState({ call: i, phase: "ready", callSecs: 0 });
+  openAudio(i) {
+    const CARDS = [
+      { name: "Customer Support for BPO", audio: "demos/customer-support-executive.mp3", orb: "linear-gradient(135deg, #7C4CFF 0%, #FFB84C 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #7C4CFF 40%, #FFB84C 100%)", halo: "rgba(124,76,255,.45)" },
+      { name: "Field Sales for Retailer",  audio: "demos/mobile-sales.mp3",                orb: "linear-gradient(135deg, #7C4CFF 0%, #2DD4A7 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #7C4CFF 40%, #2DD4A7 100%)", halo: "rgba(124,76,255,.45)" },
+      { name: "Insurance Sales for BFSI",  audio: "demos/insurance-sales.mp3",             orb: "linear-gradient(135deg, #7C4CFF 0%, #22D3EE 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #7C4CFF 40%, #22D3EE 100%)", halo: "rgba(124,76,255,.45)" }
+    ];
+    const card = CARDS[i];
+    this.setState({ call: i, audioCard: card, audioPlaying: true, audioProgress: 0, audioDur: 0, audioSecs: 0 });
+    clearInterval(this.cs);
+    setTimeout(() => {
+      const el = document.getElementById('demo-audio');
+      if (!el) return;
+      el.src = card.audio;
+      el.load();
+      el.play();
+      el.ontimeupdate = () => this.setState({ audioProgress: el.duration ? el.currentTime / el.duration : 0, audioSecs: Math.floor(el.currentTime), audioDur: Math.floor(el.duration || 0) });
+      el.onended = () => this.setState({ audioPlaying: false });
+    }, 80);
   }
-  startCall() {
-    this.setState({ phase: "connecting" });
-    clearTimeout(this.cx);
-    this.cx = setTimeout(() => {
-      this.setState({ phase: "live", callSecs: 0 });
-      clearInterval(this.cs);
-      this.cs = setInterval(() => this.setState(s => ({ callSecs: s.callSecs + 1 })), 1000);
-    }, 1600);
+  toggleAudio() {
+    const el = document.getElementById('demo-audio');
+    if (!el) return;
+    if (el.paused) { el.play(); this.setState({ audioPlaying: true }); }
+    else { el.pause(); this.setState({ audioPlaying: false }); }
   }
-  endCall() {
-    clearInterval(this.cs); clearTimeout(this.cx);
-    this.setState({ call: null, phase: "ready" });
+  seekAudio(pct) {
+    const el = document.getElementById('demo-audio');
+    if (!el || !el.duration) return;
+    el.currentTime = pct * el.duration;
+  }
+  closeAudio() {
+    const el = document.getElementById('demo-audio');
+    if (el) { el.pause(); el.src = ''; }
+    clearInterval(this.cs);
+    this.setState({ call: null, audioPlaying: false, audioProgress: 0, audioSecs: 0, audioDur: 0 });
   }
 
   applyTheme(name) {
@@ -915,11 +925,11 @@ class Component extends DCLogic {
     const ss = String(secs % 60).padStart(2, "0");
 
     const CARDS = [
-      { name: "Customer Support for BPO", tags: ["English", "Audio", "Inbound"],
+      { name: "Customer Support for BPO", tags: ["English", "Audio", "Inbound"], audio: "demos/customer-support-executive.mp3",
         orb: "linear-gradient(135deg, #7C4CFF 0%, #FFB84C 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #7C4CFF 40%, #FFB84C 100%)", halo: "rgba(124,76,255,.45)" },
-      { name: "Field Sales for Retailer", tags: ["Hindi", "Language switch"],
+      { name: "Field Sales for Retailer", tags: ["Hindi", "Language switch"], audio: "demos/mobile-sales.mp3",
         orb: "linear-gradient(135deg, #7C4CFF 0%, #2DD4A7 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #7C4CFF 40%, #2DD4A7 100%)", halo: "rgba(124,76,255,.45)" },
-      { name: "Insurance Sales for BFSI", tags: ["English", "CEFR gate", "Audio"],
+      { name: "Insurance Sales for BFSI", tags: ["English", "CEFR gate", "Audio"], audio: "demos/insurance-sales.mp3",
         orb: "linear-gradient(135deg, #7C4CFF 0%, #22D3EE 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #7C4CFF 40%, #22D3EE 100%)", halo: "rgba(124,76,255,.45)" }
     ];
     const n = CARDS.length;
@@ -945,7 +955,7 @@ class Component extends DCLogic {
       return Object.assign({}, c, {
         go: () => {
           if (diff === 0) {
-            this.openCall(i);
+            this.openAudio(i);
           } else {
             this.setState({ idx: idx + diff });
             this.startDeckAutoScroll(8000);
@@ -997,15 +1007,14 @@ class Component extends DCLogic {
       deck,
       dots,
       callOpen: this.state.call !== null,
-      callCard: this.state.call !== null ? CARDS[this.state.call] : {},
-      callPhase: this.state.phase,
-      callIsLive: this.state.phase === "live",
-      callIsReady: this.state.phase === "ready",
-      callIsConnecting: this.state.phase === "connecting",
-      callStatus: this.state.phase === "ready" ? "Ready to start" : this.state.phase === "connecting" ? "Connecting to the agent…" : "Live — speak now",
-      callClock: String(Math.floor(this.state.callSecs / 60)).padStart(2, "0") + ":" + String(this.state.callSecs % 60).padStart(2, "0"),
-      startCall: () => this.startCall(),
-      endCall: () => this.endCall(),
+      audioCard: this.state.audioCard || {},
+      audioPlaying: !!this.state.audioPlaying,
+      audioPct: Math.round((this.state.audioProgress || 0) * 100) + "%",
+      audioTime: (() => { const s = this.state.audioSecs || 0; return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0"); })(),
+      audioDurFmt: (() => { const s = this.state.audioDur || 0; return s ? String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0") : "--:--"; })(),
+      toggleAudio: () => this.toggleAudio(),
+      closeAudio: () => this.closeAudio(),
+      seekClick: e => { const bar = e.currentTarget; const pct = (e.clientX - bar.getBoundingClientRect().left) / bar.offsetWidth; this.seekAudio(pct); },
       stopProp: e => e.stopPropagation(),
       prev: () => {
         this.setState({ idx: idx - 1 });
