@@ -358,7 +358,7 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
 
       <!-- Right Column: Eyebrow + Data Table -->
       <div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:20px">{{ activeHow.eyebrow }}</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:20px">{{ activeHow.eyebrow }}</div>
         <div style="display:flex;flex-direction:column">
           <sc-for list="{{ activeHow.rows }}" as="r">
             <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-top:1px solid var(--line)">
@@ -379,7 +379,7 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:64px;position:relative">
       <!-- Inbound Column (Candidate-initiated) -->
       <div style="display:flex;flex-direction:column">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)">INBOUND</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)">INBOUND</div>
         
         <!-- Converging Inbound SVG Graphic -->
         <div style="margin-top:32px;height:110px;display:flex;align-items:center">
@@ -424,7 +424,7 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
 
       <!-- Outbound Column (AI-initiated) -->
       <div style="display:flex;flex-direction:column">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)">OUTBOUND</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)">OUTBOUND</div>
         
         <!-- Diverging Outbound SVG Graphic -->
         <div style="margin-top:32px;height:110px;display:flex;align-items:center">
