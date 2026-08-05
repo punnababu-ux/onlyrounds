@@ -567,127 +567,28 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
             Any volume, same day
           </li>
         </ul>
-      </div>
     </div>
   </section>
 
   <section id="assess" style="padding:88px 0 0;margin-top:96px;border-top:1px solid var(--line)">
     <div data-reveal style="max-width:800px;margin:0;text-align:left">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)">Attachable assessment modules</div>
-      <h2 style="font-size:42px;line-height:1.08;letter-spacing:-.03em;font-weight:600;margin:14px 0 0">The same platform assesses, not just screens.</h2>
-
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)">Built for enterprises</div>
+      <h2 style="font-size:42px;line-height:1.08;letter-spacing:-.03em;font-weight:600;margin:14px 0 0">Every capability you need — screening, assessment, governance, and integrations — in a single platform.</h2>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-top:44px">
-      <sc-for list="{{ modules }}" as="m" hint-placeholder-count="6">
-        <div style="background:var(--panel);padding:28px 26px 30px;display:flex;flex-direction:column;justify-content:space-between;transition:background .35s ease" style-hover="background:var(--card2)">
-          <div>
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
-              <div style="color:{{ m.c }};width:18px;height:18px">
-                <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;display:block">
-                  <sc-if value="{{ m.tag === 'Language' }}">
-                    <path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/>
-                  </sc-if>
-                  <sc-if value="{{ m.tag === 'Integrity' }}">
-                    <polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/>
-                  </sc-if>
-                  <sc-if value="{{ m.tag === 'Domain' }}">
-                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
-                  </sc-if>
-                  <sc-if value="{{ m.tag === 'Behavioral' }}">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                  </sc-if>
-                  <sc-if value="{{ m.tag === 'Proctoring' }}">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
-                  </sc-if>
-                  <sc-if value="{{ m.tag === 'Output' }}">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
-                  </sc-if>
-                </svg>
-              </div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:{{ m.c }}">{{ m.tag }}</div>
-            </div>
-            <div style="font-size:18.5px;font-weight:600;letter-spacing:-.015em;color:var(--ink)">{{ m.t }}</div>
-            <div style="font-size:15px;line-height:1.6;color:var(--mut);margin-top:10px">{{ m.d }}</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-top:44px">
+      <sc-for list="{{ enterprise }}" as="m" hint-placeholder-count="12">
+        <div style="background:var(--panel);padding:28px 26px 30px;display:flex;flex-direction:column;transition:background .35s ease" style-hover="background:var(--card2)">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+            <div style="font-size:22px">{{ m.icon }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:{{ m.c }}">{{ m.tag }}</div>
           </div>
+          <div style="font-size:17px;font-weight:600;letter-spacing:-.015em;color:var(--ink)">{{ m.t }}</div>
+          <div style="font-size:14px;line-height:1.6;color:var(--mut);margin-top:8px">{{ m.d }}</div>
         </div>
       </sc-for>
     </div>
   </section>
 
-
-
-
-
-  <section id="governance" style="padding:88px 0 0;margin-top:96px;border-top:1px solid var(--line)">
-    <div data-reveal style="max-width:800px;margin:0;text-align:left">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)">Governance, workflow & commercial</div>
-      <h2 style="font-size:42px;line-height:1.08;letter-spacing:-.03em;font-weight:600;margin:14px 0 0">What makes it enterprise-grade rather than a point tool: control, auditability, and self-serve commercials.</h2>
-
-    </div>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:22px;margin-top:44px;align-items:stretch">
-      <div data-reveal style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:22px;overflow:hidden">
-        <sc-for list="{{ governance }}" as="g" hint-placeholder-count="6">
-          <div style="background:var(--panel);padding:26px 24px 28px;transition:background .35s ease" style-hover="background:var(--card2)">
-            <div style="display:flex;align-items:center;gap:8px">
-              <div style="color:{{ g.c }};width:16px;height:16px">
-                <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;display:block">
-                  <sc-if value="{{ g.tag === 'Reporting' }}">
-                    <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
-                  </sc-if>
-                  <sc-if value="{{ g.tag === 'Access' }}">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                  </sc-if>
-                  <sc-if value="{{ g.tag === 'Workflow' }}">
-                    <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
-                  </sc-if>
-                  <sc-if value="{{ g.tag === 'Oversight' }}">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
-                  </sc-if>
-                  <sc-if value="{{ g.tag === 'Records' }}">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-                  </sc-if>
-                  <sc-if value="{{ g.tag === 'Commercial' }}">
-                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/>
-                  </sc-if>
-                </svg>
-              </div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:{{ g.c }}">{{ g.tag }}</div>
-            </div>
-            <div style="font-size:17.5px;font-weight:600;letter-spacing:-.015em;margin-top:11px">{{ g.t }}</div>
-            <div style="font-size:14.5px;line-height:1.6;color:var(--mut);margin-top:8px">{{ g.d }}</div>
-          </div>
-        </sc-for>
-      </div>
-
-      <div data-reveal style="border:1px solid var(--line);border-radius:22px;background:var(--card2);padding:26px;display:flex;flex-direction:column;backdrop-filter:blur(12px);box-shadow:var(--shadow)">
-        <div style="display:flex;align-items:center;justify-content:space-between">
-          <div style="font-size:16.5px;font-weight:600;letter-spacing:-.01em">Candidate timeline</div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--mut)">Audit trail</div>
-        </div>
-        <div style="display:flex;flex-direction:column;margin-top:20px;flex:1">
-          <sc-for list="{{ timeline }}" as="e" hint-placeholder-count="6">
-            <div style="display:flex;gap:14px;padding-bottom:18px">
-              <div style="display:flex;flex-direction:column;align-items:center;flex:none;width:12px">
-                <div style="height:21px;display:flex;align-items:center;justify-content:center">
-                  <span style="width:9px;height:9px;border-radius:50%;background:{{ e.c }};box-shadow:0 0 14px 1px {{ e.c }}"></span>
-                </div>
-                <span style="flex:1;width:1px;background:var(--line)"></span>
-              </div>
-              <div style="flex:1;display:flex;justify-content:space-between;gap:12px">
-                <div>
-                  <div style="font-size:14.5px;font-weight:500;line-height:21px">{{ e.t }}</div>
-                  <div style="font-size:13px;color:var(--mut);margin-top:3px;line-height:1.5">{{ e.d }}</div>
-                </div>
-                <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--mut);line-height:21px;flex:none">{{ e.ts }}</div>
-              </div>
-            </div>
-          </sc-for>
-        </div>
-        <div style="border-top:1px solid var(--line);padding-top:14px;font-size:14px;line-height:1.6;color:var(--mut)">Every call, WhatsApp, email and outcome against one candidate record, visible to whoever RBAC allows.</div>
-      </div>
-    </div>
-  </section>
 
   <section id="ats" style="padding:88px 0 0;margin-top:96px;border-top:1px solid var(--line)">
     <div data-reveal style="max-width:800px;margin:0;text-align:left">
@@ -1139,12 +1040,19 @@ class Component extends DCLogic {
         { v: "24/7", k: "Rounds run outside office hours" },
         { v: "No app", k: "Any phone,\nany network" }
       ],
-      modules: [
-        { tag: "Language", c: "var(--c-purple)", t: "CEFR English assessment", d: "Built-in English grading on the CEFR scale; usable as a score or a hard gate (e.g. minimum B1 on Loan Sales)." },
-        { tag: "Integrity", c: "var(--c-magenta)", t: "Enterprise question banks + randomizer", d: "Clients upload their own questions; randomized per candidate to prevent answer leakage." },
-        { tag: "Domain", c: "var(--c-amber)", t: "Industry knowledge tests", d: "Domain checks per role, e.g. BFSI product questions on the Credit Card and Insurance bots." },
-        { tag: "Behavioral", c: "var(--c-blue)", t: "Behavioral evaluation", d: "Communication, negotiation, customer and objection handling, as run on the Deep Interview round." },
-        { tag: "Proctoring", c: "var(--c-mint)", t: "Proctoring on video rounds", d: "Integrity checks on video interviews for assessment-grade rigor." }
+      enterprise: [
+        { tag: "Screening",       c: "var(--c-purple)",  icon: "🎙️", t: "Voice AI Screening",        d: "Structured voice rounds delivered by link, QR code, or outbound AI dial — no recruiter on the call." },
+        { tag: "Assessment",      c: "var(--c-blue)",    icon: "📊", t: "Behavioral Testing",         d: "Evaluates situation handling, communication, negotiation, and customer objection handling." },
+        { tag: "CEFR",            c: "var(--c-mint)",    icon: "🗣️", t: "CEFR English Assessment",    d: "Built-in English grading on the CEFR scale; usable as a score or a hard gate (e.g. minimum B1)." },
+        { tag: "Domain",          c: "var(--c-amber)",   icon: "📚", t: "Domain Testing",             d: "Role-specific knowledge checks — BFSI products, retail scenarios, or any client-defined question bank." },
+        { tag: "Proctoring",      c: "var(--c-magenta)", icon: "👁️", t: "Proctoring",                 d: "Integrity checks on video interviews for assessment-grade rigour." },
+        { tag: "Scheduler",       c: "var(--c-rose)",    icon: "📅", t: "Interview Scheduler",        d: "AI collects candidate availability and books interview slots automatically — inbound or outbound." },
+        { tag: "Outreach",        c: "var(--c-purple)",  icon: "📣", t: "Multi-channel Outreach",     d: "Retries across call, WhatsApp, and email — cadence and channels fully configurable per role." },
+        { tag: "Data Extraction", c: "var(--c-blue)",    icon: "🧩", t: "Custom Data Extraction",     d: "Gen AI reports shaped per role — extract the exact fields and scores your team needs." },
+        { tag: "RBAC",            c: "var(--c-mint)",    icon: "🔐", t: "RBAC + Multi-tenant",        d: "Role-based access control with enterprise governance across business units and client tenants." },
+        { tag: "Governance",      c: "var(--c-amber)",   icon: "🛡️", t: "Governance Dashboard",       d: "Every candidate, every interview, full audit trail in one view — timestamped and exportable." },
+        { tag: "ATS Integration", c: "var(--c-magenta)", icon: "🔗", t: "ATS Integration",            d: "Transcripts, evaluations, and recordings sync back to your ATS automatically via native or webhook." },
+        { tag: "Commercial",      c: "var(--c-rose)",    icon: "💳", t: "Credits + Self-serve",       d: "Buy credits, upload leads, configure and run screening at your own pace without IT involvement." }
       ],
       bots: [
         { n: "Credit Card Sales (En)", l: "English", m: "Audio", f: "In", p: "Core screening flow - the default demo" },
