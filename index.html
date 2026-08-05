@@ -416,7 +416,7 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
             </div>
             <div style="display:flex;align-items:center;justify-content:space-between;margin-top:4px;gap:12px;flex-wrap:wrap">
               <div style="font-size:12.5px;color:var(--mut)">We'll reply within 1 business day.</div>
-              <button onClick="{{ submitContact }}" style="flex:none;background:var(--ink);color:var(--bg);font-size:15px;font-weight:500;padding:13px 24px;border-radius:12px;border:none;cursor:pointer;white-space:nowrap" style-hover="opacity:.85">Send message →</button>
+              <button onClick="{{ submitContact }}" style="flex:none;background:var(--ink);color:var(--bg);font-size:15px;font-weight:500;padding:13px 24px;border-radius:12px;border:none;cursor:pointer;white-space:nowrap;opacity:{{ contactSubmitting ? '.6' : '1' }}" style-hover="opacity:.85">{{ contactSubmitting ? 'Sending…' : 'Send message →' }}</button>
             </div>
           </div>
         </sc-if>
@@ -950,7 +950,7 @@ class Component extends DCLogic {
   closeContactForm() {
     this.setState({ contactOpen: false });
   }
-  submitContact() {
+  async submitContact() {
     const get = id => (document.getElementById(id) || {}).value || '';
     const name = get('cf-name').trim();
     const email = get('cf-email').trim();
@@ -963,16 +963,36 @@ class Component extends DCLogic {
     };
     this.setState(errors);
     if (errors.cfErrName || errors.cfErrCompany || errors.cfErrEmail) return;
-    const body = [
-      'Name: ' + name,
-      'Company: ' + company,
-      'Email: ' + email,
-      'Role: ' + get('cf-role'),
-      'Monthly hires: ' + get('cf-volume'),
-      'Message: ' + get('cf-msg')
-    ].join('%0A');
-    window.open('mailto:sales@onlyround.ai?subject=Contact%20Sales%20-%20' + encodeURIComponent(company) + '&body=' + body);
-    this.setState({ contactSent: true });
+
+    this.setState({ contactSubmitting: true });
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: 'd84c6667-ba5d-40ac-8f9f-c8836495fd95',
+          subject: 'New Contact Sales Lead - ' + company,
+          from_name: 'OnlyRound Landing Page',
+          name,
+          email,
+          company,
+          role: get('cf-role'),
+          monthly_hires: get('cf-volume'),
+          message: get('cf-msg')
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        this.setState({ contactSent: true, contactSubmitting: false });
+      } else {
+        alert(data.message || 'Submission failed. Please try again.');
+        this.setState({ contactSubmitting: false });
+      }
+    } catch (err) {
+      alert('Unable to submit form. Please check your network connection.');
+      this.setState({ contactSubmitting: false });
+    }
   }
 
   applyTheme(name) {
@@ -1158,6 +1178,7 @@ class Component extends DCLogic {
       onSeekInput: e => this.seekAudio(e.target.value / 1000),
       contactOpen: !!this.state.contactOpen,
       contactSent: !!this.state.contactSent,
+      contactSubmitting: !!this.state.contactSubmitting,
       cfErrName: this.state.cfErrName || '',
       cfErrCompany: this.state.cfErrCompany || '',
       cfErrEmail: this.state.cfErrEmail || '',
