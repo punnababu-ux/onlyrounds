@@ -135,6 +135,12 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
 @keyframes breathe{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.18);opacity:.15}}
 
 .reach-col{transition:opacity .4s ease;cursor:pointer}
+    .audio-seek{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:4px;background:var(--line);outline:none;cursor:pointer;accent-color:var(--accent)}
+    .audio-seek::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 0 3px rgba(124,76,255,.2)}
+    .audio-seek::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--accent);cursor:pointer;border:none;box-shadow:0 0 0 3px rgba(124,76,255,.2)}
+    .audio-seek::-webkit-slider-runnable-track{border-radius:4px;height:4px}
+    .audio-seek::-moz-range-track{border-radius:4px;height:4px;background:var(--line)}
+    .audio-seek::-moz-range-progress{border-radius:4px;height:4px;background:var(--accent)}
 .reach-col .reach-svg path,.reach-col .reach-svg circle,.reach-col .reach-bullet,.reach-col .reach-eyebrow,.reach-col .reach-svg polyline,.reach-col .reach-svg line,.reach-col .reach-svg rect{transition:all .4s ease}
 .reach-icon-box{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:var(--card2);border:1px solid var(--line);position:relative;transition:all .4s ease;flex-shrink:0}
 .reach-active .reach-icon-box{background:rgba(124,76,255,0.06);border-color:rgba(124,76,255,0.2)}
@@ -334,8 +340,15 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
 
         <!-- Progress bar -->
         <div style="margin-top:24px">
-          <div onClick="{{ seekClick }}" style="height:4px;background:var(--line);border-radius:4px;cursor:pointer;position:relative;overflow:hidden">
-            <div style="position:absolute;left:0;top:0;height:100%;width:{{ audioPct }};background:var(--accent);border-radius:4px;transition:width .25s linear"></div>
+          <div style="position:relative">
+            <input
+              type="range"
+              class="audio-seek"
+              min="0" max="1000"
+              value="{{ audioRangeVal }}"
+              onInput="{{ onSeekInput }}"
+              style="display:block;width:100%"
+            />
           </div>
           <div style="display:flex;justify-content:space-between;margin-top:8px">
             <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--mut)">{{ audioTime }}</span>
@@ -1010,11 +1023,12 @@ class Component extends DCLogic {
       audioCard: this.state.audioCard || {},
       audioPlaying: !!this.state.audioPlaying,
       audioPct: Math.round((this.state.audioProgress || 0) * 100) + "%",
+      audioRangeVal: Math.round((this.state.audioProgress || 0) * 1000),
       audioTime: (() => { const s = this.state.audioSecs || 0; return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0"); })(),
       audioDurFmt: (() => { const s = this.state.audioDur || 0; return s ? String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0") : "--:--"; })(),
       toggleAudio: () => this.toggleAudio(),
       closeAudio: () => this.closeAudio(),
-      seekClick: e => { const bar = e.currentTarget; const pct = (e.clientX - bar.getBoundingClientRect().left) / bar.offsetWidth; this.seekAudio(pct); },
+      onSeekInput: e => this.seekAudio(e.target.value / 1000),
       stopProp: e => e.stopPropagation(),
       prev: () => {
         this.setState({ idx: idx - 1 });
