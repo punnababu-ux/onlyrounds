@@ -99,6 +99,11 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
 @keyframes morph{0%,100%{border-radius:54% 46% 42% 58%/58% 52% 48% 42%;transform:rotate(0deg) scale(1);background-position:0% 30%}25%{border-radius:44% 56% 58% 42%/50% 58% 42% 50%;transform:rotate(45deg) scale(1.03) translate(2px,-2px);background-position:70% 10%}50%{border-radius:58% 42% 46% 54%/42% 50% 50% 58%;transform:rotate(90deg) scale(.97) translate(-2px,2px);background-position:100% 70%}75%{border-radius:46% 54% 52% 48%/54% 44% 56% 46%;transform:rotate(135deg) scale(1.02) translate(1px,1px);background-position:30% 100%}}
 @keyframes grow{from{width:0}to{width:100%}}
 @keyframes breathe{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.18);opacity:.15}}
+.how-tab-btn{background:none;border:none;padding:16px 0 20px;text-align:left;cursor:pointer;position:relative;display:flex;align-items:center;color:var(--ink)!important}
+.how-tab-num{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;color:var(--mut)!important;margin-right:10px;transition:color .3s ease}
+.how-tab-text{font-size:15.5px;font-weight:500;color:var(--mut)!important;transition:color .3s ease,font-weight .3s ease}
+.how-tab-active .how-tab-num{color:var(--accent)!important;font-weight:700!important}
+.how-tab-active .how-tab-text{color:var(--ink)!important;font-weight:700!important}
 .reach-col{transition:opacity .4s ease;cursor:pointer}
 .reach-col .reach-svg path,.reach-col .reach-svg circle,.reach-col .reach-bullet,.reach-col .reach-eyebrow{transition:all .4s ease}
 .reach-active{opacity:1!important}
@@ -280,13 +285,13 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
     <!-- 4 Top Step Tabs -->
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:24px;border-bottom:1px solid var(--line);padding-bottom:1px;margin-top:48px">
       <sc-for list="{{ howSteps }}" as="st">
-        <button onClick="{{ st.pick }}" aria-label="{{ st.n }} {{ st.tabTitle }}" style="background:none;border:none;padding:16px 0 20px;text-align:left;cursor:pointer;position:relative;display:flex;align-items:center">
+        <button onClick="{{ st.pick }}" aria-label="{{ st.n }} {{ st.tabTitle }}" class="how-tab-btn {{ st.active ? 'how-tab-active' : '' }}">
           <div style="position:absolute;top:-1px;left:0;right:0;height:2px;background:var(--line);opacity:.5"></div>
           <sc-if value="{{ st.active }}">
             <div key="{{ st.barKey }}" style="position:absolute;top:-1px;left:0;height:2px;background:var(--accent);animation:grow 5.5s linear forwards"></div>
           </sc-if>
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:{{ st.active ? '700' : '500' }};color:{{ st.active ? 'var(--accent)' : 'var(--mut)' }};margin-right:10px">{{ st.n }}</span>
-          <span style="font-size:15.5px;font-weight:{{ st.active ? '700' : '500' }};color:{{ st.active ? 'var(--ink)' : 'var(--mut)' }};transition:color .3s ease">{{ st.tabTitle }}</span>
+          <span class="how-tab-num">{{ st.n }}</span>
+          <span class="how-tab-text">{{ st.tabTitle }}</span>
         </button>
       </sc-for>
     </div>
