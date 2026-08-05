@@ -99,28 +99,18 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
 @keyframes morph{0%,100%{border-radius:54% 46% 42% 58%/58% 52% 48% 42%;transform:rotate(0deg) scale(1);background-position:0% 30%}25%{border-radius:44% 56% 58% 42%/50% 58% 42% 50%;transform:rotate(45deg) scale(1.03) translate(2px,-2px);background-position:70% 10%}50%{border-radius:58% 42% 46% 54%/42% 50% 50% 58%;transform:rotate(90deg) scale(.97) translate(-2px,2px);background-position:100% 70%}75%{border-radius:46% 54% 52% 48%/54% 44% 56% 46%;transform:rotate(135deg) scale(1.02) translate(1px,1px);background-position:30% 100%}}
 @keyframes grow{from{width:0}to{width:100%}}
 @keyframes breathe{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.18);opacity:.15}}
-.reach-col{transition:opacity .4s ease}
+.reach-col{transition:opacity .4s ease;cursor:pointer}
 .reach-col .reach-svg path,.reach-col .reach-svg circle,.reach-col .reach-bullet,.reach-col .reach-eyebrow{transition:all .4s ease}
-.reach-inbound{opacity:1}
-.reach-inbound .reach-eyebrow{color:var(--accent)}
-.reach-inbound .reach-svg path{stroke:var(--accent);opacity:.8}
-.reach-inbound .reach-svg circle{fill:var(--accent);opacity:1}
-.reach-inbound .reach-bullet{background:var(--accent)}
-.reach-outbound{opacity:.65;cursor:pointer}
-.reach-outbound .reach-eyebrow{color:var(--mut)}
-.reach-outbound .reach-svg path{stroke:var(--mut);opacity:.4}
-.reach-outbound .reach-svg circle{fill:var(--mut);opacity:.5}
-.reach-outbound .reach-bullet{background:var(--mut);opacity:.5}
-.reach-outbound:hover{opacity:1}
-.reach-outbound:hover .reach-eyebrow{color:var(--accent)}
-.reach-outbound:hover .reach-svg path{stroke:var(--accent);opacity:.8}
-.reach-outbound:hover .reach-svg circle{fill:var(--accent);opacity:1}
-.reach-outbound:hover .reach-bullet{background:var(--accent);opacity:1}
-.reach-grid:has(.reach-outbound:hover) .reach-inbound{opacity:.5}
-.reach-grid:has(.reach-outbound:hover) .reach-inbound .reach-eyebrow{color:var(--mut)}
-.reach-grid:has(.reach-outbound:hover) .reach-inbound .reach-svg path{stroke:var(--mut);opacity:.4}
-.reach-grid:has(.reach-outbound:hover) .reach-inbound .reach-svg circle{fill:var(--mut);opacity:.5}
-.reach-grid:has(.reach-outbound:hover) .reach-inbound .reach-bullet{background:var(--mut);opacity:.5}
+.reach-active{opacity:1!important}
+.reach-active .reach-eyebrow{color:var(--accent)!important}
+.reach-active .reach-svg path{stroke:var(--accent)!important;opacity:.85!important}
+.reach-active .reach-svg circle{fill:var(--accent)!important;opacity:1!important}
+.reach-active .reach-bullet{background:var(--accent)!important}
+.reach-inactive{opacity:.45!important}
+.reach-inactive .reach-eyebrow{color:var(--mut)!important}
+.reach-inactive .reach-svg path{stroke:var(--mut)!important;opacity:.4!important}
+.reach-inactive .reach-svg circle{fill:var(--mut)!important;opacity:.5!important}
+.reach-inactive .reach-bullet{background:var(--mut)!important;opacity:.5!important}
 @media (max-width:768px){
   header nav{display:none!important}
   h1{font-size:38px!important;line-height:1.1!important;min-height:auto!important;margin-top:16px!important}
@@ -295,8 +285,8 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
           <sc-if value="{{ st.active }}">
             <div key="{{ st.barKey }}" style="position:absolute;top:-1px;left:0;height:2px;background:var(--accent);animation:grow 5.5s linear forwards"></div>
           </sc-if>
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:{{ st.active ? '700' : '500' }};color:{{ st.active ? 'var(--accent)' : 'var(--mut)' }};opacity:{{ st.active ? '1' : '0.7' }};margin-right:10px">{{ st.n }}</span>
-          <span style="font-size:15.5px;font-weight:{{ st.active ? '700' : '400' }};color:{{ st.active ? 'var(--ink)' : 'var(--mut)' }};opacity:{{ st.active ? '1' : '0.7' }};transition:color .3s ease,opacity .3s ease">{{ st.tabTitle }}</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:{{ st.active ? '700' : '500' }};color:{{ st.active ? 'var(--accent)' : 'var(--mut)' }};margin-right:10px">{{ st.n }}</span>
+          <span style="font-size:15.5px;font-weight:{{ st.active ? '700' : '500' }};color:{{ st.active ? 'var(--ink)' : 'var(--mut)' }};transition:color .3s ease">{{ st.tabTitle }}</span>
         </button>
       </sc-for>
     </div>
@@ -780,7 +770,11 @@ const THEMES = {
 };
 
 class Component extends DCLogic {
-  state = { li: 0, ch: 0, secs: 0, open: 0, idx: 0, word: 0, theme: "dark", call: null, phase: "ready", callSecs: 0, how: 0, howTick: 0, demoFilter: "All" };
+  state = { li: 0, ch: 0, secs: 0, open: 0, idx: 0, word: 0, theme: "dark", call: null, phase: "ready", callSecs: 0, how: 0, howTick: 0, demoFilter: "All", reachMode: "inbound" };
+
+  setReachMode(mode) {
+    this.setState({ reachMode: mode });
+  }
 
   pickStep(i) {
     clearInterval(this.h);
@@ -974,10 +968,10 @@ class Component extends DCLogic {
     ];
 
     return {
-      reachInboundActive: (this.state.reachMode || 'inbound') === 'inbound',
-      reachOutboundActive: this.state.reachMode === 'outbound',
-      setInboundActive: () => this.setState({ reachMode: 'inbound' }),
-      setOutboundActive: () => this.setState({ reachMode: 'outbound' }),
+      inboundClass: (this.state.reachMode || 'inbound') === 'inbound' ? 'reach-active' : 'reach-inactive',
+      outboundClass: this.state.reachMode === 'outbound' ? 'reach-active' : 'reach-inactive',
+      setInbound: () => this.setReachMode('inbound'),
+      setOutbound: () => this.setReachMode('outbound'),
       demoFilter: this.state.demoFilter || 'All',
       filterAll: () => this.setState({ demoFilter: 'All' }),
       filterEnglish: () => this.setState({ demoFilter: 'English' }),
