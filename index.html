@@ -274,97 +274,107 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
       <h2 style="font-size:42px;line-height:1.08;letter-spacing:-.03em;font-weight:600;margin:14px 0 0">Structured deployment in four steps.</h2>
       <p style="font-size:18px;line-height:1.6;color:var(--mut);margin:18px auto 0;max-width:580px">Configure once. The platform handles delivery, evaluation, and reporting at scale.</p>
     </div>
-    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
-      <div style="display:flex;flex-direction:column;gap:18px;margin-top:32px">
-        <!-- Active Step Card -->
-        <div onClick="{{ currentStep.next }}" style="position:relative;display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:center;border:1px solid {{ currentStep.border }};background:{{ currentStep.bg }};border-radius:18px;padding:18px 16px;cursor:pointer;overflow:hidden">
-          <div style="width:44px;height:44px;border-radius:13px;background:var(--card);display:flex;align-items:center;justify-content:center;flex:none">
-            <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:{{ currentStep.dot }};stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="{{ currentStep.icon }}"></path></svg>
-          </div>
-          <div>
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
-              <div style="font-size:17.5px;font-weight:600;letter-spacing:-.02em">{{ currentStep.title }}</div>
-              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--mut);flex:none">{{ currentStep.n }}</span>
-            </div>
-            <div style="font-size:13px;line-height:1.45;color:var(--mut);margin-top:4px">{{ currentStep.body }}</div>
-          </div>
-          <div style="position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--line)"></div>
-          <div key="{{ currentStep.barKey }}" style="position:absolute;left:0;bottom:0;height:2px;background:var(--accent);animation:grow 4.2s linear forwards"></div>
-        </div>
+    <!-- 4 Top Step Tabs -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:24px;border-bottom:1px solid var(--line);padding-bottom:1px;margin-top:48px">
+      <sc-for list="{{ howSteps }}" as="st">
+        <button onClick="{{ st.pick }}" style="background:none;border:none;padding:16px 0 20px;text-align:left;cursor:pointer;position:relative;display:flex;align-items:center">
+          <div style="position:absolute;top:-1px;left:0;right:0;height:2px;background:{{ st.active ? 'var(--accent)' : 'transparent' }};transition:background .3s ease"></div>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:{{ st.active ? 'var(--accent)' : 'var(--mut)' }};margin-right:10px">{{ st.n }}</span>
+          <span style="font-size:15.5px;font-weight:{{ st.active ? '600' : '400' }};color:{{ st.active ? 'var(--ink)' : 'var(--mut)' }};transition:color .3s ease">{{ st.tabTitle }}</span>
+        </button>
+      </sc-for>
+    </div>
 
-        <!-- Preview Panel Card -->
-        <div style="border:1px solid var(--line);background:var(--card2);border-radius:22px;padding:22px 20px;backdrop-filter:blur(12px);box-shadow:var(--shadow);display:flex;flex-direction:column">
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <div style="font-size:16.5px;font-weight:600;letter-spacing:-.01em">{{ panel.title }}</div>
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--mut)">{{ panel.meta }}</div>
-          </div>
-          <div style="font-size:15px;line-height:1.55;color:var(--mut);margin-top:8px">{{ panel.desc }}</div>
-          <div style="display:flex;flex-direction:column;gap:10px;margin-top:18px">
-            <sc-for list="{{ panel.rows }}" as="r" hint-placeholder-count="4">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;border:1px solid var(--line);background:var(--card);border-radius:13px;padding:12px 14px;animation:rise .45s cubic-bezier(.22,.7,.2,1) both;animation-delay:{{ r.delay }}">
-                <span style="font-size:14.5px">{{ r.k }}</span>
-                <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;color:{{ r.c }};background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:4px 10px;flex:none">{{ r.v }}</span>
-              </div>
-            </sc-for>
-          </div>
-          <div style="border-top:1px solid var(--line);margin-top:16px;padding-top:12px;font-size:13.5px;line-height:1.55;color:var(--mut)">{{ panel.note }}</div>
-        </div>
+    <!-- Active Step Content Area -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:54px;margin-top:54px;align-items:center">
+      <!-- Left Column: Graphic SVG + Large Headline -->
+      <div style="display:flex;align-items:center;gap:36px">
+        <sc-if value="{{ activeHow.isGrid }}">
+          <svg viewBox="0 0 160 160" style="width:130px;height:130px;flex:none">
+            <circle cx="16" cy="16" r="5" fill="var(--accent)"/>
+            <circle cx="48" cy="16" r="4" fill="var(--mut)" opacity="0.3"/>
+            <circle cx="80" cy="16" r="5" fill="var(--accent)"/>
+            <circle cx="112" cy="16" r="4" fill="var(--mut)" opacity="0.3"/>
+            <circle cx="144" cy="16" r="4" fill="var(--mut)" opacity="0.3"/>
 
-        <!-- Navigation Controls below Preview Card -->
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:2px 2px 0">
-          <div style="display:flex;align-items:center;gap:6px">
-            <sc-for list="{{ steps }}" as="st" hint-placeholder-count="4">
-              <button onClick="{{ st.pick }}" aria-label="Go to step {{ st.n }}" style="width:{{ st.active ? '22px' : '7px' }};height:7px;border-radius:999px;background:{{ st.active ? 'var(--accent)' : 'var(--line)' }};border:none;padding:0;cursor:pointer;transition:all .3s ease"></button>
-            </sc-for>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px">
-            <button onClick="{{ prevStep }}" aria-label="Previous step" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px">‹</button>
-            <button onClick="{{ nextStep }}" aria-label="Next step" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px">›</button>
-          </div>
-        </div>
+            <circle cx="16" cy="48" r="4" fill="var(--mut)" opacity="0.3"/>
+            <circle cx="48" cy="48" r="5" fill="var(--accent)"/>
+            <circle cx="80" cy="48" r="4" fill="var(--mut)" opacity="0.3"/>
+            <circle cx="112" cy="48" r="5" fill="var(--accent)"/>
+            <circle cx="144" cy="48" r="4" fill="var(--mut)" opacity="0.3"/>
+
+            <circle cx="16" cy="80" r="4" fill="var(--mut)" opacity="0.3"/>
+            <circle cx="48" cy="80" r="4" fill="var(--mut)" opacity="0.3"/>
+            <circle cx="80" cy="80" r="5" fill="var(--accent)"/>
+            <circle cx="112" cy="80" r="5" fill="var(--accent)"/>
+            <circle cx="144" cy="80" r="4" fill="var(--mut)" opacity="0.3"/>
+
+            <circle cx="16" cy="112" r="4" fill="var(--mut)" opacity="0.3"/>
+            <circle cx="48" cy="112" r="5" fill="var(--accent)"/>
+            <circle cx="80" cy="112" r="4" fill="var(--mut)" opacity="0.3"/>
+            <circle cx="112" cy="112" r="4" fill="var(--mut)" opacity="0.3"/>
+            <circle cx="144" cy="112" r="5" fill="var(--accent)"/>
+
+            <circle cx="16" cy="144" r="4" fill="var(--mut)" opacity="0.3"/>
+            <circle cx="48" cy="144" r="4" fill="var(--mut)" opacity="0.3"/>
+            <circle cx="80" cy="144" r="5" fill="var(--accent)"/>
+            <circle cx="112" cy="144" r="4" fill="var(--mut)" opacity="0.3"/>
+            <circle cx="144" cy="144" r="4" fill="var(--mut)" opacity="0.3"/>
+          </svg>
+        </sc-if>
+
+        <sc-if value="{{ activeHow.isNodes }}">
+          <svg viewBox="0 0 160 160" style="width:130px;height:130px;flex:none">
+            <circle cx="16" cy="80" r="7" fill="var(--accent)"/>
+            <path d="M 16 80 C 60 80, 80 16, 144 16" fill="none" stroke="var(--accent)" stroke-width="1.8" opacity="0.6"/>
+            <path d="M 16 80 C 60 80, 80 48, 144 48" fill="none" stroke="var(--accent)" stroke-width="1.8" opacity="0.6"/>
+            <path d="M 16 80 C 60 80, 80 80, 144 80" fill="none" stroke="var(--accent)" stroke-width="2" opacity="0.9"/>
+            <path d="M 16 80 C 60 80, 80 112, 144 112" fill="none" stroke="var(--accent)" stroke-width="1.8" opacity="0.6"/>
+            <path d="M 16 80 C 60 80, 80 144, 144 144" fill="none" stroke="var(--accent)" stroke-width="1.8" opacity="0.6"/>
+            <circle cx="144" cy="16" r="4" fill="var(--accent)"/>
+            <circle cx="144" cy="48" r="4" fill="var(--accent)"/>
+            <circle cx="144" cy="80" r="4" fill="var(--accent)"/>
+            <circle cx="144" cy="112" r="4" fill="var(--accent)"/>
+            <circle cx="144" cy="144" r="4" fill="var(--accent)"/>
+          </svg>
+        </sc-if>
+
+        <sc-if value="{{ activeHow.isRadar }}">
+          <svg viewBox="0 0 160 160" style="width:130px;height:130px;flex:none">
+            <circle cx="80" cy="80" r="74" fill="none" stroke="var(--accent)" stroke-width="1.2" opacity="0.25"/>
+            <circle cx="80" cy="80" r="54" fill="none" stroke="var(--accent)" stroke-width="1.4" opacity="0.45"/>
+            <circle cx="80" cy="80" r="34" fill="none" stroke="var(--accent)" stroke-width="1.6" opacity="0.7"/>
+            <circle cx="80" cy="80" r="16" fill="none" stroke="var(--accent)" stroke-width="1.8" opacity="0.9"/>
+            <circle cx="80" cy="80" r="6" fill="var(--accent)"/>
+          </svg>
+        </sc-if>
+
+        <sc-if value="{{ activeHow.isBars }}">
+          <svg viewBox="0 0 160 160" style="width:130px;height:130px;flex:none">
+            <rect x="0" y="20" width="115" height="4" rx="2" fill="var(--accent)" opacity="0.45"/>
+            <rect x="0" y="50" width="80" height="4" rx="2" fill="var(--accent)" opacity="0.45"/>
+            <rect x="0" y="80" width="145" height="5" rx="2.5" fill="var(--accent)"/>
+            <rect x="0" y="110" width="60" height="4" rx="2" fill="var(--accent)" opacity="0.45"/>
+            <rect x="0" y="140" width="98" height="4" rx="2" fill="var(--accent)" opacity="0.45"/>
+          </svg>
+        </sc-if>
+
+        <h3 style="font-size:32px;line-height:1.28;font-weight:500;letter-spacing:-.025em;color:var(--ink);margin:0;max-width:440px">{{ activeHow.headline }}</h3>
       </div>
-    </sc-if>
 
-    <sc-if value="{{ !isMobile }}" hint-placeholder-val="{{ true }}">
-      <div data-reveal style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:24px;margin-top:44px;align-items:stretch">
-        <div style="display:flex;flex-direction:column;gap:12px;height:100%">
-          <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
-            <div onClick="{{ s.pick }}" tabindex="0" role="button" aria-label="Step {{ s.n }}: {{ s.title }}" style="position:relative;display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:center;border:1px solid {{ s.border }};background:{{ s.bg }};border-radius:18px;padding:0 20px;flex:1;cursor:pointer;overflow:hidden;transition:border-color .4s ease,background .4s ease" style-hover="border-color:var(--accent)">
-              <div style="width:44px;height:44px;border-radius:13px;background:var(--card);display:flex;align-items:center;justify-content:center">
-                <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:{{ s.dot }};stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="{{ s.icon }}"></path></svg>
-              </div>
-              <div>
-                <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
-                  <div style="font-size:19px;font-weight:600;letter-spacing:-.02em">{{ s.title }}</div>
-                  <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--mut);flex:none">{{ s.n }}</span>
-                </div>
-              </div>
-              <div style="position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--line);opacity:{{ s.active }}"></div>
-              <div key="{{ s.barKey }}" style="position:absolute;left:0;bottom:0;height:2px;background:var(--accent);opacity:{{ s.active }};animation:grow 4.2s linear forwards"></div>
+      <!-- Right Column: Eyebrow + Data Table -->
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:20px">{{ activeHow.eyebrow }}</div>
+        <div style="display:flex;flex-direction:column">
+          <sc-for list="{{ activeHow.rows }}" as="r">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-top:1px solid var(--line)">
+              <span style="font-size:15px;color:var(--mut)">{{ r.k }}</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:500;color:var(--ink)">{{ r.v }}</span>
             </div>
           </sc-for>
         </div>
-
-        <div style="border:1px solid var(--line);background:var(--card2);border-radius:22px;padding:26px;backdrop-filter:blur(12px);box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:space-between">
-          <div>
-            <div style="display:flex;align-items:center;justify-content:space-between">
-              <div style="font-size:16.5px;font-weight:600;letter-spacing:-.01em">{{ panel.title }}</div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--mut)">{{ panel.meta }}</div>
-            </div>
-            <div style="font-size:15.5px;line-height:1.6;color:var(--mut);margin-top:10px">{{ panel.desc }}</div>
-            <div style="display:flex;flex-direction:column;gap:10px;margin-top:20px">
-              <sc-for list="{{ panel.rows }}" as="r" hint-placeholder-count="4">
-                <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;border:1px solid var(--line);background:var(--card);border-radius:13px;padding:14px 16px;animation:rise .45s cubic-bezier(.22,.7,.2,1) both;animation-delay:{{ r.delay }}">
-                  <span style="font-size:15px">{{ r.k }}</span>
-                  <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;color:{{ r.c }};background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:5px 11px;flex:none">{{ r.v }}</span>
-                </div>
-              </sc-for>
-            </div>
-          </div>
-          <div style="border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:14px;line-height:1.6;color:var(--mut)">{{ panel.note }}</div>
-        </div>
       </div>
-    </sc-if>
+    </div>
   </section>
 
   <section id="reach" style="margin-top:96px;padding:88px 0 0;border-top:1px solid var(--line);position:relative">
@@ -662,32 +672,56 @@ const SCRIPT = [
   ["Agent", "No fee at any stage. Shift is 10 to 7, six days, documents verified on joining."]
 ];
 
-const STEPS = [
-  { n: "01", dot: "var(--accent)", icon: "M6 3h8l4 4v14H6z M14 3v4h4 M9 12h6 M9 16h4",
-    title: "Create the job", body: "Paste the job description and the platform builds the interview agent for that role." },
-  { n: "02", dot: "var(--accent2)", icon: "M4 7h16 M4 12h16 M4 17h16 M9 5v4 M16 10v4 M7 15v4",
-    title: "Add the assessments", body: "Switch on CEFR English, domain tests, behavioral scoring or proctoring per role." },
-  { n: "03", dot: "var(--gold)", icon: "M8 3h8v18H8z M11 18h2",
-    title: "Interview candidates", body: "Send a link or QR and they interview in the browser, or upload a list and the agent calls them." },
-  { n: "04", dot: "var(--accent)", icon: "M9 4h6v3H9z M15 5h3v15H6V5h3 M9 13l2 2 4-4",
-    title: "Review and decide", body: "Read the report against your criteria, with the recording and transcript attached." }
+const HOW_STEPS = [
+  {
+    n: "01",
+    tabTitle: "Define the round",
+    headline: "Upload a job description. Questions, follow-up depth and pass bands are yours to set.",
+    eyebrow: "SETUP · ONCE PER ROLE",
+    type: "grid",
+    rows: [
+      { k: "Questions", v: "9 core + adaptive" },
+      { k: "Languages", v: "English, Hindi" },
+      { k: "Pass band", v: "≥ 7.0 composite" }
+    ]
+  },
+  {
+    n: "02",
+    tabTitle: "Send it anywhere",
+    headline: "Publish a link or QR, or upload a list and let the agent place the calls.",
+    eyebrow: "DELIVERY · LINK, QR, OUTBOUND",
+    type: "nodes",
+    rows: [
+      { k: "Channels", v: "Web, phone, WhatsApp" },
+      { k: "Install", v: "None" },
+      { k: "Retries", v: "Automatic, 3×" }
+    ]
+  },
+  {
+    n: "03",
+    tabTitle: "The round runs",
+    headline: "A voice agent runs the interview and follows up whenever an answer is thin.",
+    eyebrow: "LIVE · 24/7, UNATTENDED",
+    type: "radar",
+    rows: [
+      { k: "Concurrency", v: "Unlimited" },
+      { k: "Avg length", v: "7m 40s" },
+      { k: "Proctoring", v: "On for video" }
+    ]
+  },
+  {
+    n: "04",
+    tabTitle: "Read the evidence",
+    headline: "Every score carries the transcript span behind it, synced to the candidate record.",
+    eyebrow: "OUTPUT · AUDITABLE REPORT",
+    type: "bars",
+    rows: [
+      { k: "Report", v: "Score + rationale" },
+      { k: "Media", v: "Audio, video, transcript" },
+      { k: "Sync", v: "ATS write-back" }
+    ]
+  }
 ];
-
-const PANELS = [
-  { title: "Credit Card Sales Executive", meta: "Agent generated", desc: "The interview agent is built from your job description.", note: "Edit any question, or keep what the agent drafted.",
-    rows: [["Interview questions", "12 drafted", "var(--accent)"], ["Follow-up depth", "Adaptive", "var(--accent)"],
-      ["Must Have criteria", "4 set", "var(--accent)"], ["Tracks", "Fresher + experienced", "var(--mut)"]] },
-  { title: "Assessment modules", meta: "Per role", desc: "Add the checks this role needs.", note: "They run inside the same interview — no separate test to schedule.",
-    rows: [["CEFR English", "Gate · B1", "var(--accent2)"], ["Industry knowledge", "BFSI bank", "var(--accent2)"],
-      ["Behavioral scoring", "On", "var(--accent2)"], ["Proctoring", "Video only", "var(--mut)"]] },
-  { title: "240 candidates", meta: "Live", desc: "Candidates interview by web link, or the agent calls them.", note: "Both routes run the same interview and the same criteria.",
-    rows: [["Web link + QR", "Inbound", "var(--gold)"], ["Agent calling", "148 dialed", "var(--gold)"],
-      ["WhatsApp retry", "Scheduled", "var(--gold)"], ["Language", "Hindi → English", "var(--mut)"]] },
-  { title: "Shortlist", meta: "Ranked", desc: "See who passed, and why.", note: "Recording, transcript and evidence attached to each candidate.",
-    rows: [["Recommended", "18 candidates", "var(--accent)"], ["Below the bar", "63 candidates", "var(--mut)"],
-      ["Red flags", "9 candidates", "#E8544A"], ["Synced to ATS", "Complete", "var(--accent)"]] }
-].map(p => ({ title: p.title, meta: p.meta, desc: p.desc, note: p.note,
-  rows: p.rows.map(([k, v, c], i) => ({ k, v, c, delay: (i * 70) + "ms" })) }));
 
 const THEMES = {
   dark: { "--bg": "#07100D", "--ink": "#F1F6F3", "--mut": "#8B9A94", "--line": "rgba(255,255,255,.11)",
@@ -907,25 +941,18 @@ class Component extends DCLogic {
       clock: mm + ":" + ss,
       lines,
       isMobile: mobile,
-      currentStep: Object.assign({}, STEPS[this.state.how], {
-        border: "var(--accent)",
-        bg: "var(--card2)",
-        barKey: "bar-" + this.state.how + "-" + (this.state.howTick || 0),
-        next: () => this.setState(s => ({ how: (s.how + 1) % 4, howTick: s.howTick + 1 }))
-      }),
-      prevStep: () => this.setState(s => ({ how: (s.how - 1 + 4) % 4, howTick: s.howTick + 1 })),
-      nextStep: () => this.setState(s => ({ how: (s.how + 1) % 4, howTick: s.howTick + 1 })),
-      steps: STEPS.map((s, i) => Object.assign({}, s, {
-        pick: () => this.pickStep(i),
-        border: this.state.how === i ? "var(--accent)" : "var(--line)",
-        bg: this.state.how === i ? "var(--card2)" : "transparent",
-        active: this.state.how === i ? 1 : 0,
-        barKey: "bar-" + i + "-" + (this.state.how === i ? this.state.howTick : "x")
+      howSteps: HOW_STEPS.map((s, i) => ({
+        n: s.n,
+        tabTitle: s.tabTitle,
+        active: ((this.state.how % 4) + 4) % 4 === i,
+        pick: () => this.pickStep(i)
       })),
-      panel: PANELS[this.state.how],
-      stepDir: mobile ? "row" : "column",
-      stepScroll: mobile ? "auto" : "visible",
-      stepFlex: mobile ? "0 0 84%" : "1 1 0",
+      activeHow: Object.assign({}, HOW_STEPS[((this.state.how % 4) + 4) % 4], {
+        isGrid: HOW_STEPS[((this.state.how % 4) + 4) % 4].type === "grid",
+        isNodes: HOW_STEPS[((this.state.how % 4) + 4) % 4].type === "nodes",
+        isRadar: HOW_STEPS[((this.state.how % 4) + 4) % 4].type === "radar",
+        isBars: HOW_STEPS[((this.state.how % 4) + 4) % 4].type === "bars"
+      }),
       inboundPoints: [
         "Runs in the browser — no app, no login",
         "Works on the candidate's own phone",
