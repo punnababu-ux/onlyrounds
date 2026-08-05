@@ -628,43 +628,6 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
     </div>
   </section>
 
-  <section id="demos" style="padding:88px 0 0;margin-top:96px;border-top:1px solid var(--line)">
-    <div data-reveal style="max-width:800px;margin:0;text-align:left">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)">Live demo environments</div>
-      <h2 style="font-size:42px;line-height:1.08;letter-spacing:-.03em;font-weight:600;margin:14px 0 0">Eleven production-grade interview agents. Run one now.</h2>
-      <p style="font-size:18px;line-height:1.6;color:var(--mut);margin:18px 0 0;max-width:560px">Same engine as production — across roles, languages, and modes. Live interviews, not recordings.</p>
-    </div>
-    <div data-reveal style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px;margin-top:40px">
-      <sc-for list="{{ bots }}" as="b" hint-placeholder-count="11">
-        <div style="display:flex;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 24px;flex-direction:column;justify-content:space-between;gap:18px;transition:background .3s ease,border-color .3s ease" style-hover="background:var(--card2);border-color:var(--mut)">
-          <div>
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px">
-              <div style="font-size:18px;font-weight:600;letter-spacing:-.015em;color:var(--ink)">{{ b.n }}</div>
-              <a href="#" aria-label="Test {{ b.n }} bot" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--ink);background:var(--panel);border:1px solid var(--line);padding:5px 13px;border-radius:999px;transition:all .2s ease;flex:none" style-hover="background:var(--accent);border-color:var(--accent);color:var(--panel)">
-                <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                Run demo
-              </a>
-            </div>
-            <div style="font-size:14.5px;line-height:1.5;color:var(--mut)">{{ b.p }}</div>
-            <div style="display:flex;align-items:center;gap:12px;margin-top:14px;font-size:13px;color:var(--mut)">
-              <span style="display:flex;align-items:center;gap:6px">
-                <sc-if value="{{ b.isVideo }}" hint-placeholder-val="{{ false }}">
-                  <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-                </sc-if>
-                <sc-if value="{{ !b.isVideo }}" hint-placeholder-val="{{ true }}">
-                  <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
-                </sc-if>
-                {{ b.m }}
-              </span>
-              <span style="width:4px;height:4px;border-radius:50%;background:var(--mut);opacity:0.3"></span>
-              <span>{{ b.l }}</span>
-            </div>
-          </div>
-        </div>
-      </sc-for>
-    </div>
-  </section>
-
 
 
   <section id="faq" style="padding:88px 0 0;margin-top:96px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:50px">
