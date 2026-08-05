@@ -339,18 +339,15 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
         <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-top:6px">Live demo recording</div>
 
         <!-- Progress bar -->
-        <div style="margin-top:24px">
-          <div style="position:relative">
-            <input
-              type="range"
-              class="audio-seek"
-              min="0" max="1000"
-              value="{{ audioRangeVal }}"
-              onInput="{{ onSeekInput }}"
-              style="display:block;width:100%"
-            />
+        <div style="margin-top:28px">
+          <!-- Seek track: tall hit zone, visually 4px -->
+          <div id="demo-seek-track" style="padding:10px 0;cursor:pointer;margin:-10px 0">
+            <div style="height:4px;background:var(--line);border-radius:4px;position:relative">
+              <div id="demo-seek-fill" style="height:100%;width:0%;background:var(--accent);border-radius:4px;pointer-events:none"></div>
+              <div id="demo-seek-thumb" style="position:absolute;top:50%;right:auto;left:0%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(124,76,255,.25);pointer-events:none"></div>
+            </div>
           </div>
-          <div style="display:flex;justify-content:space-between;margin-top:8px">
+          <div style="display:flex;justify-content:space-between;margin-top:6px">
             <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--mut)">{{ audioTime }}</span>
             <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--mut)">{{ audioDurFmt }}</span>
           </div>
@@ -825,9 +822,40 @@ class Component extends DCLogic {
       if (!el) return;
       el.src = card.audio;
       el.load();
-      el.play();
-      el.ontimeupdate = () => this.setState({ audioProgress: el.duration ? el.currentTime / el.duration : 0, audioSecs: Math.floor(el.currentTime), audioDur: Math.floor(el.duration || 0) });
+
+      const updateSeekUI = () => {
+        const pct = el.duration && isFinite(el.duration) ? el.currentTime / el.duration : 0;
+        const fill = document.getElementById('demo-seek-fill');
+        const thumb = document.getElementById('demo-seek-thumb');
+        if (fill) fill.style.width = (pct * 100) + '%';
+        if (thumb) thumb.style.left = (pct * 100) + '%';
+        this.setState({
+          audioProgress: pct,
+          audioSecs: Math.floor(el.currentTime),
+          audioDur: isFinite(el.duration) ? Math.floor(el.duration) : 0
+        });
+      };
+
+      el.onloadedmetadata = () => {
+        this.setState({ audioDur: isFinite(el.duration) ? Math.floor(el.duration) : 0 });
+        el.play().catch(() => {});
+      };
+      el.ontimeupdate = updateSeekUI;
       el.onended = () => this.setState({ audioPlaying: false });
+
+      // Attach seek click directly to track element
+      setTimeout(() => {
+        const track = document.getElementById('demo-seek-track');
+        if (track) {
+          track.onclick = (e) => {
+            if (!el.duration || !isFinite(el.duration)) return;
+            const rect = track.getBoundingClientRect();
+            const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+            el.currentTime = pct * el.duration;
+            updateSeekUI();
+          };
+        }
+      }, 150);
     }, 80);
   }
   toggleAudio() {
