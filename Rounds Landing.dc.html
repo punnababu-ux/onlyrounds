@@ -737,6 +737,15 @@ class Component extends DCLogic {
     this.setState(s => ({ how: i, howTick: s.howTick + 1 }));
   }
 
+  startDeckAutoScroll(initialDelay = 8000) {
+    clearInterval(this.k);
+    clearTimeout(this.kt);
+    this.kt = setTimeout(() => {
+      this.setState(s => ({ idx: s.idx + 1 }));
+      this.k = setInterval(() => this.setState(s => ({ idx: s.idx + 1 })), 5400);
+    }, initialDelay);
+  }
+
   openCall(i) {
     this.setState({ call: i, phase: "ready", callSecs: 0 });
   }
@@ -810,6 +819,7 @@ class Component extends DCLogic {
     this.onResize();
     window.addEventListener("resize", this.onResize);
     this.c = setInterval(() => this.setState(s => ({ secs: s.secs + 1 })), 1000);
+    this.startDeckAutoScroll(8000);
     this.h = setInterval(() => this.setState(s => ({ how: (s.how + 1) % 4, howTick: s.howTick + 1 })), 5500);
 
     if (this.props.reduceMotion) return;
@@ -879,7 +889,14 @@ class Component extends DCLogic {
       }
 
       return Object.assign({}, c, {
-        go: () => diff === 0 ? this.openCall(i) : this.setState({ idx: idx + diff }),
+        go: () => {
+          if (diff === 0) {
+            this.openCall(i);
+          } else {
+            this.setState({ idx: idx + diff });
+            this.startDeckAutoScroll(8000);
+          }
+        },
         t: "translateX(" + x + "px) scale(" + s + ")",
         o, io, pe, z, border, shadow
       });
@@ -890,7 +907,10 @@ class Component extends DCLogic {
       return {
         w: active ? "22px" : "7px",
         bg: active ? "var(--accent)" : "var(--line)",
-        go: () => this.setState({ idx: i })
+        go: () => {
+          this.setState({ idx: i });
+          this.startDeckAutoScroll(8000);
+        }
       };
     });
 
@@ -929,8 +949,14 @@ class Component extends DCLogic {
       startCall: () => this.startCall(),
       endCall: () => this.endCall(),
       stopProp: e => e.stopPropagation(),
-      prev: () => this.setState({ idx: idx - 1 }),
-      next: () => this.setState({ idx: idx + 1 }),
+      prev: () => {
+        this.setState({ idx: idx - 1 });
+        this.startDeckAutoScroll(8000);
+      },
+      next: () => {
+        this.setState({ idx: idx + 1 });
+        this.startDeckAutoScroll(8000);
+      },
       clock: mm + ":" + ss,
       lines,
       isMobile: mobile,
