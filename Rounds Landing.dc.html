@@ -378,25 +378,25 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:64px;position:relative">
       <!-- Inbound Column (Candidate-initiated) -->
-      <div style="display:flex;flex-direction:column">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)">INBOUND</div>
+      <div onMouseEnter="{{ setInboundActive }}" style="display:flex;flex-direction:column;cursor:pointer;opacity:{{ reachInboundActive ? '1' : '0.45' }};transition:opacity .4s ease">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:{{ reachInboundActive ? 'var(--accent)' : 'var(--mut)' }};transition:color .4s ease">INBOUND</div>
         
         <!-- Converging Inbound SVG Graphic -->
         <div style="margin-top:32px;height:110px;display:flex;align-items:center">
           <svg viewBox="0 0 200 120" style="width:180px;height:100px">
-            <circle cx="16" cy="12" r="4" fill="var(--accent)"/>
-            <circle cx="16" cy="38" r="4" fill="var(--accent)"/>
-            <circle cx="16" cy="60" r="4" fill="var(--accent)"/>
-            <circle cx="16" cy="82" r="4" fill="var(--accent)"/>
-            <circle cx="16" cy="108" r="4" fill="var(--accent)"/>
+            <circle cx="16" cy="12" r="4" fill="{{ reachInboundActive ? 'var(--accent)' : 'var(--mut)' }}" style="transition:fill .4s ease"/>
+            <circle cx="16" cy="38" r="4" fill="{{ reachInboundActive ? 'var(--accent)' : 'var(--mut)' }}" style="transition:fill .4s ease"/>
+            <circle cx="16" cy="60" r="4" fill="{{ reachInboundActive ? 'var(--accent)' : 'var(--mut)' }}" style="transition:fill .4s ease"/>
+            <circle cx="16" cy="82" r="4" fill="{{ reachInboundActive ? 'var(--accent)' : 'var(--mut)' }}" style="transition:fill .4s ease"/>
+            <circle cx="16" cy="108" r="4" fill="{{ reachInboundActive ? 'var(--accent)' : 'var(--mut)' }}" style="transition:fill .4s ease"/>
             
-            <path d="M 16 12 C 90 12, 120 60, 170 60" fill="none" stroke="var(--accent)" stroke-width="1.6" opacity="0.65"/>
-            <path d="M 16 38 C 90 38, 120 60, 170 60" fill="none" stroke="var(--accent)" stroke-width="1.6" opacity="0.75"/>
-            <path d="M 16 60 C 90 60, 120 60, 170 60" fill="none" stroke="var(--accent)" stroke-width="2" opacity="0.95"/>
-            <path d="M 16 82 C 90 82, 120 60, 170 60" fill="none" stroke="var(--accent)" stroke-width="1.6" opacity="0.75"/>
-            <path d="M 16 108 C 90 108, 120 60, 170 60" fill="none" stroke="var(--accent)" stroke-width="1.6" opacity="0.65"/>
+            <path d="M 16 12 C 90 12, 120 60, 170 60" fill="none" stroke="{{ reachInboundActive ? 'var(--accent)' : 'var(--mut)' }}" stroke-width="1.6" opacity="{{ reachInboundActive ? '0.65' : '0.35' }}" style="transition:stroke .4s ease,opacity .4s ease"/>
+            <path d="M 16 38 C 90 38, 120 60, 170 60" fill="none" stroke="{{ reachInboundActive ? 'var(--accent)' : 'var(--mut)' }}" stroke-width="1.6" opacity="{{ reachInboundActive ? '0.75' : '0.45' }}" style="transition:stroke .4s ease,opacity .4s ease"/>
+            <path d="M 16 60 C 90 60, 120 60, 170 60" fill="none" stroke="{{ reachInboundActive ? 'var(--accent)' : 'var(--mut)' }}" stroke-width="2" opacity="{{ reachInboundActive ? '0.95' : '0.6' }}" style="transition:stroke .4s ease,opacity .4s ease"/>
+            <path d="M 16 82 C 90 82, 120 60, 170 60" fill="none" stroke="{{ reachInboundActive ? 'var(--accent)' : 'var(--mut)' }}" stroke-width="1.6" opacity="{{ reachInboundActive ? '0.75' : '0.45' }}" style="transition:stroke .4s ease,opacity .4s ease"/>
+            <path d="M 16 108 C 90 108, 120 60, 170 60" fill="none" stroke="{{ reachInboundActive ? 'var(--accent)' : 'var(--mut)' }}" stroke-width="1.6" opacity="{{ reachInboundActive ? '0.65' : '0.35' }}" style="transition:stroke .4s ease,opacity .4s ease"/>
             
-            <circle cx="170" cy="60" r="8" fill="var(--accent)"/>
+            <circle cx="170" cy="60" r="8" fill="{{ reachInboundActive ? 'var(--accent)' : 'var(--mut)' }}" style="transition:fill .4s ease"/>
           </svg>
         </div>
 
@@ -405,15 +405,15 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
         
         <ul style="list-style:none;padding:0;margin:28px 0 0;display:flex;flex-direction:column;gap:12px;font-size:15px;color:var(--ink)">
           <li style="display:flex;align-items:center;gap:10px">
-            <span style="width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block"></span>
+            <span style="width:5px;height:5px;border-radius:50%;background:{{ reachInboundActive ? 'var(--accent)' : 'var(--mut)' }};display:inline-block;transition:background .4s ease"></span>
             Link, QR or WhatsApp
           </li>
           <li style="display:flex;align-items:center;gap:10px">
-            <span style="width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block"></span>
+            <span style="width:5px;height:5px;border-radius:50%;background:{{ reachInboundActive ? 'var(--accent)' : 'var(--mut)' }};display:inline-block;transition:background .4s ease"></span>
             No app, no scheduling
           </li>
           <li style="display:flex;align-items:center;gap:10px">
-            <span style="width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block"></span>
+            <span style="width:5px;height:5px;border-radius:50%;background:{{ reachInboundActive ? 'var(--accent)' : 'var(--mut)' }};display:inline-block;transition:background .4s ease"></span>
             Runs outside office hours
           </li>
         </ul>
@@ -423,42 +423,42 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
       <div class="delivery-divider" style="position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--line)"></div>
 
       <!-- Outbound Column (AI-initiated) -->
-      <div style="display:flex;flex-direction:column">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)">OUTBOUND</div>
+      <div onMouseEnter="{{ setOutboundActive }}" style="display:flex;flex-direction:column;cursor:pointer;opacity:{{ reachOutboundActive ? '1' : '0.45' }};transition:opacity .4s ease">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:{{ reachOutboundActive ? 'var(--accent)' : 'var(--mut)' }};transition:color .4s ease">OUTBOUND</div>
         
         <!-- Diverging Outbound SVG Graphic -->
         <div style="margin-top:32px;height:110px;display:flex;align-items:center">
           <svg viewBox="0 0 200 120" style="width:180px;height:100px">
-            <circle cx="30" cy="60" r="7" fill="var(--mut)" opacity="0.6"/>
+            <circle cx="30" cy="60" r="7" fill="{{ reachOutboundActive ? 'var(--accent)' : 'var(--mut)' }}" style="transition:fill .4s ease"/>
             
-            <path d="M 30 60 C 80 60, 110 12, 184 12" fill="none" stroke="var(--mut)" stroke-width="1.6" opacity="0.35"/>
-            <path d="M 30 60 C 80 60, 110 38, 184 38" fill="none" stroke="var(--mut)" stroke-width="1.6" opacity="0.45"/>
-            <path d="M 30 60 C 80 60, 110 60, 184 60" fill="none" stroke="var(--mut)" stroke-width="1.8" opacity="0.6"/>
-            <path d="M 30 60 C 80 60, 110 82, 184 82" fill="none" stroke="var(--mut)" stroke-width="1.6" opacity="0.45"/>
-            <path d="M 30 60 C 80 60, 110 108, 184 108" fill="none" stroke="var(--mut)" stroke-width="1.6" opacity="0.35"/>
+            <path d="M 30 60 C 80 60, 110 12, 184 12" fill="none" stroke="{{ reachOutboundActive ? 'var(--accent)' : 'var(--mut)' }}" stroke-width="1.6" opacity="{{ reachOutboundActive ? '0.65' : '0.35' }}" style="transition:stroke .4s ease,opacity .4s ease"/>
+            <path d="M 30 60 C 80 60, 110 38, 184 38" fill="none" stroke="{{ reachOutboundActive ? 'var(--accent)' : 'var(--mut)' }}" stroke-width="1.6" opacity="{{ reachOutboundActive ? '0.75' : '0.45' }}" style="transition:stroke .4s ease,opacity .4s ease"/>
+            <path d="M 30 60 C 80 60, 110 60, 184 60" fill="none" stroke="{{ reachOutboundActive ? 'var(--accent)' : 'var(--mut)' }}" stroke-width="2" opacity="{{ reachOutboundActive ? '0.95' : '0.6' }}" style="transition:stroke .4s ease,opacity .4s ease"/>
+            <path d="M 30 60 C 80 60, 110 82, 184 82" fill="none" stroke="{{ reachOutboundActive ? 'var(--accent)' : 'var(--mut)' }}" stroke-width="1.6" opacity="{{ reachOutboundActive ? '0.75' : '0.45' }}" style="transition:stroke .4s ease,opacity .4s ease"/>
+            <path d="M 30 60 C 80 60, 110 108, 184 108" fill="none" stroke="{{ reachOutboundActive ? 'var(--accent)' : 'var(--mut)' }}" stroke-width="1.6" opacity="{{ reachOutboundActive ? '0.65' : '0.35' }}" style="transition:stroke .4s ease,opacity .4s ease"/>
             
-            <circle cx="184" cy="12" r="4" fill="var(--mut)" opacity="0.5"/>
-            <circle cx="184" cy="38" r="4" fill="var(--mut)" opacity="0.5"/>
-            <circle cx="184" cy="60" r="4" fill="var(--mut)" opacity="0.6"/>
-            <circle cx="184" cy="82" r="4" fill="var(--mut)" opacity="0.5"/>
-            <circle cx="184" cy="108" r="4" fill="var(--mut)" opacity="0.5"/>
+            <circle cx="184" cy="12" r="4" fill="{{ reachOutboundActive ? 'var(--accent)' : 'var(--mut)' }}" style="transition:fill .4s ease"/>
+            <circle cx="184" cy="38" r="4" fill="{{ reachOutboundActive ? 'var(--accent)' : 'var(--mut)' }}" style="transition:fill .4s ease"/>
+            <circle cx="184" cy="60" r="4" fill="{{ reachOutboundActive ? 'var(--accent)' : 'var(--mut)' }}" style="transition:fill .4s ease"/>
+            <circle cx="184" cy="82" r="4" fill="{{ reachOutboundActive ? 'var(--accent)' : 'var(--mut)' }}" style="transition:fill .4s ease"/>
+            <circle cx="184" cy="108" r="4" fill="{{ reachOutboundActive ? 'var(--accent)' : 'var(--mut)' }}" style="transition:fill .4s ease"/>
           </svg>
         </div>
 
-        <h3 style="font-size:38px;line-height:1.15;font-weight:500;letter-spacing:-.03em;color:var(--ink);opacity:0.85;margin:24px 0 0">AI-initiated</h3>
+        <h3 style="font-size:38px;line-height:1.15;font-weight:500;letter-spacing:-.03em;color:var(--ink);margin:24px 0 0">AI-initiated</h3>
         <p style="font-size:17px;line-height:1.55;color:var(--mut);margin:14px 0 0;max-width:440px">Upload a list. The agent calls, runs the same round, handles retries and files the report.</p>
         
-        <ul style="list-style:none;padding:0;margin:28px 0 0;display:flex;flex-direction:column;gap:12px;font-size:15px;color:var(--mut)">
+        <ul style="list-style:none;padding:0;margin:28px 0 0;display:flex;flex-direction:column;gap:12px;font-size:15px;color:var(--ink)">
           <li style="display:flex;align-items:center;gap:10px">
-            <span style="width:5px;height:5px;border-radius:50%;background:var(--mut);opacity:0.6;display:inline-block"></span>
+            <span style="width:5px;height:5px;border-radius:50%;background:{{ reachOutboundActive ? 'var(--accent)' : 'var(--mut)' }};display:inline-block;transition:background .4s ease"></span>
             Bulk list upload
           </li>
           <li style="display:flex;align-items:center;gap:10px">
-            <span style="width:5px;height:5px;border-radius:50%;background:var(--mut);opacity:0.6;display:inline-block"></span>
+            <span style="width:5px;height:5px;border-radius:50%;background:{{ reachOutboundActive ? 'var(--accent)' : 'var(--mut)' }};display:inline-block;transition:background .4s ease"></span>
             Automatic retries
           </li>
           <li style="display:flex;align-items:center;gap:10px">
-            <span style="width:5px;height:5px;border-radius:50%;background:var(--mut);opacity:0.6;display:inline-block"></span>
+            <span style="width:5px;height:5px;border-radius:50%;background:{{ reachOutboundActive ? 'var(--accent)' : 'var(--mut)' }};display:inline-block;transition:background .4s ease"></span>
             Any volume, same day
           </li>
         </ul>
@@ -952,6 +952,10 @@ class Component extends DCLogic {
     ];
 
     return {
+      reachInboundActive: (this.state.reachMode || 'inbound') === 'inbound',
+      reachOutboundActive: this.state.reachMode === 'outbound',
+      setInboundActive: () => this.setState({ reachMode: 'inbound' }),
+      setOutboundActive: () => this.setState({ reachMode: 'outbound' }),
       demoFilter: this.state.demoFilter || 'All',
       filterAll: () => this.setState({ demoFilter: 'All' }),
       filterEnglish: () => this.setState({ demoFilter: 'English' }),
