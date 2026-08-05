@@ -810,7 +810,6 @@ class Component extends DCLogic {
     this.onResize();
     window.addEventListener("resize", this.onResize);
     this.c = setInterval(() => this.setState(s => ({ secs: s.secs + 1 })), 1000);
-    this.k = setInterval(() => this.setState(s => ({ idx: s.idx + 1 })), 5400);
     this.h = setInterval(() => this.setState(s => ({ how: (s.how + 1) % 4, howTick: s.howTick + 1 })), 5500);
 
     if (this.props.reduceMotion) return;
@@ -844,19 +843,19 @@ class Component extends DCLogic {
     const ss = String(secs % 60).padStart(2, "0");
 
     const CARDS = [
-      { kind: "BFSI · default demo", name: "Credit Card Sales", tags: ["English", "Audio", "Inbound QR"], hero: "inbound QR screening.",
+      { kind: "BFSI · Interview Demo", name: "Credit Card Sales", tags: ["English", "Audio", "Inbound QR"], hero: "inbound QR screening.",
         persona: "Evaluates candidates on retail card sales experience, product pitching fluency, monthly quota metrics, and objection handling.",
         orb: "linear-gradient(135deg, #74D7AE 0%, #7BB9E5 50%, #FFD975 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #74D7AE 45%, #7BB9E5 100%)", halo: "rgba(116,215,174,.45)" },
-      { kind: "Vernacular", name: "Credit Card Sales · Hindi", tags: ["Hindi", "Language switch", "FAQ"], hero: "live language switching.",
+      { kind: "Vernacular · Interview Demo", name: "Credit Card Sales · Hindi", tags: ["Hindi", "Language switch", "FAQ"], hero: "live language switching.",
         persona: "Screens candidates in Hindi & English, testing bilingual fluency, customer rapport, and mid-interview language switching.",
         orb: "linear-gradient(135deg, #FFD975 0%, #74D7AE 50%, #7BB9E5 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #FFD975 45%, #74D7AE 100%)", halo: "rgba(255,217,117,.42)" },
-      { kind: "Hard gate", name: "Loan Sales · CEFR B1", tags: ["English", "CEFR gate", "Audio"], hero: "CEFR English gates.",
+      { kind: "Hard Gate · Interview Demo", name: "Loan Sales · CEFR B1", tags: ["English", "CEFR gate", "Audio"], hero: "CEFR English gates.",
         persona: "Conducts automated CEFR English assessment to verify candidate spoken English meets the minimum B1 threshold for loan sales.",
         orb: "linear-gradient(135deg, #7BB9E5 0%, #FFD975 50%, #74D7AE 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #7BB9E5 45%, #FFD975 100%)", halo: "rgba(123,185,229,.42)" },
-      { kind: "Assessment round", name: "Deep Interview · Retail", tags: ["Video", "Behavioral", "Proctored"], hero: "behavioral video rounds.",
+      { kind: "Assessment · Interview Demo", name: "Deep Interview · Retail", tags: ["Video", "Behavioral", "Proctored"], hero: "behavioral video rounds.",
         persona: "Evaluates situation handling, customer service behavioral traits, and proctored video responses for retail store staff.",
         orb: "linear-gradient(135deg, #5FCFC1 0%, #7BB9E5 50%, #74D7AE 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #5FCFC1 45%, #7BB9E5 100%)", halo: "rgba(95,207,193,.42)" },
-      { kind: "Different round type", name: "Interview Scheduler", tags: ["English", "In + out", "Booking"], hero: "interview scheduling calls.",
+      { kind: "Scheduler · Interview Demo", name: "Interview Scheduler", tags: ["English", "In + out", "Booking"], hero: "interview scheduling calls.",
         persona: "Interacts with candidates to collect availability, verify location preferences, and automatically book interview slots.",
         orb: "linear-gradient(135deg, #F2C98A 0%, #FFD975 50%, #74D7AE 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #F2C98A 45%, #FFD975 100%)", halo: "rgba(242,201,138,.42)" }
     ];
