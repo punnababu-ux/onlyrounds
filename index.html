@@ -153,17 +153,8 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
   <section id="top" style="display:flex;flex-direction:column;min-height:calc(100vh - 78px);padding:40px 0 32px">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:40px;align-items:center;flex:1">
       <div>
-      <div style="display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 10px;background:var(--card);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)">
-        <span style="width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2s ease-out infinite"></span>
-        500+ agentic interviews daily
-      </div>
-      <h1 style="font-size:66px;line-height:1.03;letter-spacing:-.038em;font-weight:600;margin:22px 0 0;min-height:3.09em">Enterprise voice AI<br>for <span style="background:linear-gradient(96deg,#74D7AE,#7BB9E5,#FFD975,#74D7AE);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 7s linear infinite">{{ heroWord }}</span></h1>
+      <h1 style="font-size:66px;line-height:1.03;letter-spacing:-.038em;font-weight:600;margin:0;min-height:3.09em">Enterprise voice AI<br>for <span style="background:linear-gradient(96deg,#74D7AE,#7BB9E5,#FFD975,#74D7AE);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 7s linear infinite">{{ heroWord }}</span></h1>
       <p style="font-size:20px;line-height:1.55;color:var(--mut);max-width:440px;margin:22px 0 0">Structured interview rounds delivered by link, QR, or AI phone call. Every response graded against your criteria and returned as an auditable report.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:22px">
-        <sc-for list="{{ heroChips }}" as="h" hint-placeholder-count="4">
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.05em;color:var(--mut);border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px">{{ h }}</span>
-        </sc-for>
-      </div>
       <div class="hero-btns" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:34px">
         <a href="#contact" style="display:inline-flex;align-items:center;background:var(--ink);color:var(--bg);font-size:16px;font-weight:500;padding:15px 24px;border-radius:12px" style-hover="opacity:.85">Talk to sales</a>
         <a href="#demos" style="display:inline-flex;align-items:center;background:var(--card);border:1px solid var(--line);color:var(--ink);font-size:16px;font-weight:500;padding:15px 24px;border-radius:12px" style-hover="border-color:var(--accent)">Explore live demos</a>
