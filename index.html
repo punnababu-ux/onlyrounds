@@ -478,9 +478,8 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
     </div>
     <div class="reach-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:64px;position:relative">
       <!-- Inbound Column (Candidate-initiated) -->
-      <div onMouseEnter="{{ setInbound }}" class="reach-col {{ inboundClass }}" style="display:flex;flex-direction:column">
-        <div class="reach-eyebrow" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase">INBOUND</div>
-        
+      <div class="reach-col reach-active" style="display:flex;flex-direction:column">
+
         <!-- Inbound Icons Flow -->
         <div style="margin-top:32px;height:110px;display:flex;align-items:center;gap:12px;padding-right:24px">
           <div class="reach-icon-box">
@@ -526,9 +525,8 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
       <div class="delivery-divider" style="position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--line)"></div>
 
       <!-- Outbound Column (AI-initiated) -->
-      <div onMouseEnter="{{ setOutbound }}" class="reach-col {{ outboundClass }}" style="display:flex;flex-direction:column">
-        <div class="reach-eyebrow" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase">OUTBOUND</div>
-        
+      <div class="reach-col reach-active" style="display:flex;flex-direction:column">
+
         <!-- Outbound Icons Flow -->
         <div style="margin-top:32px;height:110px;display:flex;align-items:center;gap:12px;padding-right:24px">
           <div class="reach-icon-box">
