@@ -108,6 +108,7 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
   .hero-card{width:min(300px,76%)!important}
   #contact{padding:44px 22px!important;border-radius:20px!important}
   #contact h2{font-size:32px!important}
+  .delivery-divider{display:none!important}
   footer{padding:36px 0 48px!important}
 }
 @media (max-width:640px){
@@ -371,69 +372,92 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
   </section>
 
   <section id="reach" style="margin-top:96px;padding:88px 0 0;border-top:1px solid var(--line);position:relative">
-    <div data-reveal style="max-width:800px;margin:0 auto;text-align:center">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)">Delivery modes</div>
-      <h2 style="font-size:42px;line-height:1.08;letter-spacing:-.03em;font-weight:600;margin:14px 0 0">Two delivery modes. The same rigorous round, either way.</h2>
-      <p style="font-size:18px;line-height:1.6;color:var(--mut);margin:18px auto 0;max-width:560px">Identical voice AI engine and evaluation criteria regardless of channel.</p>
-    </div>
-    <div data-reveal style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px;margin-top:42px">
-      <div style="background:linear-gradient(150deg,var(--panel),var(--card));border:1px solid var(--line);border-radius:26px;padding:36px;box-shadow:var(--shadow);transition:transform .4s ease,border-color .4s ease" style-hover="transform:translateY(-4px);border-color:var(--accent)">
-        <div style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:14px;background:var(--card2);border:1px solid var(--line);color:var(--accent);margin-bottom:24px">
-          <svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-        </div>
-        <h3 style="font-size:24px;font-weight:600;letter-spacing:-.02em;margin:0">Candidate-Initiated (Inbound)</h3>
-        <p style="font-size:16px;line-height:1.6;color:var(--mut);margin:14px 0 0">Publish a URL via job boards or WhatsApp. Candidates self-initiate in the browser — no app install.</p>
-      </div>
-
-      <div style="background:linear-gradient(150deg,var(--panel),var(--card));border:1px solid var(--line);border-radius:26px;padding:36px;box-shadow:var(--shadow);transition:transform .4s ease,border-color .4s ease" style-hover="transform:translateY(-4px);border-color:var(--gold)">
-        <div style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:14px;background:var(--card2);border:1px solid var(--line);color:var(--gold);margin-bottom:24px">
-          <svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-        </div>
-        <h3 style="font-size:24px;font-weight:600;letter-spacing:-.02em;margin:0">AI-Initiated (Outbound)</h3>
-        <p style="font-size:16px;line-height:1.6;color:var(--mut);margin:14px 0 0">Upload a candidate list. The AI places calls, runs the interview, and handles retries — no recruiter involvement.</p>
-      </div>
-    </div>
-
-    <div data-reveal style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px;margin-top:24px">
-      <div style="border:1px solid var(--line);border-radius:18px;padding:20px 22px;background:var(--card)">
-        <div style="color:var(--accent);margin-bottom:12px">
-          <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round">
-            <path d="m5 8 6 6" /> <path d="m4 14 6-6 2-3" /> <path d="M2 5h12" /> <path d="M7 2h1" /> <path d="m22 22-5-10-5 10" /> <path d="M14 18h6" />
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:64px;position:relative">
+      <!-- Inbound Column (Candidate-initiated) -->
+      <div style="display:flex;flex-direction:column">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)">INBOUND</div>
+        
+        <!-- Converging Inbound SVG Graphic -->
+        <div style="margin-top:32px;height:110px;display:flex;align-items:center">
+          <svg viewBox="0 0 200 120" style="width:180px;height:100px">
+            <circle cx="16" cy="12" r="4" fill="var(--accent)"/>
+            <circle cx="16" cy="38" r="4" fill="var(--accent)"/>
+            <circle cx="16" cy="60" r="4" fill="var(--accent)"/>
+            <circle cx="16" cy="82" r="4" fill="var(--accent)"/>
+            <circle cx="16" cy="108" r="4" fill="var(--accent)"/>
+            
+            <path d="M 16 12 C 90 12, 120 60, 170 60" fill="none" stroke="var(--accent)" stroke-width="1.6" opacity="0.65"/>
+            <path d="M 16 38 C 90 38, 120 60, 170 60" fill="none" stroke="var(--accent)" stroke-width="1.6" opacity="0.75"/>
+            <path d="M 16 60 C 90 60, 120 60, 170 60" fill="none" stroke="var(--accent)" stroke-width="2" opacity="0.95"/>
+            <path d="M 16 82 C 90 82, 120 60, 170 60" fill="none" stroke="var(--accent)" stroke-width="1.6" opacity="0.75"/>
+            <path d="M 16 108 C 90 108, 120 60, 170 60" fill="none" stroke="var(--accent)" stroke-width="1.6" opacity="0.65"/>
+            
+            <circle cx="170" cy="60" r="8" fill="var(--accent)"/>
           </svg>
         </div>
-        <div style="font-size:15.5px;font-weight:600;letter-spacing:-.01em">English and Hindi</div>
-        <div style="font-size:13.5px;line-height:1.5;color:var(--mut);margin-top:5px">Switches language when the candidate does.</div>
+
+        <h3 style="font-size:38px;line-height:1.15;font-weight:500;letter-spacing:-.03em;color:var(--ink);margin:24px 0 0">Candidate-initiated</h3>
+        <p style="font-size:17px;line-height:1.55;color:var(--mut);margin:14px 0 0;max-width:440px">One URL on job boards, WhatsApp or a QR. Candidates start the round themselves, in the browser.</p>
+        
+        <ul style="list-style:none;padding:0;margin:28px 0 0;display:flex;flex-direction:column;gap:12px;font-size:15px;color:var(--ink)">
+          <li style="display:flex;align-items:center;gap:10px">
+            <span style="width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block"></span>
+            Link, QR or WhatsApp
+          </li>
+          <li style="display:flex;align-items:center;gap:10px">
+            <span style="width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block"></span>
+            No app, no scheduling
+          </li>
+          <li style="display:flex;align-items:center;gap:10px">
+            <span style="width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block"></span>
+            Runs outside office hours
+          </li>
+        </ul>
       </div>
 
-      <div style="border:1px solid var(--line);border-radius:18px;padding:20px 22px;background:var(--card)">
-        <div style="color:var(--accent);margin-bottom:12px">
-          <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round">
-            <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
-          </svg>
-        </div>
-        <div style="font-size:15.5px;font-weight:600;letter-spacing:-.01em">Answers questions</div>
-        <div style="font-size:13.5px;line-height:1.5;color:var(--mut);margin-top:5px">Salary, shift and documents, from your knowledge base.</div>
-      </div>
+      <!-- Vertical Divider Line for desktop -->
+      <div class="delivery-divider" style="position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--line)"></div>
 
-      <div style="border:1px solid var(--line);border-radius:18px;padding:20px 22px;background:var(--card)">
-        <div style="color:var(--accent);margin-bottom:12px">
-          <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round">
-            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+      <!-- Outbound Column (AI-initiated) -->
+      <div style="display:flex;flex-direction:column">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)">OUTBOUND</div>
+        
+        <!-- Diverging Outbound SVG Graphic -->
+        <div style="margin-top:32px;height:110px;display:flex;align-items:center">
+          <svg viewBox="0 0 200 120" style="width:180px;height:100px">
+            <circle cx="30" cy="60" r="7" fill="var(--mut)" opacity="0.6"/>
+            
+            <path d="M 30 60 C 80 60, 110 12, 184 12" fill="none" stroke="var(--mut)" stroke-width="1.6" opacity="0.35"/>
+            <path d="M 30 60 C 80 60, 110 38, 184 38" fill="none" stroke="var(--mut)" stroke-width="1.6" opacity="0.45"/>
+            <path d="M 30 60 C 80 60, 110 60, 184 60" fill="none" stroke="var(--mut)" stroke-width="1.8" opacity="0.6"/>
+            <path d="M 30 60 C 80 60, 110 82, 184 82" fill="none" stroke="var(--mut)" stroke-width="1.6" opacity="0.45"/>
+            <path d="M 30 60 C 80 60, 110 108, 184 108" fill="none" stroke="var(--mut)" stroke-width="1.6" opacity="0.35"/>
+            
+            <circle cx="184" cy="12" r="4" fill="var(--mut)" opacity="0.5"/>
+            <circle cx="184" cy="38" r="4" fill="var(--mut)" opacity="0.5"/>
+            <circle cx="184" cy="60" r="4" fill="var(--mut)" opacity="0.6"/>
+            <circle cx="184" cy="82" r="4" fill="var(--mut)" opacity="0.5"/>
+            <circle cx="184" cy="108" r="4" fill="var(--mut)" opacity="0.5"/>
           </svg>
         </div>
-        <div style="font-size:15.5px;font-weight:600;letter-spacing:-.01em">Runs 24/7</div>
-        <div style="font-size:13.5px;line-height:1.5;color:var(--mut);margin-top:5px">Candidates interview outside office hours.</div>
-      </div>
 
-      <div style="border:1px solid var(--line);border-radius:18px;padding:20px 22px;background:var(--card)">
-        <div style="color:var(--accent);margin-bottom:12px">
-          <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round">
-            <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
-          </svg>
-        </div>
-        <div style="font-size:15.5px;font-weight:600;letter-spacing:-.01em">Audio or video</div>
-        <div style="font-size:13.5px;line-height:1.5;color:var(--mut);margin-top:5px;white-space:pre-line">Video rounds add
-proctoring.</div>
+        <h3 style="font-size:38px;line-height:1.15;font-weight:500;letter-spacing:-.03em;color:var(--ink);opacity:0.85;margin:24px 0 0">AI-initiated</h3>
+        <p style="font-size:17px;line-height:1.55;color:var(--mut);margin:14px 0 0;max-width:440px">Upload a list. The agent calls, runs the same round, handles retries and files the report.</p>
+        
+        <ul style="list-style:none;padding:0;margin:28px 0 0;display:flex;flex-direction:column;gap:12px;font-size:15px;color:var(--mut)">
+          <li style="display:flex;align-items:center;gap:10px">
+            <span style="width:5px;height:5px;border-radius:50%;background:var(--mut);opacity:0.6;display:inline-block"></span>
+            Bulk list upload
+          </li>
+          <li style="display:flex;align-items:center;gap:10px">
+            <span style="width:5px;height:5px;border-radius:50%;background:var(--mut);opacity:0.6;display:inline-block"></span>
+            Automatic retries
+          </li>
+          <li style="display:flex;align-items:center;gap:10px">
+            <span style="width:5px;height:5px;border-radius:50%;background:var(--mut);opacity:0.6;display:inline-block"></span>
+            Any volume, same day
+          </li>
+        </ul>
       </div>
     </div>
   </section>
