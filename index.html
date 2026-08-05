@@ -257,7 +257,7 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
   </nav>
   <div style="display:flex;align-items:center;gap:10px">
     <a href="#top" style="display:inline-flex;align-items:center;background:transparent;border:1px solid var(--line);color:var(--ink);font-size:14px;font-weight:500;padding:9px 18px;border-radius:11px" style-hover="border-color:var(--accent);color:var(--accent)">Log in</a>
-    <a href="#contact" style="display:inline-flex;align-items:center;background:var(--ink);color:var(--bg);font-size:14px;font-weight:500;padding:9px 18px;border-radius:11px" style-hover="opacity:.85">Talk to sales</a>
+    <button onClick="{{ openContactForm }}" style="display:inline-flex;align-items:center;background:var(--ink);color:var(--bg);font-size:14px;font-weight:500;padding:9px 18px;border-radius:11px;border:none;cursor:pointer" style-hover="opacity:.85">Contact sales</button>
   </div>
 </div>
 </header>
@@ -272,7 +272,7 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
       <div style="font-size:38px;line-height:1.2;letter-spacing:-.02em;font-weight:500;margin-top:20px;color:var(--mut)">Hire for <span style="font-weight:600;background:linear-gradient(96deg,#7C4CFF,#C24CFF,#7C4CFF,#22D3EE,#7C4CFF,#4C7BFF,#7C4CFF,#FFB84C,#7C4CFF);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 7s linear infinite">{{ heroWord }}</span></div>
 
       <div class="hero-btns" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:48px">
-        <a href="#contact" style="display:inline-flex;align-items:center;background:var(--ink);color:var(--bg);font-size:16px;font-weight:500;padding:15px 24px;border-radius:12px" style-hover="opacity:.85">Talk to sales</a>
+        <button onClick="{{ openContactForm }}" style="display:inline-flex;align-items:center;background:var(--ink);color:var(--bg);font-size:16px;font-weight:500;padding:15px 24px;border-radius:12px;border:none;cursor:pointer" style-hover="opacity:.85">Contact sales</button>
         <a href="#demos" style="display:inline-flex;align-items:center;background:var(--card);border:1px solid var(--line);color:var(--ink);font-size:16px;font-weight:500;padding:15px 24px;border-radius:12px" style-hover="border-color:var(--accent)">Explore live demos</a>
       </div>
       </div>
@@ -352,6 +352,71 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
             <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--mut)">{{ audioDurFmt }}</span>
           </div>
         </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- Contact Sales Form Modal -->
+  <sc-if value="{{ contactOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeContactForm }}" style="position:fixed;inset:0;z-index:90;background:rgba(4,10,8,.75);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;padding:24px;animation:rise .3s ease">
+      <div onClick="{{ stopProp }}" style="position:relative;width:min(520px,100%);background:var(--panel);border:1px solid var(--line);border-radius:26px;padding:40px 36px 36px;box-shadow:var(--shadow)">
+        <button onClick="{{ closeContactForm }}" aria-label="Close" style="position:absolute;top:16px;right:18px;font-size:20px;color:var(--mut);cursor:pointer;background:none;border:none;padding:4px" style-hover="color:var(--ink)">&times;</button>
+
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)">Contact sales</div>
+        <h2 style="font-size:26px;font-weight:600;letter-spacing:-.02em;margin:10px 0 4px">Let's talk deployment</h2>
+        <p style="font-size:15px;color:var(--mut);line-height:1.55;margin:0 0 26px">Tell us about your hiring needs and we'll get back within one business day.</p>
+
+        <sc-if value="{{ contactSent }}">
+          <div style="text-align:center;padding:32px 0">
+            <div style="font-size:44px;margin-bottom:16px">✅</div>
+            <div style="font-size:20px;font-weight:600;letter-spacing:-.02em">We'll be in touch!</div>
+            <div style="font-size:15px;color:var(--mut);margin-top:8px">Expect a reply within one business day.</div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ !contactSent }}">
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div>
+                <label style="font-size:12px;font-weight:500;color:var(--mut);display:block;margin-bottom:6px">Full name *</label>
+                <input id="cf-name" type="text" placeholder="Priya Sharma" style="width:100%;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:14.5px;color:var(--ink);outline:none;box-sizing:border-box" />
+              </div>
+              <div>
+                <label style="font-size:12px;font-weight:500;color:var(--mut);display:block;margin-bottom:6px">Company *</label>
+                <input id="cf-company" type="text" placeholder="Acme Corp" style="width:100%;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:14.5px;color:var(--ink);outline:none;box-sizing:border-box" />
+              </div>
+            </div>
+            <div>
+              <label style="font-size:12px;font-weight:500;color:var(--mut);display:block;margin-bottom:6px">Work email *</label>
+              <input id="cf-email" type="email" placeholder="priya@acmecorp.com" style="width:100%;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:14.5px;color:var(--ink);outline:none;box-sizing:border-box" />
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div>
+                <label style="font-size:12px;font-weight:500;color:var(--mut);display:block;margin-bottom:6px">Your role</label>
+                <input id="cf-role" type="text" placeholder="Head of TA" style="width:100%;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:14.5px;color:var(--ink);outline:none;box-sizing:border-box" />
+              </div>
+              <div>
+                <label style="font-size:12px;font-weight:500;color:var(--mut);display:block;margin-bottom:6px">Monthly hires</label>
+                <select id="cf-volume" style="width:100%;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:14.5px;color:var(--ink);outline:none;box-sizing:border-box;-webkit-appearance:none">
+                  <option value="">Select range</option>
+                  <option>&lt; 50</option>
+                  <option>50 – 200</option>
+                  <option>200 – 500</option>
+                  <option>500 – 2000</option>
+                  <option>2000+</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label style="font-size:12px;font-weight:500;color:var(--mut);display:block;margin-bottom:6px">Anything else?</label>
+              <textarea id="cf-msg" rows="3" placeholder="Roles you screen for, ATS you use, timeline…" style="width:100%;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:14.5px;color:var(--ink);outline:none;resize:vertical;box-sizing:border-box;font-family:inherit"></textarea>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:4px;gap:12px;flex-wrap:wrap">
+              <div style="font-size:12.5px;color:var(--mut)">We'll reply within 1 business day.</div>
+              <button onClick="{{ submitContact }}" style="flex:none;background:var(--ink);color:var(--bg);font-size:15px;font-weight:500;padding:13px 24px;border-radius:12px;border:none;cursor:pointer;white-space:nowrap" style-hover="opacity:.85">Send message →</button>
+            </div>
+          </div>
+        </sc-if>
       </div>
     </div>
   </sc-if>
@@ -650,7 +715,7 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
       <h2 style="font-size:46px;line-height:1.06;letter-spacing:-.03em;font-weight:600;margin:0">Ready to deploy AI screening at scale?</h2>
       <p style="font-size:18.5px;line-height:1.6;color:var(--mut);margin:18px auto 0;max-width:520px">Talk to our enterprise team about deployment scope, integrations, and commercial terms.</p>
       <div style="display:flex;gap:12px;justify-content:center;margin-top:30px;flex-wrap:wrap">
-        <a href="mailto:sales@onlyround.ai" style="background:var(--ink);color:var(--bg);font-size:16px;font-weight:500;padding:15px 26px;border-radius:12px" style-hover="opacity:.85">Request a briefing</a>
+        <button onClick="{{ openContactForm }}" style="background:var(--ink);color:var(--bg);font-size:16px;font-weight:500;padding:15px 26px;border-radius:12px;border:none;cursor:pointer" style-hover="opacity:.85">Contact sales</button>
       </div>
     </div>
   </section>
@@ -876,6 +941,34 @@ class Component extends DCLogic {
     this.setState({ call: null, audioPlaying: false, audioProgress: 0, audioSecs: 0, audioDur: 0 });
   }
 
+  openContactForm() {
+    this.setState({ contactOpen: true, contactSent: false });
+  }
+  closeContactForm() {
+    this.setState({ contactOpen: false });
+  }
+  submitContact() {
+    const get = id => (document.getElementById(id) || {}).value || '';
+    const name = get('cf-name').trim();
+    const email = get('cf-email').trim();
+    const company = get('cf-company').trim();
+    if (!name || !email || !company) {
+      alert('Please fill in name, company, and work email.');
+      return;
+    }
+    // Send to mailto as fallback (replace with API call as needed)
+    const body = [
+      'Name: ' + name,
+      'Company: ' + company,
+      'Email: ' + email,
+      'Role: ' + get('cf-role'),
+      'Monthly hires: ' + get('cf-volume'),
+      'Message: ' + get('cf-msg')
+    ].join('%0A');
+    window.open('mailto:sales@onlyround.ai?subject=Contact%20Sales%20-%20' + encodeURIComponent(company) + '&body=' + body);
+    this.setState({ contactSent: true });
+  }
+
   applyTheme(name) {
     const t = THEMES[name] || THEMES.dark;
     Object.keys(t).forEach(k => document.documentElement.style.setProperty(k, t[k]));
@@ -1057,6 +1150,11 @@ class Component extends DCLogic {
       toggleAudio: () => this.toggleAudio(),
       closeAudio: () => this.closeAudio(),
       onSeekInput: e => this.seekAudio(e.target.value / 1000),
+      contactOpen: !!this.state.contactOpen,
+      contactSent: !!this.state.contactSent,
+      openContactForm: () => this.openContactForm(),
+      closeContactForm: () => this.closeContactForm(),
+      submitContact: () => this.submitContact(),
       stopProp: e => e.stopPropagation(),
       prev: () => {
         this.setState({ idx: idx - 1 });
