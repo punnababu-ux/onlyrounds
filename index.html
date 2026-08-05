@@ -1024,8 +1024,9 @@ class Component extends DCLogic {
     const cur = ((idx % n) + n) % n;
     const deck = CARDS.map((c, i) => {
       let diff = i - cur;
-      if (diff > 2) diff -= n;
-      if (diff < -2) diff += n;
+      let half = Math.floor(n / 2);
+      if (diff > half) diff -= n;
+      if (diff < -half) diff += n;
 
       let x = 0, s = 1, o = 1, z = 30, io = 1, pe = "auto", border = "var(--line)", shadow = "var(--shadow)";
       if (diff === 0) {
