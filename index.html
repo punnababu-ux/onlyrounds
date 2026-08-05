@@ -823,44 +823,32 @@ const SCRIPT = [
 const HOW_STEPS = [
   {
     n: "01",
-    tabTitle: "Define the round",
-    headline: "Upload a job description. Questions, follow-up depth and pass bands are yours to set.",
+    tabTitle: "Post a Job",
+    headline: "Upload a job description. The AI builds your question bank, sets pass criteria, and is ready to interview in minutes.",
     eyebrow: "SETUP · ONCE PER ROLE",
     type: "grid",
     rows: [
-      { k: "Questions", v: "9 core + adaptive" },
+      { k: "Questions", v: "9 core + adaptive follow-ups" },
       { k: "Languages", v: "English, Hindi" },
-      { k: "Pass band", v: "≥ 7.0 composite" }
+      { k: "Delivery", v: "Link, QR code, or AI dial-out" }
     ]
   },
   {
     n: "02",
-    tabTitle: "Send it anywhere",
-    headline: "Publish a link or QR, or upload a list and let the agent place the calls.",
-    eyebrow: "DELIVERY · LINK, QR, OUTBOUND",
+    tabTitle: "AI Takes the Interview",
+    headline: "A voice AI runs the round 24/7 — inbound via link or QR, outbound via auto-dial. No recruiter needed on the call.",
+    eyebrow: "LIVE · 24/7, UNATTENDED",
     type: "nodes",
     rows: [
-      { k: "Channels", v: "Web, phone, WhatsApp" },
-      { k: "Install", v: "None" },
-      { k: "Retries", v: "Automatic, 3×" }
+      { k: "Concurrency", v: "Unlimited" },
+      { k: "Avg length", v: "7–12 mins" },
+      { k: "Proctoring", v: "On for video rounds" }
     ]
   },
   {
     n: "03",
-    tabTitle: "The round runs",
-    headline: "A voice agent runs the interview and follows up whenever an answer is thin.",
-    eyebrow: "LIVE · 24/7, UNATTENDED",
-    type: "radar",
-    rows: [
-      { k: "Concurrency", v: "Unlimited" },
-      { k: "Avg length", v: "7m 40s" },
-      { k: "Proctoring", v: "On for video" }
-    ]
-  },
-  {
-    n: "04",
-    tabTitle: "Read the evidence",
-    headline: "Every score carries the transcript span behind it, synced to the candidate record.",
+    tabTitle: "AI Evaluates the Candidates",
+    headline: "Every response is scored against your Must Have and Red Flag criteria. Recruiters get a ranked, auditable shortlist.",
     eyebrow: "OUTPUT · AUDITABLE REPORT",
     type: "bars",
     rows: [
@@ -893,7 +881,7 @@ class Component extends DCLogic {
 
   pickStep(i) {
     clearInterval(this.h);
-    this.h = setInterval(() => this.setState(s => ({ how: (s.how + 1) % 4, howTick: s.howTick + 1 })), 5500);
+    this.h = setInterval(() => this.setState(s => ({ how: (s.how + 1) % 3, howTick: s.howTick + 1 })), 5500);
     this.setState(s => ({ how: i, howTick: s.howTick + 1 }));
   }
 
@@ -1119,15 +1107,15 @@ class Component extends DCLogic {
       howSteps: HOW_STEPS.map((s, i) => ({
         n: s.n,
         tabTitle: s.tabTitle,
-        active: ((this.state.how % 4) + 4) % 4 === i,
+        active: ((this.state.how % 3) + 3) % 3 === i,
         barKey: "bar-" + i + "-" + (this.state.howTick || 0),
         pick: () => this.pickStep(i)
       })),
-      activeHow: Object.assign({}, HOW_STEPS[((this.state.how % 4) + 4) % 4], {
-        isGrid: HOW_STEPS[((this.state.how % 4) + 4) % 4].type === "grid",
-        isNodes: HOW_STEPS[((this.state.how % 4) + 4) % 4].type === "nodes",
-        isRadar: HOW_STEPS[((this.state.how % 4) + 4) % 4].type === "radar",
-        isBars: HOW_STEPS[((this.state.how % 4) + 4) % 4].type === "bars"
+      activeHow: Object.assign({}, HOW_STEPS[((this.state.how % 3) + 3) % 3], {
+        isGrid: HOW_STEPS[((this.state.how % 3) + 3) % 3].type === "grid",
+        isNodes: HOW_STEPS[((this.state.how % 3) + 3) % 3].type === "nodes",
+        isRadar: HOW_STEPS[((this.state.how % 3) + 3) % 3].type === "radar",
+        isBars: HOW_STEPS[((this.state.how % 3) + 3) % 3].type === "bars"
       }),
       inboundPoints: [
         "Runs in the browser — no app, no login",
