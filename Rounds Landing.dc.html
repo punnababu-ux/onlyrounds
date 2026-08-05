@@ -273,8 +273,8 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
           <sc-if value="{{ st.active }}">
             <div key="{{ st.barKey }}" style="position:absolute;top:-1px;left:0;height:2px;background:var(--accent);animation:grow 5.5s linear forwards"></div>
           </sc-if>
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:{{ st.active ? '700' : '500' }};color:var(--accent);opacity:{{ st.active ? '1' : '0.65' }};margin-right:10px">{{ st.n }}</span>
-          <span style="font-size:15.5px;font-weight:{{ st.active ? '700' : '400' }};color:var(--ink);opacity:{{ st.active ? '1' : '0.65' }};transition:opacity .3s ease">{{ st.tabTitle }}</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:{{ st.active ? '700' : '500' }};color:{{ st.active ? 'var(--accent)' : 'var(--mut)' }};opacity:{{ st.active ? '1' : '0.7' }};margin-right:10px">{{ st.n }}</span>
+          <span style="font-size:15.5px;font-weight:{{ st.active ? '700' : '400' }};color:{{ st.active ? 'var(--ink)' : 'var(--mut)' }};opacity:{{ st.active ? '1' : '0.7' }};transition:color .3s ease,opacity .3s ease">{{ st.tabTitle }}</span>
         </button>
       </sc-for>
     </div>
