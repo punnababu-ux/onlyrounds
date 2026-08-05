@@ -81,7 +81,41 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400..700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#07100D;--ink:#F1F6F3;--mut:#8B9A94;--line:rgba(255,255,255,.11);--card:rgba(255,255,255,.04);--card2:rgba(255,255,255,.06);--head:rgba(7,16,13,.72);--panel:#0B1714;--glow1:rgba(62,186,141,.30);--glow2:rgba(123,185,229,.24);--shadow:0 34px 80px -40px rgba(0,0,0,.9);--accent:#3EBA8D;--accent2:#7BB9E5;--gold:#FFD975}
+:root {
+  --bg: #FFFFFF;
+  --ink: #070410;
+  --mut: #6B7280;
+  --line: rgba(0,0,0,0.1);
+  --card: rgba(0,0,0,0.02);
+  --card2: rgba(0,0,0,0.04);
+  --head: rgba(255,255,255,0.85);
+  --panel: #F9FAFB;
+  --glow1: rgba(124, 76, 255, 0.15);
+  --glow2: rgba(167, 137, 248, 0.15);
+  --shadow: 0 20px 40px -20px rgba(0,0,0,0.1);
+  --accent: #7C4CFF;
+  --accent2: #A789F8;
+  --gold: #F59E0B;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #070314;
+    --ink: #F1F6F3;
+    --mut: #9CA3AF;
+    --line: rgba(255,255,255,0.12);
+    --card: rgba(255,255,255,0.04);
+    --card2: rgba(255,255,255,0.07);
+    --head: rgba(7,3,20,0.85);
+    --panel: #0D0620;
+    --glow1: rgba(124, 76, 255, 0.25);
+    --glow2: rgba(167, 137, 248, 0.2);
+    --shadow: 0 34px 80px -40px rgba(0,0,0,0.9);
+    --accent: #A789F8;
+    --accent2: #22D3EE;
+    --gold: #FFB84C;
+  }
+}
 *{box-sizing:border-box}
 .skip-link{position:absolute;top:-100px;left:16px;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;z-index:999;font-size:14px;font-weight:500;text-decoration:none;transition:top .2s ease}
 .skip-link:focus{top:16px}
@@ -92,7 +126,7 @@ a:hover{color:var(--accent)}
 a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 @keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(62,186,141,.4)}100%{box-shadow:0 0 0 18px rgba(62,186,141,0)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(124,76,255,.4)}100%{box-shadow:0 0 0 18px rgba(124,76,255,0)}}
 @keyframes drift{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(0,-16px,0) scale(1.05)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes shimmer{0%{background-position:0% 50%}100%{background-position:200% 50%}}
@@ -103,9 +137,9 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
 .reach-col{transition:opacity .4s ease;cursor:pointer}
 .reach-col .reach-svg path,.reach-col .reach-svg circle,.reach-col .reach-bullet,.reach-col .reach-eyebrow,.reach-col .reach-svg polyline,.reach-col .reach-svg line,.reach-col .reach-svg rect{transition:all .4s ease}
 .reach-icon-box{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:var(--card2);border:1px solid var(--line);position:relative;transition:all .4s ease;flex-shrink:0}
-.reach-active .reach-icon-box{background:rgba(62,186,141,0.06);border-color:rgba(62,186,141,0.2)}
-.reach-flow-line{flex:1;height:1px;background:var(--line);transition:background .4s ease}
-.reach-active .reach-flow-line{background:rgba(62,186,141,0.3)}
+.reach-active .reach-icon-box{background:rgba(124,76,255,0.06);border-color:rgba(124,76,255,0.2)}
+.reach-active svg{stroke:var(--accent)}
+.reach-active .reach-flow-line{background:rgba(124,76,255,0.3)}
 .reach-active{opacity:1!important}
 .reach-active .reach-eyebrow{color:var(--accent)!important}
 .reach-active .reach-svg path{stroke:var(--accent)!important;opacity:.85!important}
@@ -148,8 +182,65 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
 <header style="position:fixed;top:0;left:0;right:0;z-index:100;background:var(--head);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);width:100%;border-bottom:1px solid var(--line)">
 <div style="display:flex;align-items:center;justify-content:space-between;height:78px;max-width:1180px;margin:0 auto;padding:0 28px">
   <a href="#top" style="display:flex;align-items:center;gap:10px" aria-label="OnlyRound Home">
-    <img src="assets/logo-mark.svg" alt="OnlyRound Logo" style="width:23px;height:25px;display:block">
-    <span style="font-size:19px;font-weight:600;letter-spacing:-.02em">OnlyRound</span>
+    <svg style="height:26px;width:auto;display:block" viewBox="0 0 184 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14.1224 7.51569C14.0342 7.66593 13.9509 7.81965 13.8729 7.97618L11.9342 11.3199L11.3665 12.299L10.3333 14.081L9.75568 15.077L7.80745 18.437L7.80713 18.4377C7.71416 18.577 7.62571 18.7192 7.5421 18.8648C6.90778 19.9681 6.54496 21.2462 6.54496 22.6089C6.54496 23.8417 6.84202 25.0056 7.36854 26.0333L7.36872 26.0337C7.42662 26.1467 7.48753 26.2583 7.55096 26.3681H7.15776C3.16818 26.1517 0 22.8614 0 18.8344C0 17.6 0.297726 16.4347 0.825421 15.4061L0.825923 15.4054L1.0105 15.087L1.01617 15.077L1.2131 14.7374L7.36854 4.12131L7.56281 3.78613H7.99671C10.612 3.92804 12.8741 5.39058 14.1224 7.51569Z" fill="url(#paint0_linear_1968_7168)"/>
+      <path d="M28.2448 18.8341C28.2448 22.8612 25.0767 26.1512 21.0868 26.3678H20.6936C20.7571 26.2581 20.818 26.1465 20.876 26.0335L20.8762 26.0331L27.0321 15.4157C27.1021 15.308 27.1696 15.1983 27.2343 15.0868L27.4189 15.4052C27.9472 16.434 28.2448 17.5994 28.2448 18.8341Z" fill="url(#paint1_linear_1968_7168)"/>
+      <path d="M28.2448 18.8341C28.2448 22.8612 25.0767 26.1512 21.0868 26.3678H20.6936C20.7571 26.2581 20.818 26.1465 20.876 26.0335L20.8762 26.0331L27.0321 15.4157C27.1021 15.308 27.1696 15.1983 27.2343 15.0868L27.4189 15.4052C27.9472 16.434 28.2448 17.5994 28.2448 18.8341Z" fill="url(#paint2_linear_1968_7168)"/>
+      <path d="M28.2448 18.8341C28.2448 22.8612 25.0767 26.1512 21.0868 26.3678H20.6936C20.7571 26.2581 20.818 26.1465 20.876 26.0335L20.8762 26.0331L27.0321 15.4157C27.1021 15.308 27.1696 15.1983 27.2343 15.0868L27.4189 15.4052C27.9472 16.434 28.2448 17.5994 28.2448 18.8341Z" fill="url(#paint3_linear_1968_7168)"/>
+      <path d="M21.6988 7.54523C21.6988 8.90773 21.3361 10.1858 20.7017 11.2891C20.618 11.4348 20.5293 11.5774 20.4362 11.7168L18.4881 15.0768L17.9105 14.0808L16.8773 12.2988L16.3095 11.3197L14.3708 7.97598C14.2931 7.81926 14.2098 7.6657 14.1213 7.51549C12.873 5.39054 10.6109 3.928 7.99559 3.78591C7.85674 3.77828 7.71689 3.77444 7.5762 3.77444H7.56836L7.76044 3.44341C9.11124 1.37082 11.4555 0 14.1215 0C16.7875 0 19.1318 1.37082 20.4825 3.44341L20.6744 3.77444L20.6812 3.78591L20.8754 4.12109C21.402 5.14876 21.6988 6.31251 21.6988 7.54523Z" fill="url(#paint4_linear_1968_7168)"/>
+      <path d="M7.55096 3.78613C7.48737 3.89614 7.42646 4.00781 7.36854 4.12131L1.2131 14.7375C1.14284 14.8456 1.07525 14.9556 1.0105 15.0672L0.826256 14.7494C0.297892 13.7205 0 12.5548 0 11.3199C0 7.29286 3.16818 4.00283 7.15793 3.78613H7.55096Z" fill="url(#paint5_linear_1968_7168)"/>
+      <path d="M28.2454 11.3199C28.2454 12.5548 27.9474 13.7205 27.4191 14.7494L27.2347 15.0672L27.2292 15.0772L27.0327 15.4161L20.8768 26.0335L20.8766 26.0337L20.6826 26.3683H20.2488C17.6335 26.2263 15.3714 24.7638 14.123 22.6388C14.2115 22.4883 14.2948 22.3344 14.3729 22.1775V22.1769L14.3734 22.1765L16.3113 18.8344L16.879 17.8552L17.9122 16.0731L18.4898 15.077L20.4379 11.7171C20.5309 11.5776 20.6195 11.4349 20.7035 11.2893C21.3377 10.1861 21.7006 8.90796 21.7006 7.54546C21.7006 6.31255 21.4036 5.14896 20.877 4.12131C20.8191 4.00781 20.7581 3.89614 20.6944 3.78613H21.0876C25.0773 4.00283 28.2454 7.29286 28.2454 11.3199Z" fill="url(#paint6_linear_1968_7168)"/>
+      <path d="M28.2454 11.3199C28.2454 12.5548 27.9474 13.7205 27.4191 14.7494L27.2347 15.0672L27.2292 15.0772L27.0327 15.4161L20.8768 26.0335L20.8766 26.0337L20.6826 26.3683H20.2488C17.6335 26.2263 15.3714 24.7638 14.123 22.6388C14.2115 22.4883 14.2948 22.3344 14.3729 22.1775V22.1769L14.3734 22.1765L16.3113 18.8344L16.879 17.8552L17.9122 16.0731L18.4898 15.077L20.4379 11.7171C20.5309 11.5776 20.6195 11.4349 20.7035 11.2893C21.3377 10.1861 21.7006 8.90796 21.7006 7.54546C21.7006 6.31255 21.4036 5.14896 20.877 4.12131C20.8191 4.00781 20.7581 3.89614 20.6944 3.78613H21.0876C25.0773 4.00283 28.2454 7.29286 28.2454 11.3199Z" fill="url(#paint7_linear_1968_7168)"/>
+      <path d="M20.6752 26.3796L20.4834 26.7105L20.483 26.7111C19.1323 28.7833 16.7881 30.1542 14.1222 30.1542C11.4564 30.1542 9.1123 28.7833 7.76153 26.7111L7.76104 26.7105L7.56928 26.3796L7.56278 26.3683L7.36869 26.0338L7.36852 26.0334C6.84182 25.0057 6.54492 23.842 6.54492 22.6089C6.54492 21.2465 6.90758 19.9682 7.54208 18.8649C7.62569 18.7195 7.71413 18.5771 7.80709 18.4378L7.80742 18.4371L9.75567 15.0771L10.3333 16.0732L11.3665 17.8553L11.9342 18.8345L13.8724 22.1774C13.9504 22.3345 14.0336 22.4883 14.1222 22.6387C15.3706 24.7636 17.6327 26.2262 20.248 26.3683C20.3868 26.3759 20.5268 26.3796 20.6674 26.3796H20.6752Z" fill="url(#paint8_linear_1968_7168)"/>
+      <path d="M43.4718 24.0901C41.8016 24.0901 40.328 23.7126 39.0508 22.9578C37.7737 22.2029 36.7667 21.1608 36.0299 19.8316C35.3094 18.486 34.9492 16.9352 34.9492 15.1793C34.9492 13.4234 35.3094 11.8809 36.0299 10.5516C36.7667 9.20599 37.7737 8.15573 39.0508 7.40086C40.328 6.64599 41.8016 6.26855 43.4718 6.26855C45.1583 6.26855 46.6401 6.64599 47.9172 7.40086C49.2108 8.15573 50.2096 9.20599 50.9136 10.5516C51.6341 11.8809 51.9943 13.4234 51.9943 15.1793C51.9943 16.9352 51.6341 18.486 50.9136 19.8316C50.2096 21.1608 49.2108 22.2029 47.9172 22.9578C46.6401 23.7126 45.1583 24.0901 43.4718 24.0901ZM43.4718 20.9885C44.5033 20.9885 45.3957 20.7506 46.1489 20.2747C46.9021 19.7988 47.4833 19.1342 47.8927 18.2809C48.302 17.4111 48.5067 16.3773 48.5067 15.1793C48.5067 13.9814 48.302 12.9557 47.8927 12.1024C47.4833 11.2327 46.9021 10.5598 46.1489 10.0839C45.3957 9.60804 44.5033 9.37009 43.4718 9.37009C42.4566 9.37009 41.5724 9.60804 40.8192 10.0839C40.0824 10.5598 39.5011 11.2327 39.0754 12.1024C38.6661 12.9557 38.4614 13.9814 38.4614 15.1793C38.4614 16.3773 38.6661 17.4111 39.0754 18.2809C39.5011 19.1342 40.0824 19.7988 40.8192 20.2747C41.5724 20.7506 42.4566 20.9885 43.4718 20.9885Z" fill="var(--ink)"/>
+      <path d="M53.5215 23.7953V11.3891H56.5424L56.7881 13.4076C57.1646 12.7184 57.6968 12.1604 58.3845 11.7337C59.0886 11.3071 59.9318 11.0938 60.9142 11.0938C61.9294 11.0938 62.789 11.3153 63.4931 11.7584C64.1972 12.185 64.7293 12.8086 65.0895 13.6291C65.4661 14.4496 65.6544 15.4589 65.6544 16.6568V23.7953H62.2405V16.9768C62.2405 16.025 62.0358 15.2948 61.6265 14.7861C61.2335 14.2609 60.6031 13.9984 59.7353 13.9984C59.2114 13.9984 58.7365 14.1296 58.3108 14.3922C57.8851 14.6384 57.5494 14.9994 57.3038 15.4753C57.0746 15.9348 56.96 16.5009 56.96 17.1737V23.7953H53.5215Z" fill="var(--ink)"/>
+      <path d="M67.5469 23.7953V6.07227H70.9854V23.7953H67.5469Z" fill="var(--ink)"/>
+      <path d="M74.5836 29.2102L77.5555 22.4163H76.8187L71.8574 11.3887H75.5906L79.1028 19.241L82.1729 11.3887H85.8324L78.2186 29.2102H74.5836Z" fill="var(--ink)"/>
+      <path d="M86.7754 23.7952V6.56445H93.284C94.6757 6.56445 95.8219 6.8024 96.7224 7.2783C97.6394 7.7542 98.3189 8.3942 98.761 9.1983C99.2194 9.98599 99.4487 10.8721 99.4487 11.8568C99.4487 12.7757 99.2276 13.6373 98.7855 14.4414C98.3598 15.2455 97.6885 15.8937 96.7716 16.386C95.8546 16.8619 94.6839 17.0998 93.2594 17.0998H90.2139V23.7952H86.7754ZM95.6663 23.7952L92.1542 16.2383H95.8874L99.596 23.7952H95.6663ZM90.2139 14.5891H93.0875C94.0535 14.5891 94.7658 14.3511 95.2242 13.8752C95.6991 13.3993 95.9365 12.7675 95.9365 11.9798C95.9365 11.2086 95.7073 10.5932 95.2488 10.1337C94.7903 9.6742 94.0617 9.44445 93.0629 9.44445H90.2139V14.5891Z" fill="var(--ink)"/>
+      <path d="M106.191 24.0907C105.012 24.0907 103.947 23.8199 102.998 23.2783C102.048 22.7204 101.295 21.9491 100.738 20.9645C100.198 19.9799 99.9277 18.864 99.9277 17.6168C99.9277 16.3368 100.198 15.2045 100.738 14.2199C101.295 13.2353 102.048 12.4722 102.998 11.9307C103.947 11.3727 105.02 11.0938 106.215 11.0938C107.411 11.0938 108.483 11.3727 109.433 11.9307C110.382 12.4722 111.127 13.2353 111.668 14.2199C112.224 15.1881 112.503 16.3122 112.503 17.5922C112.503 18.8722 112.224 20.0045 111.668 20.9891C111.111 21.9573 110.358 22.7204 109.408 23.2783C108.475 23.8199 107.402 24.0907 106.191 24.0907ZM106.191 21.1122C106.731 21.1122 107.206 20.9809 107.615 20.7183C108.025 20.4558 108.352 20.062 108.598 19.5368C108.86 19.0117 108.991 18.3635 108.991 17.5922C108.991 16.8209 108.868 16.1727 108.622 15.6476C108.377 15.1225 108.041 14.7286 107.615 14.4661C107.206 14.2035 106.739 14.0722 106.215 14.0722C105.708 14.0722 105.241 14.2035 104.815 14.4661C104.39 14.7286 104.054 15.1225 103.808 15.6476C103.563 16.1727 103.44 16.8209 103.44 17.5922C103.44 18.3635 103.563 19.0117 103.808 19.5368C104.054 20.062 104.381 20.4558 104.791 20.7183C105.216 20.9809 105.683 21.1122 106.191 21.1122Z" fill="var(--ink)"/>
+      <path d="M118.749 24.0902C117.75 24.0902 116.891 23.8851 116.17 23.4748C115.466 23.0481 114.926 22.4245 114.549 21.604C114.173 20.7835 113.984 19.7743 113.984 18.5764V11.3887H117.423V18.2317C117.423 19.2 117.619 19.9384 118.012 20.4471C118.422 20.9394 119.052 21.1856 119.903 21.1856C120.444 21.1856 120.927 21.0625 121.353 20.8163C121.778 20.5702 122.106 20.2174 122.335 19.7579C122.581 19.282 122.703 18.6994 122.703 18.0102V11.3887H126.142V23.7948H123.121L122.851 21.801C122.491 22.4902 121.958 23.0481 121.254 23.4748C120.567 23.8851 119.732 24.0902 118.749 24.0902Z" fill="var(--ink)"/>
+      <path d="M128.158 23.7953V11.3891H131.179L131.425 13.4076C131.801 12.7184 132.333 12.1604 133.021 11.7337C133.725 11.3071 134.569 11.0938 135.551 11.0938C136.566 11.0938 137.426 11.3153 138.13 11.7584C138.834 12.185 139.366 12.8086 139.726 13.6291C140.103 14.4496 140.291 15.4589 140.291 16.6568V23.7953H136.877V16.9768C136.877 16.025 136.673 15.2948 136.263 14.7861C135.87 14.2609 135.24 13.9984 134.372 13.9984C133.848 13.9984 133.373 14.1296 132.948 14.3922C132.522 14.6384 132.186 14.9994 131.941 15.4753C131.711 15.9348 131.597 16.5009 131.597 17.1737V23.7953H128.158Z" fill="var(--ink)"/>
+      <path d="M147.686 24.0907C146.556 24.0907 145.549 23.8117 144.665 23.2538C143.78 22.6958 143.076 21.9246 142.552 20.9399C142.045 19.9553 141.791 18.8477 141.791 17.6169C141.791 16.3533 142.045 15.2374 142.552 14.2692C143.076 13.2846 143.789 12.5133 144.689 11.9553C145.606 11.381 146.629 11.0938 147.759 11.0938C148.643 11.0938 149.413 11.2579 150.068 11.5861C150.723 11.8979 151.255 12.3492 151.664 12.94V6.07227H155.103V23.7953H152.033L151.664 22.1215C151.419 22.4661 151.116 22.7943 150.756 23.1061C150.395 23.4015 149.962 23.6394 149.454 23.8199C148.946 24.0005 148.357 24.0907 147.686 24.0907ZM148.521 21.0876C149.159 21.0876 149.724 20.9399 150.215 20.6446C150.707 20.3492 151.083 19.9389 151.345 19.4138C151.623 18.8887 151.763 18.2815 151.763 17.5923C151.763 16.903 151.623 16.2959 151.345 15.7707C151.083 15.2456 150.707 14.8353 150.215 14.54C149.724 14.2446 149.159 14.0969 148.521 14.0969C147.898 14.0969 147.342 14.2446 146.851 14.54C146.359 14.8353 145.975 15.2456 145.696 15.7707C145.434 16.2959 145.303 16.8948 145.303 17.5677C145.303 18.2569 145.434 18.8723 145.696 19.4138C145.975 19.9389 146.359 20.3492 146.851 20.6446C147.342 20.9399 147.898 21.0876 148.521 21.0876Z" fill="var(--ink)"/>
+      <path d="M160.412 24.4105L166.7 7.17969H170.457L176.72 24.4105H173.208L168.566 10.9705L163.9 24.4105H160.412ZM163.187 20.4966L164.072 17.912H172.815L173.675 20.4966H163.187ZM178.98 24.4105V7.17969H182.295V24.4105H178.98Z" fill="var(--ink)"/>
+      <defs>
+      <linearGradient id="paint0_linear_1968_7168" x1="7.06122" y1="3.78613" x2="1.66195" y2="23.8917" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7746FF"/>
+      <stop offset="1" stop-color="#A789F8"/>
+      </linearGradient>
+      <linearGradient id="paint1_linear_1968_7168" x1="20.6936" y1="20.7274" x2="28.2448" y2="20.7274" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF4810"/>
+      <stop offset="1" stop-color="#FF1D99"/>
+      </linearGradient>
+      <linearGradient id="paint2_linear_1968_7168" x1="24.4692" y1="15.0868" x2="24.4692" y2="26.3964" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A789F8"/>
+      <stop offset="1" stop-color="#7746FF"/>
+      </linearGradient>
+      <linearGradient id="paint3_linear_1968_7168" x1="23.8443" y1="21.2277" x2="26.9178" y2="22.9984" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7746FF"/>
+      <stop offset="1" stop-color="#A789F8"/>
+      </linearGradient>
+      <linearGradient id="paint4_linear_1968_7168" x1="9.82335" y1="1.74359" x2="19.772" y2="11.6701" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A789F8"/>
+      <stop offset="1" stop-color="#7746FF"/>
+      </linearGradient>
+      <linearGradient id="paint5_linear_1968_7168" x1="4.29811" y1="9.84638" x2="0.814118" y2="7.59705" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7746FF"/>
+      <stop offset="1" stop-color="#A789F8"/>
+      </linearGradient>
+      <linearGradient id="paint6_linear_1968_7168" x1="16.0242" y1="20.385" x2="25.2792" y2="9.76291" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#245B35"/>
+      <stop offset="1" stop-color="#378456"/>
+      </linearGradient>
+      <linearGradient id="paint7_linear_1968_7168" x1="26.0964" y1="8.10279" x2="16.9573" y2="24.5984" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A789F8"/>
+      <stop offset="1" stop-color="#7746FF"/>
+      </linearGradient>
+      <linearGradient id="paint8_linear_1968_7168" x1="11.4062" y1="21.949" x2="13.6192" y2="30.1899" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A789F8"/>
+      <stop offset="1" stop-color="#7746FF"/>
+      </linearGradient>
+      </defs>
+    </svg>
   </a>
   <nav style="display:flex;align-items:center;gap:26px;font-size:15px;color:var(--mut)" aria-label="Main navigation">
     <a href="#how" style="color:inherit">How it works</a>
@@ -171,7 +262,7 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
   <section id="top" style="display:flex;flex-direction:column;min-height:calc(100vh - 78px);padding:40px 0 32px">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:40px;align-items:center;flex:1">
       <div>
-      <h1 style="font-size:66px;line-height:1.03;letter-spacing:-.038em;font-weight:600;margin:0;min-height:3.09em">Enterprise voice AI<br>for <span style="background:linear-gradient(96deg,#74D7AE,#7BB9E5,#FFD975,#74D7AE);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 7s linear infinite">{{ heroWord }}</span></h1>
+      <h1 style="font-size:66px;line-height:1.03;letter-spacing:-.038em;font-weight:600;margin:0;min-height:3.09em">Enterprise voice AI<br>for <span style="background:linear-gradient(96deg,#7C4CFF,#C24CFF,#7C4CFF,#22D3EE,#7C4CFF,#4C7BFF,#7C4CFF,#FFB84C,#7C4CFF);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 7s linear infinite">{{ heroWord }}</span></h1>
       <p style="font-size:20px;line-height:1.55;color:var(--mut);max-width:440px;margin:22px 0 0">Structured interview rounds delivered by link, QR, or AI phone call. Every response graded against your criteria and returned as an auditable report.</p>
       <div class="hero-btns" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:34px">
         <a href="#contact" style="display:inline-flex;align-items:center;background:var(--ink);color:var(--bg);font-size:16px;font-weight:500;padding:15px 24px;border-radius:12px" style-hover="opacity:.85">Talk to sales</a>
@@ -664,9 +755,66 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
   </main>
 
   <footer style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:44px 0 56px;font-size:14.5px;color:var(--mut)">
-    <a href="#top" style="display:flex;align-items:center;gap:10px" aria-label="OnlyRound Home">
-      <img src="assets/logo-mark.svg" alt="OnlyRound Logo" style="width:18px;height:20px;display:block">
-      <span style="color:var(--ink);font-weight:600">OnlyRound</span>
+    <a href="#top" style="display:flex;align-items:center;gap:8px" aria-label="OnlyRound Home">
+      <svg style="height:20px;width:auto;display:block" viewBox="0 0 184 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14.1224 7.51569C14.0342 7.66593 13.9509 7.81965 13.8729 7.97618L11.9342 11.3199L11.3665 12.299L10.3333 14.081L9.75568 15.077L7.80745 18.437L7.80713 18.4377C7.71416 18.577 7.62571 18.7192 7.5421 18.8648C6.90778 19.9681 6.54496 21.2462 6.54496 22.6089C6.54496 23.8417 6.84202 25.0056 7.36854 26.0333L7.36872 26.0337C7.42662 26.1467 7.48753 26.2583 7.55096 26.3681H7.15776C3.16818 26.1517 0 22.8614 0 18.8344C0 17.6 0.297726 16.4347 0.825421 15.4061L0.825923 15.4054L1.0105 15.087L1.01617 15.077L1.2131 14.7374L7.36854 4.12131L7.56281 3.78613H7.99671C10.612 3.92804 12.8741 5.39058 14.1224 7.51569Z" fill="url(#paint0_linear_1968_7168)"/>
+        <path d="M28.2448 18.8341C28.2448 22.8612 25.0767 26.1512 21.0868 26.3678H20.6936C20.7571 26.2581 20.818 26.1465 20.876 26.0335L20.8762 26.0331L27.0321 15.4157C27.1021 15.308 27.1696 15.1983 27.2343 15.0868L27.4189 15.4052C27.9472 16.434 28.2448 17.5994 28.2448 18.8341Z" fill="url(#paint1_linear_1968_7168)"/>
+        <path d="M28.2448 18.8341C28.2448 22.8612 25.0767 26.1512 21.0868 26.3678H20.6936C20.7571 26.2581 20.818 26.1465 20.876 26.0335L20.8762 26.0331L27.0321 15.4157C27.1021 15.308 27.1696 15.1983 27.2343 15.0868L27.4189 15.4052C27.9472 16.434 28.2448 17.5994 28.2448 18.8341Z" fill="url(#paint2_linear_1968_7168)"/>
+        <path d="M28.2448 18.8341C28.2448 22.8612 25.0767 26.1512 21.0868 26.3678H20.6936C20.7571 26.2581 20.818 26.1465 20.876 26.0335L20.8762 26.0331L27.0321 15.4157C27.1021 15.308 27.1696 15.1983 27.2343 15.0868L27.4189 15.4052C27.9472 16.434 28.2448 17.5994 28.2448 18.8341Z" fill="url(#paint3_linear_1968_7168)"/>
+        <path d="M21.6988 7.54523C21.6988 8.90773 21.3361 10.1858 20.7017 11.2891C20.618 11.4348 20.5293 11.5774 20.4362 11.7168L18.4881 15.0768L17.9105 14.0808L16.8773 12.2988L16.3095 11.3197L14.3708 7.97598C14.2931 7.81926 14.2098 7.6657 14.1213 7.51549C12.873 5.39054 10.6109 3.928 7.99559 3.78591C7.85674 3.77828 7.71689 3.77444 7.5762 3.77444H7.56836L7.76044 3.44341C9.11124 1.37082 11.4555 0 14.1215 0C16.7875 0 19.1318 1.37082 20.4825 3.44341L20.6744 3.77444L20.6812 3.78591L20.8754 4.12109C21.402 5.14876 21.6988 6.31251 21.6988 7.54523Z" fill="url(#paint4_linear_1968_7168)"/>
+        <path d="M7.55096 3.78613C7.48737 3.89614 7.42646 4.00781 7.36854 4.12131L1.2131 14.7375C1.14284 14.8456 1.07525 14.9556 1.0105 15.0672L0.826256 14.7494C0.297892 13.7205 0 12.5548 0 11.3199C0 7.29286 3.16818 4.00283 7.15793 3.78613H7.55096Z" fill="url(#paint5_linear_1968_7168)"/>
+        <path d="M28.2454 11.3199C28.2454 12.5548 27.9474 13.7205 27.4191 14.7494L27.2347 15.0672L27.2292 15.0772L27.0327 15.4161L20.8768 26.0335L20.8766 26.0337L20.6826 26.3683H20.2488C17.6335 26.2263 15.3714 24.7638 14.123 22.6388C14.2115 22.4883 14.2948 22.3344 14.3729 22.1775V22.1769L14.3734 22.1765L16.3113 18.8344L16.879 17.8552L17.9122 16.0731L18.4898 15.077L20.4379 11.7171C20.5309 11.5776 20.6195 11.4349 20.7035 11.2893C21.3377 10.1861 21.7006 8.90796 21.7006 7.54546C21.7006 6.31255 21.4036 5.14896 20.877 4.12131C20.8191 4.00781 20.7581 3.89614 20.6944 3.78613H21.0876C25.0773 4.00283 28.2454 7.29286 28.2454 11.3199Z" fill="url(#paint6_linear_1968_7168)"/>
+        <path d="M28.2454 11.3199C28.2454 12.5548 27.9474 13.7205 27.4191 14.7494L27.2347 15.0672L27.2292 15.0772L27.0327 15.4161L20.8768 26.0335L20.8766 26.0337L20.6826 26.3683H20.2488C17.6335 26.2263 15.3714 24.7638 14.123 22.6388C14.2115 22.4883 14.2948 22.3344 14.3729 22.1775V22.1769L14.3734 22.1765L16.3113 18.8344L16.879 17.8552L17.9122 16.0731L18.4898 15.077L20.4379 11.7171C20.5309 11.5776 20.6195 11.4349 20.7035 11.2893C21.3377 10.1861 21.7006 8.90796 21.7006 7.54546C21.7006 6.31255 21.4036 5.14896 20.877 4.12131C20.8191 4.00781 20.7581 3.89614 20.6944 3.78613H21.0876C25.0773 4.00283 28.2454 7.29286 28.2454 11.3199Z" fill="url(#paint7_linear_1968_7168)"/>
+        <path d="M20.6752 26.3796L20.4834 26.7105L20.483 26.7111C19.1323 28.7833 16.7881 30.1542 14.1222 30.1542C11.4564 30.1542 9.1123 28.7833 7.76153 26.7111L7.76104 26.7105L7.56928 26.3796L7.56278 26.3683L7.36869 26.0338L7.36852 26.0334C6.84182 25.0057 6.54492 23.842 6.54492 22.6089C6.54492 21.2465 6.90758 19.9682 7.54208 18.8649C7.62569 18.7195 7.71413 18.5771 7.80709 18.4378L7.80742 18.4371L9.75567 15.0771L10.3333 16.0732L11.3665 17.8553L11.9342 18.8345L13.8724 22.1774C13.9504 22.3345 14.0336 22.4883 14.1222 22.6387C15.3706 24.7636 17.6327 26.2262 20.248 26.3683C20.3868 26.3759 20.5268 26.3796 20.6674 26.3796H20.6752Z" fill="url(#paint8_linear_1968_7168)"/>
+        <path d="M43.4718 24.0901C41.8016 24.0901 40.328 23.7126 39.0508 22.9578C37.7737 22.2029 36.7667 21.1608 36.0299 19.8316C35.3094 18.486 34.9492 16.9352 34.9492 15.1793C34.9492 13.4234 35.3094 11.8809 36.0299 10.5516C36.7667 9.20599 37.7737 8.15573 39.0508 7.40086C40.328 6.64599 41.8016 6.26855 43.4718 6.26855C45.1583 6.26855 46.6401 6.64599 47.9172 7.40086C49.2108 8.15573 50.2096 9.20599 50.9136 10.5516C51.6341 11.8809 51.9943 13.4234 51.9943 15.1793C51.9943 16.9352 51.6341 18.486 50.9136 19.8316C50.2096 21.1608 49.2108 22.2029 47.9172 22.9578C46.6401 23.7126 45.1583 24.0901 43.4718 24.0901ZM43.4718 20.9885C44.5033 20.9885 45.3957 20.7506 46.1489 20.2747C46.9021 19.7988 47.4833 19.1342 47.8927 18.2809C48.302 17.4111 48.5067 16.3773 48.5067 15.1793C48.5067 13.9814 48.302 12.9557 47.8927 12.1024C47.4833 11.2327 46.9021 10.5598 46.1489 10.0839C45.3957 9.60804 44.5033 9.37009 43.4718 9.37009C42.4566 9.37009 41.5724 9.60804 40.8192 10.0839C40.0824 10.5598 39.5011 11.2327 39.0754 12.1024C38.6661 12.9557 38.4614 13.9814 38.4614 15.1793C38.4614 16.3773 38.6661 17.4111 39.0754 18.2809C39.5011 19.1342 40.0824 19.7988 40.8192 20.2747C41.5724 20.7506 42.4566 20.9885 43.4718 20.9885Z" fill="var(--ink)"/>
+        <path d="M53.5215 23.7953V11.3891H56.5424L56.7881 13.4076C57.1646 12.7184 57.6968 12.1604 58.3845 11.7337C59.0886 11.3071 59.9318 11.0938 60.9142 11.0938C61.9294 11.0938 62.789 11.3153 63.4931 11.7584C64.1972 12.185 64.7293 12.8086 65.0895 13.6291C65.4661 14.4496 65.6544 15.4589 65.6544 16.6568V23.7953H62.2405V16.9768C62.2405 16.025 62.0358 15.2948 61.6265 14.7861C61.2335 14.2609 60.6031 13.9984 59.7353 13.9984C59.2114 13.9984 58.7365 14.1296 58.3108 14.3922C57.8851 14.6384 57.5494 14.9994 57.3038 15.4753C57.0746 15.9348 56.96 16.5009 56.96 17.1737V23.7953H53.5215Z" fill="var(--ink)"/>
+        <path d="M67.5469 23.7953V6.07227H70.9854V23.7953H67.5469Z" fill="var(--ink)"/>
+        <path d="M74.5836 29.2102L77.5555 22.4163H76.8187L71.8574 11.3887H75.5906L79.1028 19.241L82.1729 11.3887H85.8324L78.2186 29.2102H74.5836Z" fill="var(--ink)"/>
+        <path d="M86.7754 23.7952V6.56445H93.284C94.6757 6.56445 95.8219 6.8024 96.7224 7.2783C97.6394 7.7542 98.3189 8.3942 98.761 9.1983C99.2194 9.98599 99.4487 10.8721 99.4487 11.8568C99.4487 12.7757 99.2276 13.6373 98.7855 14.4414C98.3598 15.2455 97.6885 15.8937 96.7716 16.386C95.8546 16.8619 94.6839 17.0998 93.2594 17.0998H90.2139V23.7952H86.7754ZM95.6663 23.7952L92.1542 16.2383H95.8874L99.596 23.7952H95.6663ZM90.2139 14.5891H93.0875C94.0535 14.5891 94.7658 14.3511 95.2242 13.8752C95.6991 13.3993 95.9365 12.7675 95.9365 11.9798C95.9365 11.2086 95.7073 10.5932 95.2488 10.1337C94.7903 9.6742 94.0617 9.44445 93.0629 9.44445H90.2139V14.5891Z" fill="var(--ink)"/>
+        <path d="M106.191 24.0907C105.012 24.0907 103.947 23.8199 102.998 23.2783C102.048 22.7204 101.295 21.9491 100.738 20.9645C100.198 19.9799 99.9277 18.864 99.9277 17.6168C99.9277 16.3368 100.198 15.2045 100.738 14.2199C101.295 13.2353 102.048 12.4722 102.998 11.9307C103.947 11.3727 105.02 11.0938 106.215 11.0938C107.411 11.0938 108.483 11.3727 109.433 11.9307C110.382 12.4722 111.127 13.2353 111.668 14.2199C112.224 15.1881 112.503 16.3122 112.503 17.5922C112.503 18.8722 112.224 20.0045 111.668 20.9891C111.111 21.9573 110.358 22.7204 109.408 23.2783C108.475 23.8199 107.402 24.0907 106.191 24.0907ZM106.191 21.1122C106.731 21.1122 107.206 20.9809 107.615 20.7183C108.025 20.4558 108.352 20.062 108.598 19.5368C108.86 19.0117 108.991 18.3635 108.991 17.5922C108.991 16.8209 108.868 16.1727 108.622 15.6476C108.377 15.1225 108.041 14.7286 107.615 14.4661C107.206 14.2035 106.739 14.0722 106.215 14.0722C105.708 14.0722 105.241 14.2035 104.815 14.4661C104.39 14.7286 104.054 15.1225 103.808 15.6476C103.563 16.1727 103.44 16.8209 103.44 17.5922C103.44 18.3635 103.563 19.0117 103.808 19.5368C104.054 20.062 104.381 20.4558 104.791 20.7183C105.216 20.9809 105.683 21.1122 106.191 21.1122Z" fill="var(--ink)"/>
+        <path d="M118.749 24.0902C117.75 24.0902 116.891 23.8851 116.17 23.4748C115.466 23.0481 114.926 22.4245 114.549 21.604C114.173 20.7835 113.984 19.7743 113.984 18.5764V11.3887H117.423V18.2317C117.423 19.2 117.619 19.9384 118.012 20.4471C118.422 20.9394 119.052 21.1856 119.903 21.1856C120.444 21.1856 120.927 21.0625 121.353 20.8163C121.778 20.5702 122.106 20.2174 122.335 19.7579C122.581 19.282 122.703 18.6994 122.703 18.0102V11.3887H126.142V23.7948H123.121L122.851 21.801C122.491 22.4902 121.958 23.0481 121.254 23.4748C120.567 23.8851 119.732 24.0902 118.749 24.0902Z" fill="var(--ink)"/>
+        <path d="M128.158 23.7953V11.3891H131.179L131.425 13.4076C131.801 12.7184 132.333 12.1604 133.021 11.7337C133.725 11.3071 134.569 11.0938 135.551 11.0938C136.566 11.0938 137.426 11.3153 138.13 11.7584C138.834 12.185 139.366 12.8086 139.726 13.6291C140.103 14.4496 140.291 15.4589 140.291 16.6568V23.7953H136.877V16.9768C136.877 16.025 136.673 15.2948 136.263 14.7861C135.87 14.2609 135.24 13.9984 134.372 13.9984C133.848 13.9984 133.373 14.1296 132.948 14.3922C132.522 14.6384 132.186 14.9994 131.941 15.4753C131.711 15.9348 131.597 16.5009 131.597 17.1737V23.7953H128.158Z" fill="var(--ink)"/>
+        <path d="M147.686 24.0907C146.556 24.0907 145.549 23.8117 144.665 23.2538C143.78 22.6958 143.076 21.9246 142.552 20.9399C142.045 19.9553 141.791 18.8477 141.791 17.6169C141.791 16.3533 142.045 15.2374 142.552 14.2692C143.076 13.2846 143.789 12.5133 144.689 11.9553C145.606 11.381 146.629 11.0938 147.759 11.0938C148.643 11.0938 149.413 11.2579 150.068 11.5861C150.723 11.8979 151.255 12.3492 151.664 12.94V6.07227H155.103V23.7953H152.033L151.664 22.1215C151.419 22.4661 151.116 22.7943 150.756 23.1061C150.395 23.4015 149.962 23.6394 149.454 23.8199C148.946 24.0005 148.357 24.0907 147.686 24.0907ZM148.521 21.0876C149.159 21.0876 149.724 20.9399 150.215 20.6446C150.707 20.3492 151.083 19.9389 151.345 19.4138C151.623 18.8887 151.763 18.2815 151.763 17.5923C151.763 16.903 151.623 16.2959 151.345 15.7707C151.083 15.2456 150.707 14.8353 150.215 14.54C149.724 14.2446 149.159 14.0969 148.521 14.0969C147.898 14.0969 147.342 14.2446 146.851 14.54C146.359 14.8353 145.975 15.2456 145.696 15.7707C145.434 16.2959 145.303 16.8948 145.303 17.5677C145.303 18.2569 145.434 18.8723 145.696 19.4138C145.975 19.9389 146.359 20.3492 146.851 20.6446C147.342 20.9399 147.898 21.0876 148.521 21.0876Z" fill="var(--ink)"/>
+        <path d="M160.412 24.4105L166.7 7.17969H170.457L176.72 24.4105H173.208L168.566 10.9705L163.9 24.4105H160.412ZM163.187 20.4966L164.072 17.912H172.815L173.675 20.4966H163.187ZM178.98 24.4105V7.17969H182.295V24.4105H178.98Z" fill="var(--ink)"/>
+        <defs>
+        <linearGradient id="paint0_linear_1968_7168" x1="7.06122" y1="3.78613" x2="1.66195" y2="23.8917" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#7746FF"/>
+        <stop offset="1" stop-color="#A789F8"/>
+        </linearGradient>
+        <linearGradient id="paint1_linear_1968_7168" x1="20.6936" y1="20.7274" x2="28.2448" y2="20.7274" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#FF4810"/>
+        <stop offset="1" stop-color="#FF1D99"/>
+        </linearGradient>
+        <linearGradient id="paint2_linear_1968_7168" x1="24.4692" y1="15.0868" x2="24.4692" y2="26.3964" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#A789F8"/>
+        <stop offset="1" stop-color="#7746FF"/>
+        </linearGradient>
+        <linearGradient id="paint3_linear_1968_7168" x1="23.8443" y1="21.2277" x2="26.9178" y2="22.9984" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#7746FF"/>
+        <stop offset="1" stop-color="#A789F8"/>
+        </linearGradient>
+        <linearGradient id="paint4_linear_1968_7168" x1="9.82335" y1="1.74359" x2="19.772" y2="11.6701" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#A789F8"/>
+        <stop offset="1" stop-color="#7746FF"/>
+        </linearGradient>
+        <linearGradient id="paint5_linear_1968_7168" x1="4.29811" y1="9.84638" x2="0.814118" y2="7.59705" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#7746FF"/>
+        <stop offset="1" stop-color="#A789F8"/>
+        </linearGradient>
+        <linearGradient id="paint6_linear_1968_7168" x1="16.0242" y1="20.385" x2="25.2792" y2="9.76291" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#245B35"/>
+        <stop offset="1" stop-color="#378456"/>
+        </linearGradient>
+        <linearGradient id="paint7_linear_1968_7168" x1="26.0964" y1="8.10279" x2="16.9573" y2="24.5984" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#A789F8"/>
+        <stop offset="1" stop-color="#7746FF"/>
+        </linearGradient>
+        <linearGradient id="paint8_linear_1968_7168" x1="11.4062" y1="21.949" x2="13.6192" y2="30.1899" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#A789F8"/>
+        <stop offset="1" stop-color="#7746FF"/>
+        </linearGradient>
+        </defs>
+      </svg>
     </a>
     <div style="display:flex;align-items:center;gap:14px">
       <button onClick="{{ toggleTheme }}" aria-label="Toggle color theme" style="width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--card);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:var(--mut);padding:0" style-hover="border-color:var(--accent);color:var(--accent)">{{ themeIcon }}</button>
@@ -675,7 +823,7 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
   </footer>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;dark&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;tsType&quot;:&quot;string&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#3EBA8D&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#3EBA8D&quot;,&quot;#7BB9E5&quot;,&quot;#FFD975&quot;,&quot;#5FCFC1&quot;]},&quot;typingSpeed&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:34,&quot;min&quot;:8,&quot;max&quot;:60,&quot;step&quot;:2,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;reduceMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;dark&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;tsType&quot;:&quot;string&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#7C4CFF&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#7C4CFF&quot;,&quot;#FF1D99&quot;,&quot;#FF4810&quot;,&quot;#A789F8&quot;]},&quot;typingSpeed&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:34,&quot;min&quot;:8,&quot;max&quot;:60,&quot;step&quot;:2,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;reduceMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
 const SCRIPT = [
   ["Agent", "Namaste! Ye Credit Card Sales role ke liye screening round hai. Aap abhi kis city mein hain?"],
   ["Candidate", "Pune. I have two years in credit card sales, mostly walk-in leads."],
@@ -736,14 +884,16 @@ const HOW_STEPS = [
 ];
 
 const THEMES = {
-  dark: { "--bg": "#07100D", "--ink": "#F1F6F3", "--mut": "#8B9A94", "--line": "rgba(255,255,255,.11)",
-    "--card": "rgba(255,255,255,.04)", "--card2": "rgba(255,255,255,.06)", "--head": "rgba(7,16,13,.78)",
-    "--panel": "#0B1714", "--glow1": "rgba(62,186,141,.30)", "--glow2": "rgba(123,185,229,.24)",
-    "--shadow": "0 34px 80px -40px rgba(0,0,0,.9)", "--accent": "#3EBA8D", "--accent2": "#7BB9E5", "--gold": "#FFD975" },
-  light: { "--bg": "#F2F7F4", "--ink": "#08130F", "--mut": "#43544D", "--line": "rgba(8,19,15,.14)",
-    "--card": "#FFFFFF", "--card2": "#E6F0EA", "--head": "rgba(242,247,244,.88)",
-    "--panel": "#FFFFFF", "--glow1": "rgba(21,128,85,.24)", "--glow2": "rgba(37,99,235,.20)",
-    "--shadow": "0 24px 60px -20px rgba(8,19,15,.14), 0 4px 16px -4px rgba(8,19,15,.06)", "--accent": "#147A51", "--accent2": "#1E58C8", "--gold": "#B45309" }
+  dark: { "--bg": "#070314", "--ink": "#F1F6F3", "--mut": "#9CA3AF", "--line": "rgba(255,255,255,.12)",
+    "--card": "rgba(255,255,255,.04)", "--card2": "rgba(255,255,255,.07)", "--head": "rgba(7,3,20,.85)",
+    "--panel": "#0D0620", "--glow1": "rgba(124, 76, 255, .25)", "--glow2": "rgba(34, 211, 238, .2)",
+    "--shadow": "0 34px 80px -40px rgba(0,0,0,.9)", "--accent": "#A789F8", "--accent2": "#22D3EE", "--gold": "#FFB84C",
+    "--c-purple": "#A789F8", "--c-magenta": "#D94CFF", "--c-rose": "#FF4C93", "--c-amber": "#FFB84C", "--c-blue": "#4C7BFF", "--c-mint": "#2DD4A7" },
+  light: { "--bg": "#FFFFFF", "--ink": "#070410", "--mut": "#6B7280", "--line": "rgba(0,0,0,.1)",
+    "--card": "rgba(0,0,0,.02)", "--card2": "rgba(0,0,0,.04)", "--head": "rgba(255,255,255,.85)",
+    "--panel": "#F9FAFB", "--glow1": "rgba(124, 76, 255, .15)", "--glow2": "rgba(34, 211, 238, .15)",
+    "--shadow": "0 24px 60px -20px rgba(0,0,0,.1)", "--accent": "#7C4CFF", "--accent2": "#22D3EE", "--gold": "#FFB84C",
+    "--c-purple": "#612CE4", "--c-magenta": "#A817D1", "--c-rose": "#D4125C", "--c-amber": "#B46200", "--c-blue": "#1D55E6", "--c-mint": "#0B946F" }
 };
 
 class Component extends DCLogic {
@@ -877,19 +1027,19 @@ class Component extends DCLogic {
     const CARDS = [
       { kind: "BFSI · Interview Demo", name: "Credit Card Sales", tags: ["English", "Audio", "Inbound QR"], hero: "inbound QR screening.",
         persona: "Evaluates candidates on retail card sales experience, product pitching fluency, monthly quota metrics, and objection handling.",
-        orb: "linear-gradient(135deg, #74D7AE 0%, #7BB9E5 50%, #FFD975 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #74D7AE 45%, #7BB9E5 100%)", halo: "rgba(116,215,174,.45)" },
+        orb: "linear-gradient(100deg, #2E6BFF 0%, #7C4CFF 50%, #C24CFF 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #2E6BFF 45%, #C24CFF 100%)", halo: "rgba(124,76,255,.45)" },
       { kind: "Vernacular · Interview Demo", name: "Credit Card Sales · Hindi", tags: ["Hindi", "Language switch", "FAQ"], hero: "live language switching.",
         persona: "Screens candidates in Hindi & English, testing bilingual fluency, customer rapport, and mid-interview language switching.",
-        orb: "linear-gradient(135deg, #FFD975 0%, #74D7AE 50%, #7BB9E5 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #FFD975 45%, #74D7AE 100%)", halo: "rgba(255,217,117,.42)" },
+        orb: "linear-gradient(135deg, #7C4CFF 0%, #2DD4A7 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #7C4CFF 40%, #2DD4A7 100%)", halo: "rgba(124,76,255,.45)" },
       { kind: "Hard Gate · Interview Demo", name: "Loan Sales · CEFR B1", tags: ["English", "CEFR gate", "Audio"], hero: "CEFR English gates.",
         persona: "Conducts automated CEFR English assessment to verify candidate spoken English meets the minimum B1 threshold for loan sales.",
-        orb: "linear-gradient(135deg, #7BB9E5 0%, #FFD975 50%, #74D7AE 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #7BB9E5 45%, #FFD975 100%)", halo: "rgba(123,185,229,.42)" },
+        orb: "linear-gradient(135deg, #7C4CFF 0%, #22D3EE 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #7C4CFF 40%, #22D3EE 100%)", halo: "rgba(124,76,255,.45)" },
       { kind: "Assessment · Interview Demo", name: "Deep Interview · Retail", tags: ["Video", "Behavioral", "Proctored"], hero: "behavioral video rounds.",
         persona: "Evaluates situation handling, customer service behavioral traits, and proctored video responses for retail store staff.",
-        orb: "linear-gradient(135deg, #5FCFC1 0%, #7BB9E5 50%, #74D7AE 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #5FCFC1 45%, #7BB9E5 100%)", halo: "rgba(95,207,193,.42)" },
+        orb: "linear-gradient(135deg, #FF4C93 0%, #7C4CFF 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #FF4C93 40%, #7C4CFF 100%)", halo: "rgba(124,76,255,.45)" },
       { kind: "Scheduler · Interview Demo", name: "Interview Scheduler", tags: ["English", "In + out", "Booking"], hero: "interview scheduling calls.",
         persona: "Interacts with candidates to collect availability, verify location preferences, and automatically book interview slots.",
-        orb: "linear-gradient(135deg, #F2C98A 0%, #FFD975 50%, #74D7AE 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #F2C98A 45%, #FFD975 100%)", halo: "rgba(242,201,138,.42)" }
+        orb: "linear-gradient(135deg, #4C7BFF 0%, #7C4CFF 100%)", inner: "linear-gradient(225deg, rgba(255,255,255,0.85) 0%, #4C7BFF 40%, #7C4CFF 100%)", halo: "rgba(124,76,255,.45)" }
     ];
     const n = CARDS.length;
     const cur = ((idx % n) + n) % n;
@@ -1011,10 +1161,10 @@ class Component extends DCLogic {
       ],
 
       outbound: [
-        { phone: "+91 ••••• 41207", status: "In call 04:12", c: "#74D7AE", anim: "pulse 2s ease-out infinite" },
-        { phone: "+91 ••••• 88310", status: "Completed", c: "#8B9A94", anim: "none" },
-        { phone: "+91 ••••• 20554", status: "Dialing", c: "#FFD975", anim: "pulse 2s ease-out infinite" },
-        { phone: "+91 ••••• 66290", status: "Retry 18:00", c: "#8B9A94", anim: "none" }
+        { phone: "+91 ••••• 41207", status: "In call 04:12", c: "var(--c-purple)", anim: "pulse 2s ease-out infinite" },
+        { phone: "+91 ••••• 88310", status: "Completed", c: "var(--mut)", anim: "none" },
+        { phone: "+91 ••••• 20554", status: "Dialing", c: "var(--c-amber)", anim: "pulse 2s ease-out infinite" },
+        { phone: "+91 ••••• 66290", status: "Retry 18:00", c: "var(--mut)", anim: "none" }
       ],
       reachStats: [
         { v: "~500", k: "Agentic interviews a day" },
@@ -1022,12 +1172,12 @@ class Component extends DCLogic {
         { v: "No app", k: "Any phone,\nany network" }
       ],
       modules: [
-        { tag: "Language", c: "#74D7AE", t: "CEFR English assessment", d: "English proficiency grading on the CEFR scale. Deploy as a score or a hard gate — e.g. minimum B1 on Loan Sales." },
-        { tag: "Integrity", c: "#7BB9E5", t: "Proprietary question banks", d: "Upload role-specific question sets, randomised per candidate to prevent answer sharing." },
-        { tag: "Domain", c: "#FFD975", t: "Domain knowledge evaluation", d: "Role-specific knowledge checks, including BFSI product knowledge for Credit Card and Insurance." },
-        { tag: "Behavioral", c: "#5FCFC1", t: "Structured behavioral evaluation", d: "Scores communication, negotiation, customer handling, and objection management against defined competencies." },
-        { tag: "Proctoring", c: "#F2C98A", t: "Video round proctoring", d: "Automated integrity controls on video sessions, with flagged signals written to the candidate record." },
-        { tag: "Output", c: "#E8875A", t: "Criteria-based reports", d: "Evaluated against your Must Have and Red Flag criteria — no generic scores, no black-box outputs." }
+        { tag: "Language", c: "var(--c-purple)", t: "CEFR English assessment", d: "English proficiency grading on the CEFR scale. Deploy as a score or a hard gate — e.g. minimum B1 on Loan Sales." },
+        { tag: "Integrity", c: "var(--c-magenta)", t: "Proprietary question banks", d: "Upload role-specific question sets, randomised per candidate to prevent answer sharing." },
+        { tag: "Domain", c: "var(--c-amber)", t: "Domain knowledge evaluation", d: "Role-specific knowledge checks, including BFSI product knowledge for Credit Card and Insurance." },
+        { tag: "Behavioral", c: "var(--c-blue)", t: "Structured behavioral evaluation", d: "Scores communication, negotiation, customer handling, and objection management against defined competencies." },
+        { tag: "Proctoring", c: "var(--c-mint)", t: "Video round proctoring", d: "Automated integrity controls on video sessions, with flagged signals written to the candidate record." },
+        { tag: "Output", c: "var(--c-purple)", t: "Criteria-based reports", d: "Evaluated against your Must Have and Red Flag criteria — no generic scores, no black-box outputs." }
       ],
       bots: [
         { n: "Credit Card Sales", l: "English", m: "Audio", f: "Inbound", p: "Core structured screening — inbound web link" },
@@ -1046,20 +1196,20 @@ class Component extends DCLogic {
         isVideo: b.m === "Video"
       })),
       governance: [
-        { tag: "Reporting", c: "#74D7AE", t: "Structured Gen AI reports", d: "Per-role reports generated against your evaluation criteria — not a generic summary." },
-        { tag: "Access", c: "#7BB9E5", t: "RBAC and multi-tenant", d: "Role-based access controls with isolated tenant environments and enterprise permission management." },
-        { tag: "Workflow", c: "#FFD975", t: "Re-engagement workflows", d: "Configure retry logic, channels, and cadence for no-shows and incomplete sessions." },
-        { tag: "Oversight", c: "#5FCFC1", t: "Governance dashboard", d: "Single operational view: every candidate, every session, complete audit trail." },
-        { tag: "Records", c: "#9FD6F0", t: "Candidate engagement record", d: "Full timeline per candidate: every call, WhatsApp, email, outcome, and timestamp." },
-        { tag: "Commercial", c: "#F2C98A", t: "Credit-based model", d: "Procure credits and run screening at the pace and volume your team requires." }
+        { tag: "Reporting", c: "var(--c-purple)", t: "Structured Gen AI reports", d: "Per-role reports generated against your evaluation criteria — not a generic summary." },
+        { tag: "Access", c: "var(--c-magenta)", t: "RBAC and multi-tenant", d: "Role-based access controls with isolated tenant environments and enterprise permission management." },
+        { tag: "Workflow", c: "var(--c-amber)", t: "Re-engagement workflows", d: "Configure retry logic, channels, and cadence for no-shows and incomplete sessions." },
+        { tag: "Oversight", c: "var(--c-blue)", t: "Governance dashboard", d: "Single operational view: every candidate, every session, complete audit trail." },
+        { tag: "Records", c: "var(--c-mint)", t: "Candidate engagement record", d: "Full timeline per candidate: every call, WhatsApp, email, outcome, and timestamp." },
+        { tag: "Commercial", c: "var(--c-rose)", t: "Credit-based model", d: "Procure credits and run screening at the pace and volume your team requires." }
       ],
       timeline: [
-        { c: "#74D7AE", t: "Lead uploaded", d: "Batch of 240 · Credit Card Sales", ts: "09:02" },
-        { c: "#7BB9E5", t: "Outbound call placed", d: "No pickup · retry scheduled", ts: "09:14" },
-        { c: "#FFD975", t: "WhatsApp re-engagement", d: "Interview link delivered", ts: "11:30" },
-        { c: "#5FCFC1", t: "Round completed", d: "Audio · Hindi → English · 08m 21s", ts: "12:07" },
-        { c: "#9FD6F0", t: "Report generated", d: "CEFR B2 · Must Have criteria met", ts: "12:08" },
-        { c: "#F2C98A", t: "Synced to ATS", d: "Recording, transcript and scores attached", ts: "12:08" }
+        { c: "var(--c-purple)", t: "Lead uploaded", d: "Batch of 240 · Credit Card Sales", ts: "09:02" },
+        { c: "var(--c-magenta)", t: "Outbound call placed", d: "No pickup · retry scheduled", ts: "09:14" },
+        { c: "var(--c-amber)", t: "WhatsApp re-engagement", d: "Interview link delivered", ts: "11:30" },
+        { c: "var(--c-blue)", t: "Round completed", d: "Audio · Hindi → English · 08m 21s", ts: "12:07" },
+        { c: "var(--c-purple)", t: "Report generated", d: "CEFR B2 · Must Have criteria met", ts: "12:08" },
+        { c: "var(--c-mint)", t: "Synced to ATS", d: "Recording, transcript and scores attached", ts: "12:08" }
       ],
       atsMarquee: [
         { n: "Greenhouse", d: "greenhouse.com" },
