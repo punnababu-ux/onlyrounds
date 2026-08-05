@@ -379,16 +379,19 @@ a:focus-visible, button:focus-visible, div[onClick]:focus-visible{outline:2px so
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
               <div>
                 <label style="font-size:12px;font-weight:500;color:var(--mut);display:block;margin-bottom:6px">Full name *</label>
-                <input id="cf-name" type="text" placeholder="Priya Sharma" style="width:100%;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:14.5px;color:var(--ink);outline:none;box-sizing:border-box" />
+                <input id="cf-name" type="text" placeholder="Priya Sharma" style="width:100%;background:var(--card);border:1px solid {{ cfErrName ? 'rgba(232,84,74,.7)' : 'var(--line)' }};border-radius:10px;padding:11px 14px;font-size:14.5px;color:var(--ink);outline:none;box-sizing:border-box" />
+                <sc-if value="{{ cfErrName }}"><div style="font-size:11.5px;color:#E8544A;margin-top:5px">{{ cfErrName }}</div></sc-if>
               </div>
               <div>
                 <label style="font-size:12px;font-weight:500;color:var(--mut);display:block;margin-bottom:6px">Company *</label>
-                <input id="cf-company" type="text" placeholder="Acme Corp" style="width:100%;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:14.5px;color:var(--ink);outline:none;box-sizing:border-box" />
+                <input id="cf-company" type="text" placeholder="Acme Corp" style="width:100%;background:var(--card);border:1px solid {{ cfErrCompany ? 'rgba(232,84,74,.7)' : 'var(--line)' }};border-radius:10px;padding:11px 14px;font-size:14.5px;color:var(--ink);outline:none;box-sizing:border-box" />
+                <sc-if value="{{ cfErrCompany }}"><div style="font-size:11.5px;color:#E8544A;margin-top:5px">{{ cfErrCompany }}</div></sc-if>
               </div>
             </div>
             <div>
               <label style="font-size:12px;font-weight:500;color:var(--mut);display:block;margin-bottom:6px">Work email *</label>
-              <input id="cf-email" type="email" placeholder="priya@acmecorp.com" style="width:100%;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:14.5px;color:var(--ink);outline:none;box-sizing:border-box" />
+              <input id="cf-email" type="text" placeholder="priya@acmecorp.com" style="width:100%;background:var(--card);border:1px solid {{ cfErrEmail ? 'rgba(232,84,74,.7)' : 'var(--line)' }};border-radius:10px;padding:11px 14px;font-size:14.5px;color:var(--ink);outline:none;box-sizing:border-box" />
+              <sc-if value="{{ cfErrEmail }}"><div style="font-size:11.5px;color:#E8544A;margin-top:5px">{{ cfErrEmail }}</div></sc-if>
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
               <div>
@@ -942,7 +945,7 @@ class Component extends DCLogic {
   }
 
   openContactForm() {
-    this.setState({ contactOpen: true, contactSent: false });
+    this.setState({ contactOpen: true, contactSent: false, cfErrName: '', cfErrCompany: '', cfErrEmail: '' });
   }
   closeContactForm() {
     this.setState({ contactOpen: false });
@@ -952,11 +955,14 @@ class Component extends DCLogic {
     const name = get('cf-name').trim();
     const email = get('cf-email').trim();
     const company = get('cf-company').trim();
-    if (!name || !email || !company) {
-      alert('Please fill in name, company, and work email.');
-      return;
-    }
-    // Send to mailto as fallback (replace with API call as needed)
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const errors = {
+      cfErrName: name ? '' : 'Please enter your full name',
+      cfErrCompany: company ? '' : 'Please enter your company name',
+      cfErrEmail: !email ? 'Please enter your work email' : !emailOk ? 'Please enter a valid email address' : ''
+    };
+    this.setState(errors);
+    if (errors.cfErrName || errors.cfErrCompany || errors.cfErrEmail) return;
     const body = [
       'Name: ' + name,
       'Company: ' + company,
@@ -1152,6 +1158,9 @@ class Component extends DCLogic {
       onSeekInput: e => this.seekAudio(e.target.value / 1000),
       contactOpen: !!this.state.contactOpen,
       contactSent: !!this.state.contactSent,
+      cfErrName: this.state.cfErrName || '',
+      cfErrCompany: this.state.cfErrCompany || '',
+      cfErrEmail: this.state.cfErrEmail || '',
       openContactForm: () => this.openContactForm(),
       closeContactForm: () => this.closeContactForm(),
       submitContact: () => this.submitContact(),
